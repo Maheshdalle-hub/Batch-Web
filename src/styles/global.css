@@ -12,15 +12,18 @@ html, body {
   background-color: #f4f4f4;
 }
 
-/* Homepage Box */
-.home-container {
+/* Homepage */
+.container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   height: 100vh;
+  text-align: center;
 }
 
-.home-box {
+/* Clickable Box on Homepage */
+.click-box {
   width: 300px;
   height: 200px;
   background-color: white;
@@ -35,35 +38,28 @@ html, body {
   transition: transform 0.3s ease-in-out;
 }
 
-.home-box:hover {
+.click-box:hover {
   transform: scale(1.05);
 }
 
-.home-box img {
+.homepage-image {
   width: 100%;
   height: 150px;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
 }
 
-.home-box p {
-  padding: 10px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-/* Subject Boxes */
-.subjects-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+/* Subjects Page */
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
   padding: 20px;
 }
 
 .subject-box {
-  width: 180px;
-  height: 100px;
-  margin: 10px;
+  width: 140px;
+  height: 80px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -74,9 +70,11 @@ html, body {
   font-weight: bold;
   text-decoration: none;
   color: black;
-  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, background 0.2s ease-in-out;
 }
 
 .subject-box:hover {
   transform: scale(1.05);
-  }
+  background-color: #e0e0e0;
+}
