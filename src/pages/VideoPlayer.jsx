@@ -1,28 +1,40 @@
 import React, { useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
-import Hls from "hls.js";
-import "../styles/global.css";
+import videojs from "video.js";
+import "video.js/dist/video-js.css";
+import { useParams, useLocation } from "react-router-dom";
 
 const VideoPlayer = () => {
-  const { chapter } = useParams();
+  const { subject, chapterIndex } = useParams();
+  const location = useLocation();
   const videoRef = useRef(null);
+  const playerRef = useRef(null);
+  
+  // Get the M3U8 URL passed from Lectures.jsx
+  const { chapterName, m3u8Url } = location.state || {};
 
   useEffect(() => {
-    const video = videoRef.current;
-    const m3u8Url = decodeURIComponent(chapter); // Get the M3U8 link from URL
+    if (videoRef.current && m3u8Url) {
+      playerRef.current = videojs(videoRef.current, {
+        controls: true,
+        autoplay: false,
+        fluid: true,
+        playbackRates: [0.5, 1, 1.5, 2], // Speed control
+      });
 
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(m3u8Url);
-      hls.attachMedia(video);
-    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      video.src = m3u8Url;
+      playerRef.current.src({ src: m3u8Url, type: "application/x-mpegURL" });
+
+      return () => {
+        if (playerRef.current) {
+          playerRef.current.dispose();
+        }
+      };
     }
-  }, [chapter]);
+  }, [m3u8Url]);
 
   return (
-    <div className="video-container">
-      <video ref={videoRef} controls className="custom-video-player"></video>
+    <div>
+      <h2>Now Playing: {chapterName || "Unknown Chapter"}</h2>
+      <video ref={videoRef} className="video-js vjs-default-skin" />
     </div>
   );
 };
