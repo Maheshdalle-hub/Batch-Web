@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
+import "../styles/Lectures.css"; // ✅ Add a CSS file
 
 const Lectures = () => {
   const { subject } = useParams();
@@ -17,17 +18,20 @@ const Lectures = () => {
   };
 
   return (
-    <div>
+    <div className="lectures-container">
       <h2>{subject} Lectures</h2>
-      {lectures[subject]?.map((lecture, index) => (
-        <Link
-          key={index}
-          to={`/video/${subject}/${index}`}
-          state={{ chapterName: lecture.name, m3u8Url: lecture.m3u8Url }} // ✅ Pass data to VideoPlayer
-        >
-          <div className="lecture-box">{lecture.name}</div>
-        </Link>
-      ))}
+      <div className="lecture-boxes">
+        {lectures[subject]?.map((lecture, index) => (
+          <Link
+            key={index}
+            to={`/video/${subject}/${index}`}
+            state={{ chapterName: lecture.name, m3u8Url: lecture.m3u8Url }}
+            className="lecture-box"
+          >
+            {lecture.name}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };
