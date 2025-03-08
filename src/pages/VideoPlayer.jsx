@@ -1,79 +1,92 @@
-import React, { useEffect, useRef } from "react";
-import videojs from "video.js";
-import "video.js/dist/video-js.css";
-import "videojs-hls-quality-selector"; // ✅ Quality selection
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+import Hls from "hls.js";
+import "../styles/VideoPlayer.css";
+import lectures from "./Lectures"; // Import lectures data
 
 const VideoPlayer = () => {
-  const location = useLocation();
+  const { subject, chapterIndex } = useParams();
   const videoRef = useRef(null);
-  const playerRef = useRef(null);
+  const [hls, setHls] = useState(null);
+  const [qualityLevels, setQualityLevels] = useState([]);
+  const [selectedQuality, setSelectedQuality] = useState("auto");
+  const doubleTapRef = useRef({ lastTap: 0 });
 
-  // Get M3U8 link from Lectures.jsx
-  const { chapterName, m3u8Url } = location.state || {};
+  const m3u8Link = lectures[subject]?.[chapterIndex];
 
   useEffect(() => {
-    if (videoRef.current && m3u8Url) {
-      playerRef.current = videojs(videoRef.current, {
-        controls: true,
-        autoplay: false,
-        fluid: true,
-        playbackRates: [0.5, 1, 1.5, 2], // ✅ Speed control
-      });
+    if (videoRef.current && m3u8Link) {
+      if (Hls.isSupported()) {
+        const hlsInstance = new Hls();
+        hlsInstance.loadSource(m3u8Link);
+        hlsInstance.attachMedia(videoRef.current);
+        setHls(hlsInstance);
 
-      playerRef.current.src({ src: m3u8Url, type: "application/x-mpegURL" });
+        hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
+          setQualityLevels(hlsInstance.levels);
+        });
 
-      // ✅ Enable quality selection
-      playerRef.current.ready(() => {
-        if (playerRef.current.hlsQualitySelector) {
-          playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
-        }
-      });
-
-      // ✅ Handle Fullscreen Rotation
-      playerRef.current.on("fullscreenchange", () => {
-        if (playerRef.current.isFullscreen()) {
-          screen.orientation.lock("landscape").catch(() => {});
-        } else {
-          screen.orientation.unlock();
-        }
-      });
-
-      // ✅ Add Double Tap to Seek Feature
-      const videoContainer = videoRef.current.parentElement;
-
-      let lastTap = 0;
-      videoContainer.addEventListener("click", (event) => {
-        const currentTime = new Date().getTime();
-        const tapGap = currentTime - lastTap;
-
-        if (tapGap < 300) {
-          // Double Tap Detected
-          const rect = videoContainer.getBoundingClientRect();
-          const tapX = event.clientX - rect.left;
-          const videoWidth = rect.width;
-
-          if (tapX < videoWidth / 2) {
-            playerRef.current.currentTime(playerRef.current.currentTime() - 10); // ⏪ Skip Back
-          } else {
-            playerRef.current.currentTime(playerRef.current.currentTime() + 10); // ⏩ Skip Forward
-          }
-        }
-        lastTap = currentTime;
-      });
-
-      return () => {
-        if (playerRef.current) {
-          playerRef.current.dispose();
-        }
-      };
+        return () => {
+          hlsInstance.destroy();
+        };
+      } else {
+        videoRef.current.src = m3u8Link;
+      }
     }
-  }, [m3u8Url]);
+  }, [m3u8Link]);
+
+  const handleQualityChange = (level) => {
+    if (hls) {
+      hls.currentLevel = level;
+      setSelectedQuality(level === -1 ? "auto" : `Quality ${level + 1}`);
+    }
+  };
+
+  const handleDoubleTap = (direction) => {
+    const now = Date.now();
+    if (now - doubleTapRef.current.lastTap < 300) {
+      if (videoRef.current) {
+        videoRef.current.currentTime += direction === "forward" ? 10 : -10;
+      }
+    }
+    doubleTapRef.current.lastTap = now;
+  };
+
+  const handleFullscreen = () => {
+    if (videoRef.current.requestFullscreen) {
+      videoRef.current.requestFullscreen();
+    } else if (videoRef.current.webkitRequestFullscreen) {
+      videoRef.current.webkitRequestFullscreen();
+    } else if (videoRef.current.msRequestFullscreen) {
+      videoRef.current.msRequestFullscreen();
+    }
+  };
 
   return (
-    <div>
-      <h2>Now Playing: {chapterName || "Unknown Chapter"}</h2>
-      <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
+    <div className="video-container">
+      <div className="video-wrapper">
+        <video
+          ref={videoRef}
+          controls
+          className="video-player"
+          onDoubleClick={(e) =>
+            handleDoubleTap(e.clientX > window.innerWidth / 2 ? "forward" : "backward")
+          }
+        />
+        <button className="fullscreen-btn" onClick={handleFullscreen}>⛶</button>
+      </div>
+
+      <div className="quality-controls">
+        <label>Quality: </label>
+        <select onChange={(e) => handleQualityChange(parseInt(e.target.value, 10))}>
+          <option value="-1">Auto</option>
+          {qualityLevels.map((level, index) => (
+            <option key={index} value={index}>
+              {`Quality ${index + 1}`}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   );
 };
