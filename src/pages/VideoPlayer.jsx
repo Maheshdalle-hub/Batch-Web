@@ -15,7 +15,7 @@ const VideoPlayer = () => {
   const m3u8Link = lectures[subject]?.[chapterIndex];
 
   useEffect(() => {
-    if (videoRef.current && m3u8Link) {
+    if (videoRef.current && m3u8Url) {
       if (Hls.isSupported()) {
         const hlsInstance = new Hls();
         hlsInstance.loadSource(m3u8Link);
