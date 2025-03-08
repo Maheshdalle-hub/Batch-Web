@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "videojs-hls-quality-selector"; // ✅ Quality selection
@@ -8,6 +8,7 @@ const VideoPlayer = () => {
   const location = useLocation();
   const videoRef = useRef(null);
   const playerRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   // Get M3U8 link from Lectures.jsx
   const { chapterName, m3u8Url } = location.state || {};
@@ -39,28 +40,9 @@ const VideoPlayer = () => {
         }
       });
 
-      // ✅ Add Double Tap to Seek Feature
-      const videoContainer = videoRef.current.parentElement;
-
-      let lastTap = 0;
-      videoContainer.addEventListener("click", (event) => {
-        const currentTime = new Date().getTime();
-        const tapGap = currentTime - lastTap;
-
-        if (tapGap < 300) {
-          // Double Tap Detected
-          const rect = videoContainer.getBoundingClientRect();
-          const tapX = event.clientX - rect.left;
-          const videoWidth = rect.width;
-
-          if (tapX < videoWidth / 2) {
-            playerRef.current.currentTime(playerRef.current.currentTime() - 10); // ⏪ Skip Back
-          } else {
-            playerRef.current.currentTime(playerRef.current.currentTime() + 10); // ⏩ Skip Forward
-          }
-        }
-        lastTap = currentTime;
-      });
+      // ✅ Update Play/Pause State
+      playerRef.current.on("play", () => setIsPlaying(true));
+      playerRef.current.on("pause", () => setIsPlaying(false));
 
       return () => {
         if (playerRef.current) {
@@ -70,10 +52,38 @@ const VideoPlayer = () => {
     }
   }, [m3u8Url]);
 
+  // ✅ Double Tap to Seek (Works on Mobile)
+  const handleDoubleTap = (event) => {
+    const rect = videoRef.current.getBoundingClientRect();
+    const tapX = event.clientX - rect.left;
+    const videoWidth = rect.width;
+
+    if (tapX < videoWidth / 2) {
+      playerRef.current.currentTime(playerRef.current.currentTime() - 10); // ⏪ Skip Back
+    } else {
+      playerRef.current.currentTime(playerRef.current.currentTime() + 10); // ⏩ Skip Forward
+    }
+  };
+
   return (
-    <div>
+    <div className="video-container">
       <h2>Now Playing: {chapterName || "Unknown Chapter"}</h2>
-      <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
+
+      {/* Video Wrapper */}
+      <div
+        className="video-wrapper"
+        onDoubleClick={handleDoubleTap} // ✅ Double Tap to Seek
+      >
+        <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
+
+        {/* ✅ Center Play/Pause Button */}
+        <button
+          className="play-pause-overlay"
+          onClick={() => (isPlaying ? playerRef.current.pause() : playerRef.current.play())}
+        >
+          {isPlaying ? "⏸" : "▶"}
+        </button>
+      </div>
     </div>
   );
 };
