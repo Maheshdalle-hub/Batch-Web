@@ -1,15 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const VideoPlayer = () => {
-  const { subject, chapterIndex } = useParams();
   const location = useLocation();
   const videoRef = useRef(null);
   const playerRef = useRef(null);
-  
-  // Get the M3U8 URL passed from Lectures.jsx
+
+  // Get M3U8 link from Lectures.jsx
   const { chapterName, m3u8Url } = location.state || {};
 
   useEffect(() => {
@@ -18,7 +17,7 @@ const VideoPlayer = () => {
         controls: true,
         autoplay: false,
         fluid: true,
-        playbackRates: [0.5, 1, 1.5, 2], // Speed control
+        playbackRates: [0.5, 1, 1.5, 2],
       });
 
       playerRef.current.src({ src: m3u8Url, type: "application/x-mpegURL" });
