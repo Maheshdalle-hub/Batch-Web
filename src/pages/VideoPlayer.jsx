@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import "videojs-http-source-selector"; // ✅ Import quality selector plugin
+import "videojs-http-source-selector"; // ✅ Import quality selection plugin
 import { useLocation } from "react-router-dom";
 
 const VideoPlayer = () => {
@@ -18,14 +18,18 @@ const VideoPlayer = () => {
         controls: true,
         autoplay: false,
         fluid: true,
-        playbackRates: [0.5, 1, 1.5, 1.75, 2], // ✅ Speed control
+        playbackRates: [0.5, 1, 1.5, 2], // ✅ Speed control
       });
 
       playerRef.current.src({ src: m3u8Url, type: "application/x-mpegURL" });
 
-      // ✅ Enable quality selection plugin
+      // ✅ Make sure the plugin is properly initialized
       playerRef.current.ready(() => {
-        playerRef.current.httpSourceSelector();
+        if (playerRef.current.httpSourceSelector) {
+          playerRef.current.httpSourceSelector(); // ✅ Apply quality selector
+        } else {
+          console.error("Quality selector plugin not found");
+        }
       });
 
       return () => {
