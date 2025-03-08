@@ -1,4 +1,4 @@
-/* Reset some default styles */
+/* Reset and Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -6,13 +6,13 @@
   font-family: Arial, sans-serif;
 }
 
-/* Smooth animations like an APK */
+/* Smooth animations for a mobile app-like experience */
 html, body {
   scroll-behavior: smooth;
   background-color: #f4f4f4;
 }
 
-/* Homepage box */
+/* Homepage Box */
 .home-container {
   display: flex;
   justify-content: center;
@@ -52,7 +52,7 @@ html, body {
   font-weight: bold;
 }
 
-/* Subject boxes */
+/* Subject Boxes */
 .subjects-container {
   display: flex;
   flex-wrap: wrap;
@@ -81,7 +81,7 @@ html, body {
   transform: scale(1.05);
 }
 
-/* Chapter boxes */
+/* Chapter Boxes */
 .lectures-container {
   padding: 20px;
   text-align: center;
@@ -122,14 +122,27 @@ html, body {
   position: relative;
 }
 
+/* Video.js Player */
+.video-js {
+  width: 100%;
+  height: auto;
+  max-width: 800px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
 /* Player Controls */
 .video-js .vjs-control-bar {
   background: rgba(0, 0, 0, 0.7);
 }
 
-/* Increase the size of player buttons slightly */
+/* Increase Button & Timestamp Size */
 .vjs-button {
   font-size: 1.2em !important;
+}
+
+.vjs-time-control {
+  font-size: 1.1em !important;
 }
 
 /* Fullscreen Mode */
@@ -153,9 +166,4 @@ html, body {
 
 .double-tap-right {
   right: 0;
-}
-
-/* Increase timestamp size slightly */
-.vjs-time-control {
-  font-size: 1.1em !important;
 }
