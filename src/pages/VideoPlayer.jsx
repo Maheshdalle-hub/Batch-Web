@@ -8,7 +8,7 @@ const VideoPlayer = () => {
   const location = useLocation();
   const videoRef = useRef(null);
   const playerRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   // Get M3U8 link from Lectures.jsx
   const { chapterName, m3u8Url } = location.state || {};
@@ -31,18 +31,15 @@ const VideoPlayer = () => {
         }
       });
 
-      // ✅ Handle Fullscreen Rotation
+      // ✅ Fullscreen Mode Handling
       playerRef.current.on("fullscreenchange", () => {
+        setIsFullscreen(playerRef.current.isFullscreen());
         if (playerRef.current.isFullscreen()) {
-          screen.orientation.lock("landscape").catch(() => {});
+          window.screen.orientation.lock("landscape").catch(() => {});
         } else {
-          screen.orientation.unlock();
+          window.screen.orientation.unlock();
         }
       });
-
-      // ✅ Update Play/Pause State
-      playerRef.current.on("play", () => setIsPlaying(true));
-      playerRef.current.on("pause", () => setIsPlaying(false));
 
       return () => {
         if (playerRef.current) {
@@ -52,38 +49,10 @@ const VideoPlayer = () => {
     }
   }, [m3u8Url]);
 
-  // ✅ Double Tap to Seek (Works on Mobile)
-  const handleDoubleTap = (event) => {
-    const rect = videoRef.current.getBoundingClientRect();
-    const tapX = event.clientX - rect.left;
-    const videoWidth = rect.width;
-
-    if (tapX < videoWidth / 2) {
-      playerRef.current.currentTime(playerRef.current.currentTime() - 10); // ⏪ Skip Back
-    } else {
-      playerRef.current.currentTime(playerRef.current.currentTime() + 10); // ⏩ Skip Forward
-    }
-  };
-
   return (
     <div className="video-container">
       <h2>Now Playing: {chapterName || "Unknown Chapter"}</h2>
-
-      {/* Video Wrapper */}
-      <div
-        className="video-wrapper"
-        onDoubleClick={handleDoubleTap} // ✅ Double Tap to Seek
-      >
-        <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
-
-        {/* ✅ Center Play/Pause Button */}
-        <button
-          className="play-pause-overlay"
-          onClick={() => (isPlaying ? playerRef.current.pause() : playerRef.current.play())}
-        >
-          {isPlaying ? "⏸" : "▶"}
-        </button>
-      </div>
+      <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
     </div>
   );
 };
