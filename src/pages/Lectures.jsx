@@ -7,7 +7,7 @@ const subjectsData = {
     { name: "Chapter 2", m3u8: "https://example.com/math2.m3u8" }
   ],
   Science: [
-    { name: "Chapter 1", m3u8: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/4269594/173531897040688296383/173531897040688296383_8296383" },
+    { name: "Chapter 1", m3u8: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/4254694/173402301054458296383/173402301054458296383_8296383.m3u8" },
     { name: "Chapter 2", m3u8: "https://example.com/science2.m3u8" }
   ]
 };
