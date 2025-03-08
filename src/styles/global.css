@@ -1,78 +1,161 @@
-/* General styles */
-body {
-  font-family: Arial, sans-serif;
+/* Reset some default styles */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Smooth animations like an APK */
+html, body {
+  scroll-behavior: smooth;
   background-color: #f4f4f4;
 }
 
-/* Video Player Container */
-.video-container {
+/* Homepage box */
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.home-box {
+  width: 300px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.home-box:hover {
+  transform: scale(1.05);
+}
+
+.home-box img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.home-box p {
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Subject boxes */
+.subjects-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 20px;
 }
 
-/* Video Wrapper */
-.video-wrapper {
-  position: relative;
-  max-width: 90%;
-  margin: 0 auto;
+.subject-box {
+  width: 180px;
+  height: 100px;
+  margin: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  transition: transform 0.3s ease-in-out;
+}
+
+.subject-box:hover {
+  transform: scale(1.05);
+}
+
+/* Chapter boxes */
+.lectures-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.lecture-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.lecture-box {
+  width: 160px;
+  height: 80px;
+  margin: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  transition: transform 0.3s ease-in-out;
+}
+
+.lecture-box:hover {
+  transform: scale(1.05);
 }
 
 /* Video Player */
-.video-player {
+.video-container {
   width: 100%;
-  max-height: 80vh;
-  border-radius: 10px;
-  background: black;
+  max-width: 800px;
+  margin: 20px auto;
+  position: relative;
 }
 
-/* Fullscreen Button */
-.fullscreen-btn {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+/* Player Controls */
+.video-js .vjs-control-bar {
   background: rgba(0, 0, 0, 0.7);
-  color: white;
-  border: none;
-  padding: 8px;
-  border-radius: 5px;
+}
+
+/* Increase the size of player buttons slightly */
+.vjs-button {
+  font-size: 1.2em !important;
+}
+
+/* Fullscreen Mode */
+.vjs-fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+/* Double Tap Skip Areas */
+.double-tap-area {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  top: 0;
   cursor: pointer;
-  font-size: 18px;
 }
 
-.fullscreen-btn:hover {
-  background: rgba(0, 0, 0, 0.9);
+.double-tap-left {
+  left: 0;
 }
 
-/* Quality Selection */
-.quality-controls {
-  margin-top: 10px;
+.double-tap-right {
+  right: 0;
 }
 
-.quality-controls label {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-.quality-controls select {
-  padding: 5px;
-  font-size: 16px;
-}
-
-/* Double-Tap Gesture Support */
-.video-wrapper:active {
-  outline: none;
-  user-select: none;
-}
-
-/* Increase Button & Text Size in Player */
-.video-container h2 {
-  font-size: 22px;
-}
-
-.quality-controls select,
-.fullscreen-btn {
-  font-size: 16px;
-  padding: 10px;
+/* Increase timestamp size slightly */
+.vjs-time-control {
+  font-size: 1.1em !important;
 }
