@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
+import "videojs-http-source-selector"; // ✅ Import quality selector plugin
 import { useLocation } from "react-router-dom";
 
 const VideoPlayer = () => {
@@ -17,10 +18,15 @@ const VideoPlayer = () => {
         controls: true,
         autoplay: false,
         fluid: true,
-        playbackRates: [0.5, 1, 1.5, 2],
+        playbackRates: [0.5, 1, 1.5, 1.75, 2], // ✅ Speed control
       });
 
       playerRef.current.src({ src: m3u8Url, type: "application/x-mpegURL" });
+
+      // ✅ Enable quality selection plugin
+      playerRef.current.ready(() => {
+        playerRef.current.httpSourceSelector();
+      });
 
       return () => {
         if (playerRef.current) {
