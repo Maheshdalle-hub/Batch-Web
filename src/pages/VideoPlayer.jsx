@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Hls from "hls.js";
-import "../styles/VideoPlayer.css";
+import "../styles/global.css";
 
 const VideoPlayer = () => {
   const videoRef = useRef(null);
