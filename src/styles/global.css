@@ -1,69 +1,60 @@
-/* General Page Styles */
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   text-align: center;
-  background: #ffffff; /* White background */
-  color: black; /* Dark text for readability */
+  background: linear-gradient(120deg, #f0f0f0, #e0e0e0); /* Light grey gradient */
+  color: #333; /* Dark grey text */
 }
 
-/* Main container */
+/* Container */
 .container {
   padding: 20px;
 }
 
-/* Clickable Boxes (Homepage, Subjects, Chapters) */
-.click-box,
-.subject-box,
-.chapter-box {
-  background: #f9f9f9; /* Light gray background */
-  color: black; /* Dark text */
+/* Boxes */
+.click-box, .subject-box, .chapter-box {
+  background: #ffffff; /* White background for clean UI */
+  color: #333; /* Dark text for readability */
   padding: 20px;
-  margin: 10px;
+  margin: 10px auto;
   width: 80%;
-  max-width: 250px;
-  border-radius: 12px;
+  border-radius: 10px;
   cursor: pointer;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   transition: transform 0.3s, background 0.3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
 }
 
-.click-box:hover,
-.subject-box:hover,
-.chapter-box:hover {
-  background: #e0e0e0; /* Slightly darker on hover */
+/* Hover Effect */
+.click-box:hover, .subject-box:hover, .chapter-box:hover {
+  background: #f9f9f9; /* Lighter shade on hover */
   transform: scale(1.05);
 }
 
-/* Subject and Chapter Grid */
-.subject-grid,
-.chapter-grid {
+/* Grid Layout */
+.subject-grid, .chapter-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
+  gap: 10px;
 }
 
-/* Image inside Homepage Box */
+/* Homepage Image */
 .homepage-image {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
   margin-bottom: 10px;
 }
 
-/* Video Player Container */
+/* Video Player */
 .video-container {
   text-align: center;
   padding: 20px;
 }
 
-/* Video Player Styling */
 .custom-video-player {
   width: 90%;
   max-width: 800px;
@@ -71,7 +62,21 @@ body {
   outline: none;
 }
 
-/* Fullscreen Video Customization */
+/* Fullscreen Mode */
 .custom-video-player:fullscreen {
   background: black;
+}
+
+/* Icon Styling */
+.icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .click-box, .subject-box, .chapter-box {
+    width: 90%;
+  }
 }
