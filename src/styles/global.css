@@ -1,107 +1,58 @@
-/* General Reset */
-* {
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-/* Main Container */
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
-  padding: 20px;
-  background-color: #f4f4f4; /* Light gray background */
+  background: linear-gradient(120deg, #1a1a2e, #16213e);
+  color: white;
 }
 
-/* Homepage Box */
-.click-box {
-  width: 300px;
+.container {
   padding: 20px;
-  margin: 10px;
-  background: white;
+}
+
+.click-box, .subject-box, .chapter-box {
+  background: #ff4b5c;
+  color: white;
+  padding: 20px;
+  margin: 10px auto;
+  width: 80%;
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s, background 0.3s;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.click-box:hover {
+.click-box:hover, .subject-box:hover, .chapter-box:hover {
+  background: #ff6b81;
   transform: scale(1.05);
-  background: #e0e0e0;
 }
 
-/* Homepage Image */
-.homepage-image {
-  width: 100%;
-  max-width: 400px;
-  border-radius: 10px;
-}
-
-/* Subject & Chapter Grid */
 .subject-grid, .chapter-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
 }
 
-/* Subject & Chapter Boxes */
-.subject-box, .chapter-box {
-  width: 180px;
-  padding: 15px;
-  background: #4a90e2; /* Blue */
-  color: white;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.3s, background 0.3s;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+.homepage-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
-.subject-box:hover, .chapter-box:hover {
-  transform: scale(1.05);
-  background: #357ABD; /* Darker blue */
-}
-
-/* Video Player Container */
 .video-container {
-  display: flex;
-  justify-content: center;
+  text-align: center;
   padding: 20px;
-  background: black;
 }
 
-/* Custom Video Player */
 .custom-video-player {
   width: 90%;
   max-width: 800px;
   border-radius: 10px;
+  outline: none;
 }
 
 .custom-video-player:fullscreen {
   background: black;
 }
-
-/* Video Controls Enhancements */
-.video-controls {
-  font-size: 16px;
-}
-
-.video-controls button {
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  border: none;
-  padding: 10px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.video-controls button:hover {
-  background: rgba(0, 0, 0, 0.9);
-  }
