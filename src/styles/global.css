@@ -1,58 +1,78 @@
+/* General styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  text-align: center;
-  background: linear-gradient(120deg, #1a1a2e, #16213e);
-  color: white;
+  background-color: #f4f4f4;
 }
 
-.container {
-  padding: 20px;
-}
-
-.click-box, .subject-box, .chapter-box {
-  background: #ff4b5c;
-  color: white;
-  padding: 20px;
-  margin: 10px auto;
-  width: 80%;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.3s, background 0.3s;
-}
-
-.click-box:hover, .subject-box:hover, .chapter-box:hover {
-  background: #ff6b81;
-  transform: scale(1.05);
-}
-
-.subject-grid, .chapter-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.homepage-image {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
+/* Video Player Container */
 .video-container {
   text-align: center;
   padding: 20px;
 }
 
-.custom-video-player {
-  width: 90%;
-  max-width: 800px;
-  border-radius: 10px;
-  outline: none;
+/* Video Wrapper */
+.video-wrapper {
+  position: relative;
+  max-width: 90%;
+  margin: 0 auto;
 }
 
-.custom-video-player:fullscreen {
+/* Video Player */
+.video-player {
+  width: 100%;
+  max-height: 80vh;
+  border-radius: 10px;
   background: black;
+}
+
+/* Fullscreen Button */
+.fullscreen-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.fullscreen-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* Quality Selection */
+.quality-controls {
+  margin-top: 10px;
+}
+
+.quality-controls label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.quality-controls select {
+  padding: 5px;
+  font-size: 16px;
+}
+
+/* Double-Tap Gesture Support */
+.video-wrapper:active {
+  outline: none;
+  user-select: none;
+}
+
+/* Increase Button & Text Size in Player */
+.video-container h2 {
+  font-size: 22px;
+}
+
+.quality-controls select,
+.fullscreen-btn {
+  font-size: 16px;
+  padding: 10px;
 }
