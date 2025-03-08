@@ -1,51 +1,69 @@
+/* General Page Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   text-align: center;
-  background: linear-gradient(120deg, #1a1a2e, #16213e);
-  color: white;
+  background: #ffffff; /* White background */
+  color: black; /* Dark text for readability */
 }
 
+/* Main container */
 .container {
   padding: 20px;
 }
 
-.click-box, .subject-box, .chapter-box {
-  background: #ff4b5c;
-  color: white;
+/* Clickable Boxes (Homepage, Subjects, Chapters) */
+.click-box,
+.subject-box,
+.chapter-box {
+  background: #f9f9f9; /* Light gray background */
+  color: black; /* Dark text */
   padding: 20px;
-  margin: 10px auto;
+  margin: 10px;
   width: 80%;
-  border-radius: 10px;
+  max-width: 250px;
+  border-radius: 12px;
   cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.3s, background 0.3s;
 }
 
-.click-box:hover, .subject-box:hover, .chapter-box:hover {
-  background: #ff6b81;
+.click-box:hover,
+.subject-box:hover,
+.chapter-box:hover {
+  background: #e0e0e0; /* Slightly darker on hover */
   transform: scale(1.05);
 }
 
-.subject-grid, .chapter-grid {
+/* Subject and Chapter Grid */
+.subject-grid,
+.chapter-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 15px;
 }
 
+/* Image inside Homepage Box */
 .homepage-image {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
   margin-bottom: 10px;
 }
 
+/* Video Player Container */
 .video-container {
   text-align: center;
   padding: 20px;
 }
 
+/* Video Player Styling */
 .custom-video-player {
   width: 90%;
   max-width: 800px;
@@ -53,6 +71,7 @@ body {
   outline: none;
 }
 
+/* Fullscreen Video Customization */
 .custom-video-player:fullscreen {
   background: black;
 }
