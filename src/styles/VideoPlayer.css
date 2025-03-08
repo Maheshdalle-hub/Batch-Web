@@ -1,0 +1,31 @@
+/* Make Player Controls Slightly Bigger */
+.custom-video-player .vjs-control-bar {
+  font-size: 14px !important;
+}
+
+.custom-video-player .vjs-button {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+/* Slightly Bigger Play Button */
+.custom-video-player .vjs-big-play-button {
+  font-size: 20px !important;
+  width: 65px !important;
+  height: 65px !important;
+}
+
+/* Increase Size of Timestamps */
+.custom-video-player .vjs-time-control {
+  font-size: 14px !important;
+}
+
+/* Increase Size of Quality Selection Menu */
+.custom-video-player .vjs-menu-button .vjs-menu {
+  font-size: 13px !important;
+}
+
+/* Slightly Thicker Progress Bar */
+.custom-video-player .vjs-progress-holder {
+  height: 5px !important;
+}
