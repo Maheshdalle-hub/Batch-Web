@@ -1,28 +1,32 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
-
-const subjectsData = {
-  Maths: [
-    { name: "Chapter 1", m3u8: "https://example.com/math1.m3u8" },
-    { name: "Chapter 2", m3u8: "https://example.com/math2.m3u8" }
-  ],
-  Science: [
-    { name: "Chapter 1", m3u8: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/4254694/173402301054458296383/173402301054458296383_8296383.m3u8" },
-    { name: "Chapter 2", m3u8: "https://example.com/science2.m3u8" }
-  ]
-};
+import { Link, useParams } from "react-router-dom";
 
 const Lectures = () => {
   const { subject } = useParams();
-  const navigate = useNavigate();
+
+  // Define M3U8 links for each chapter
+  const lectures = {
+    Science: [
+      { name: "Chapter 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/4254694/173402301054458296383/173402301054458296383_8296383.m3u8" },
+      { name: "Chapter 2", m3u8Url: "YOUR_M3U8_LINK_HERE" },
+    ],
+    Maths: [
+      { name: "Chapter 1", m3u8Url: "YOUR_M3U8_LINK_HERE" },
+      { name: "Chapter 2", m3u8Url: "YOUR_M3U8_LINK_HERE" },
+    ],
+  };
 
   return (
     <div>
       <h2>{subject} Lectures</h2>
-      {subjectsData[subject].map((chapter, index) => (
-        <div key={index} onClick={() => navigate(`/video/${subject}/${index}`)} style={{ padding: 10, border: "1px solid black", margin: 5, cursor: "pointer" }}>
-          {chapter.name}
-        </div>
+      {lectures[subject]?.map((lecture, index) => (
+        <Link
+          key={index}
+          to={`/video/${subject}/${index}`}
+          state={{ chapterName: lecture.name, m3u8Url: lecture.m3u8Url }} // ✅ Pass data to VideoPlayer
+        >
+          <div className="lecture-box">{lecture.name}</div>
+        </Link>
       ))}
     </div>
   );
