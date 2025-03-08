@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import "videojs-http-source-selector"; // ✅ Import quality selection plugin
+import "videojs-hls-quality-selector"; // ✅ Import the correct plugin
 import { useLocation } from "react-router-dom";
 
 const VideoPlayer = () => {
@@ -23,12 +23,14 @@ const VideoPlayer = () => {
 
       playerRef.current.src({ src: m3u8Url, type: "application/x-mpegURL" });
 
-      // ✅ Make sure the plugin is properly initialized
+      // ✅ Wait for player to be ready before applying quality selection
       playerRef.current.ready(() => {
-        if (playerRef.current.httpSourceSelector) {
-          playerRef.current.httpSourceSelector(); // ✅ Apply quality selector
+        if (playerRef.current.hlsQualitySelector) {
+          playerRef.current.hlsQualitySelector({
+            displayCurrentQuality: true, // ✅ Show current quality in button
+          });
         } else {
-          console.error("Quality selector plugin not found");
+          console.error("HLS Quality Selector plugin not found");
         }
       });
 
