@@ -1,24 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Hls from "hls.js";
 import "../styles/VideoPlayer.css";
-import lectures from "./Lectures"; // Import lectures data
 
 const VideoPlayer = () => {
-  const { subject, chapterIndex } = useParams();
   const videoRef = useRef(null);
   const [hls, setHls] = useState(null);
   const [qualityLevels, setQualityLevels] = useState([]);
   const [selectedQuality, setSelectedQuality] = useState("auto");
   const doubleTapRef = useRef({ lastTap: 0 });
 
-  const m3u8Link = lectures[subject]?.[chapterIndex];
+  // Get data passed from Lectures.jsx
+  const location = useLocation();
+  const { chapterName, m3u8Url } = location.state || {};
 
   useEffect(() => {
     if (videoRef.current && m3u8Url) {
       if (Hls.isSupported()) {
         const hlsInstance = new Hls();
-        hlsInstance.loadSource(m3u8Link);
+        hlsInstance.loadSource(m3u8Url);
         hlsInstance.attachMedia(videoRef.current);
         setHls(hlsInstance);
 
@@ -30,10 +30,10 @@ const VideoPlayer = () => {
           hlsInstance.destroy();
         };
       } else {
-        videoRef.current.src = m3u8Link;
+        videoRef.current.src = m3u8Url;
       }
     }
-  }, [m3u8Link]);
+  }, [m3u8Url]);
 
   const handleQualityChange = (level) => {
     if (hls) {
@@ -64,6 +64,7 @@ const VideoPlayer = () => {
 
   return (
     <div className="video-container">
+      <h2>{chapterName}</h2>
       <div className="video-wrapper">
         <video
           ref={videoRef}
