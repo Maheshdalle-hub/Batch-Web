@@ -1,8 +1,12 @@
+/* General container styling */
 .lectures-container {
   text-align: center;
   padding: 20px;
+  background: #f8f9fa; /* Light theme background */
+  min-height: 100vh;
 }
 
+/* Lecture boxes layout */
 .lecture-boxes {
   display: flex;
   flex-direction: column;
@@ -10,21 +14,57 @@
   gap: 10px;
 }
 
+/* Individual lecture box */
 .lecture-box {
   width: 80%;
-  max-width: 300px;
+  max-width: 350px;
   padding: 15px;
-  text-align: center;
-  background: #4a90e2;
-  color: white;
+  text-align: left; /* Align text to the left */
+  background: #ffffff; /* White box */
+  color: #333; /* Dark text */
   border-radius: 10px;
   text-decoration: none;
   font-size: 18px;
   font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
   transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+  padding-right: 20px;
 }
 
+/* Hover effect for lecture boxes */
 .lecture-box:hover {
-  background: #357ABD;
+  background: #e8e8ff; /* Light purple shade */
   transform: scale(1.05);
+}
+
+/* Icons on the right side */
+.lecture-icon {
+  width: 30px;
+  height: 30px;
+}
+
+/* Live Class Box Styling */
+.live-class {
+  background: #ffcc00; /* Yellow highlight */
+  color: #333;
+}
+
+.live-class:hover {
+  background: #ffdb4d; /* Lighter yellow on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .lecture-box {
+    max-width: 90%;
+    font-size: 16px;
+  }
+
+  .lecture-icon {
+    width: 25px;
+    height: 25px;
+  }
 }
