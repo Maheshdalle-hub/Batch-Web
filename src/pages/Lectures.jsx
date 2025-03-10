@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import "../styles/Lectures.css"; // Ensure this file exists
-import liveIcon from "../assets/live-icon.png"; // Replace with actual icon
-import chapterIcon from "../assets/chapter-icon.png"; // Replace with actual icon
+import liveIcon from "../assets/images.jpeg"; // Replace with actual icon
+import chapterIcon from "../assets/images.jpeg"; // Replace with actual icon
 
 const Lectures = () => {
   const { subject } = useParams();
