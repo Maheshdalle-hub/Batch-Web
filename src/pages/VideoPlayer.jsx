@@ -1,15 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import "videojs-hls-quality-selector"; // ✅ Quality selection
+import "videojs-hls-quality-selector"; 
 import { useLocation } from "react-router-dom";
 
 const VideoPlayer = () => {
   const location = useLocation();
   const videoRef = useRef(null);
   const playerRef = useRef(null);
+  const lastTap = useRef(0);
+  const holdTimer = useRef(null);
 
-  // Get M3U8 link from Lectures.jsx
   const { chapterName, m3u8Url } = location.state || {};
 
   useEffect(() => {
@@ -18,19 +19,17 @@ const VideoPlayer = () => {
         controls: true,
         autoplay: false,
         fluid: true,
-        playbackRates: [0.5, 1, 1.5, 2], // ✅ Speed control
+        playbackRates: [0.5, 1, 1.5, 2], 
       });
 
       playerRef.current.src({ src: m3u8Url, type: "application/x-mpegURL" });
 
-      // ✅ Enable quality selection
       playerRef.current.ready(() => {
         if (playerRef.current.hlsQualitySelector) {
           playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
         }
       });
 
-      // ✅ Handle Fullscreen Rotation
       playerRef.current.on("fullscreenchange", () => {
         if (playerRef.current.isFullscreen()) {
           screen.orientation.lock("landscape").catch(() => {});
@@ -39,39 +38,49 @@ const VideoPlayer = () => {
         }
       });
 
-      // ✅ Gesture Controls
+      // ✅ Gesture Controls (More Accurate)
       const videoContainer = videoRef.current.parentElement;
-      let lastTap = 0;
-      let holdTimer;
 
       videoContainer.addEventListener("touchstart", (event) => {
         const touch = event.touches[0];
         const rect = videoContainer.getBoundingClientRect();
         const tapX = touch.clientX - rect.left;
+        const tapY = touch.clientY - rect.top;
         const videoWidth = rect.width;
+        const videoHeight = rect.height;
 
-        holdTimer = setTimeout(() => {
-          playerRef.current.playbackRate(2); // Hold to speed up
-        }, 500);
+        // ✅ Ignore taps near the bottom (where controls are)
+        if (tapY > videoHeight - 50) return;
 
-        lastTap = Date.now();
+        // ✅ Hold to speed up
+        holdTimer.current = setTimeout(() => {
+          playerRef.current.playbackRate(2);
+        }, 600);
       });
 
       videoContainer.addEventListener("touchend", (event) => {
-        clearTimeout(holdTimer);
-        playerRef.current.playbackRate(1); // Reset speed
+        clearTimeout(holdTimer.current);
+        playerRef.current.playbackRate(1);
 
-        const tapGap = Date.now() - lastTap;
+        const currentTime = Date.now();
+        const tapGap = currentTime - lastTap.current;
+        lastTap.current = currentTime;
+
+        const touch = event.changedTouches[0];
+        const rect = videoContainer.getBoundingClientRect();
+        const tapX = touch.clientX - rect.left;
+        const tapY = touch.clientY - rect.top;
+        const videoWidth = rect.width;
+        const videoHeight = rect.height;
+
+        // ✅ Ignore taps near controls
+        if (tapY > videoHeight - 50) return;
+
         if (tapGap < 300) {
-          const touch = event.changedTouches[0];
-          const rect = videoContainer.getBoundingClientRect();
-          const tapX = touch.clientX - rect.left;
-          const videoWidth = rect.width;
-
           if (tapX < videoWidth / 3) {
-            playerRef.current.currentTime(playerRef.current.currentTime() - 10); // ⏪ Skip Back
+            playerRef.current.currentTime(playerRef.current.currentTime() - 10);
           } else if (tapX > (2 * videoWidth) / 3) {
-            playerRef.current.currentTime(playerRef.current.currentTime() + 10); // ⏩ Skip Forward
+            playerRef.current.currentTime(playerRef.current.currentTime() + 10);
           } else {
             if (playerRef.current.paused()) {
               playerRef.current.play();
