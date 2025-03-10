@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import "../styles/Lectures.css"; // ✅ Add a CSS file
+import "../styles/Lectures.css"; // Ensure this file exists
+import liveIcon from "../assets/live-icon.png"; // Replace with actual icon
+import chapterIcon from "../assets/chapter-icon.png"; // Replace with actual icon
 
 const Lectures = () => {
   const { subject } = useParams();
@@ -20,6 +22,13 @@ const Lectures = () => {
   return (
     <div className="lectures-container">
       <h2>{subject} Lectures</h2>
+
+      {/* Live Class Box */}
+      <Link to="/live-class" className="lecture-box live-class">
+        <span>🔴 Live Class</span>
+        <img src={liveIcon} alt="Live" className="lecture-icon" />
+      </Link>
+
       <div className="lecture-boxes">
         {lectures[subject]?.map((lecture, index) => (
           <Link
@@ -28,7 +37,8 @@ const Lectures = () => {
             state={{ chapterName: lecture.name, m3u8Url: lecture.m3u8Url }}
             className="lecture-box"
           >
-            {lecture.name}
+            <span>{lecture.name}</span>
+            <img src={chapterIcon} alt="Chapter" className="lecture-icon" />
           </Link>
         ))}
       </div>
