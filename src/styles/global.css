@@ -1,43 +1,49 @@
-/* General Styles */
+/* Global Reset */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   text-align: center;
-  background: linear-gradient(120deg, #f0f0f0, #e0e0e0); /* Light grey gradient */
-  color: #333; /* Dark grey text */
+  background: #f8f9fa; /* Light gray background */
+  color: #333; /* Dark text for contrast */
 }
 
-/* Container */
+/* Main Container */
 .container {
   padding: 20px;
 }
 
-/* Boxes */
+/* Common Box Styles */
 .click-box, .subject-box, .chapter-box {
-  background: #ffffff; /* White background for clean UI */
-  color: #333; /* Dark text for readability */
+  background: #ffffff; /* White background */
+  color: #333;
   padding: 20px;
   margin: 10px auto;
   width: 80%;
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s, background 0.3s;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 /* Hover Effect */
 .click-box:hover, .subject-box:hover, .chapter-box:hover {
-  background: #f9f9f9; /* Lighter shade on hover */
+  background: #e8e8ff; /* Light purple shade */
   transform: scale(1.05);
 }
 
-/* Grid Layout */
+/* Grid Layout for Subjects & Chapters */
 .subject-grid, .chapter-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
 }
 
 /* Homepage Image */
@@ -49,7 +55,7 @@ body {
   margin-bottom: 10px;
 }
 
-/* Video Player */
+/* Custom Video Player */
 .video-container {
   text-align: center;
   padding: 20px;
@@ -62,21 +68,19 @@ body {
   outline: none;
 }
 
-/* Fullscreen Mode */
 .custom-video-player:fullscreen {
   background: black;
-}
-
-/* Icon Styling */
-.icon {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .click-box, .subject-box, .chapter-box {
     width: 90%;
+    font-size: 16px;
   }
-}
+
+  .homepage-image {
+    width: 150px;
+    height: 150px;
+  }
+    }
