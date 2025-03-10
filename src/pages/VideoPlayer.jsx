@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "videojs-hls-quality-selector"; // ✅ Quality selection
-import "videojs-overlay"; // ✅ Built-in Video.js overlay support
 import { useLocation } from "react-router-dom";
 
 const VideoPlayer = () => {
@@ -31,21 +30,21 @@ const VideoPlayer = () => {
         }
       });
 
-      // ✅ Enable Play/Pause Overlay with Video.js Overlay Plugin
-      playerRef.current.overlay({
-        content: '<button class="vjs-big-play-button"></button>', // ✅ Uses Video.js default big play button
-        overlays: [
-          {
-            start: "pause",
-            end: "play",
-            align: "center",
-          },
-        ],
+      // ✅ Handle Fullscreen Rotation
+      playerRef.current.on("fullscreenchange", () => {
+        if (playerRef.current.isFullscreen()) {
+          screen.orientation.lock("landscape").catch(() => {});
+        } else {
+          screen.orientation.unlock();
+        }
       });
 
-      // ✅ Double Tap to Seek
+      // ✅ Gesture Controls
       const videoContainer = videoRef.current.parentElement;
+
       let lastTap = 0;
+      let holding = false;
+      let holdTimer;
 
       videoContainer.addEventListener("click", (event) => {
         const currentTime = new Date().getTime();
@@ -57,13 +56,37 @@ const VideoPlayer = () => {
           const tapX = event.clientX - rect.left;
           const videoWidth = rect.width;
 
-          if (tapX < videoWidth / 2) {
+          if (tapX < videoWidth / 3) {
             playerRef.current.currentTime(playerRef.current.currentTime() - 10); // ⏪ Skip Back
-          } else {
+          } else if (tapX > (2 * videoWidth) / 3) {
             playerRef.current.currentTime(playerRef.current.currentTime() + 10); // ⏩ Skip Forward
           }
+        } else {
+          // Single Tap (Play/Pause)
+          if (playerRef.current.paused()) {
+            playerRef.current.play();
+          } else {
+            playerRef.current.pause();
+          }
         }
+
         lastTap = currentTime;
+      });
+
+      // ✅ Hold Gesture for Speed Control
+      videoContainer.addEventListener("mousedown", () => {
+        holding = true;
+        holdTimer = setTimeout(() => {
+          if (holding) {
+            playerRef.current.playbackRate(2); // Increase speed while holding
+          }
+        }, 500);
+      });
+
+      videoContainer.addEventListener("mouseup", () => {
+        holding = false;
+        clearTimeout(holdTimer);
+        playerRef.current.playbackRate(1); // Reset speed after release
       });
 
       return () => {
@@ -75,11 +98,9 @@ const VideoPlayer = () => {
   }, [m3u8Url]);
 
   return (
-    <div className="video-container">
+    <div>
       <h2>Now Playing: {chapterName || "Unknown Chapter"}</h2>
-      <div className="video-wrapper">
-        <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
-      </div>
+      <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
     </div>
   );
 };
