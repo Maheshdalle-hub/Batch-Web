@@ -64,3 +64,63 @@
   background: #ffaaaa;
   transform: scale(1.05);
 }
+
+/* ✅ Chapter Selection Page */
+.chapter-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.chapter-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.chapter-box {
+  width: 80%;
+  max-width: 300px;
+  padding: 15px;
+  background: #fff;
+  color: #333;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chapter-box:hover {
+  background: #e9ecef;
+  transform: scale(1.05);
+}
+
+/* ✅ Lecture List for Each Chapter */
+.lecture-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.lecture-item {
+  width: 80%;
+  max-width: 300px;
+  padding: 15px;
+  background: #f1f1f1;
+  color: #333;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+}
+
+.lecture-item:hover {
+  background: #ddd;
+  transform: scale(1.05);
+}
