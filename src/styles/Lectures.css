@@ -1,12 +1,21 @@
-/* General container styling */
+/* ✅ Light Theme Background */
 .lectures-container {
   text-align: center;
   padding: 20px;
-  background: #f8f9fa; /* Light theme background */
-  min-height: 100vh;
+  background: #f8f9fa; /* Light background */
+  color: #333; /* Dark text */
 }
 
-/* Lecture boxes layout */
+/* ✅ Big Logo Styling */
+.big-logo {
+  width: 250px; /* Adjust size */
+  max-width: 80%;
+  display: block;
+  margin: 20px auto; /* Center the logo */
+  border-radius: 10px;
+}
+
+/* ✅ Lecture Boxes */
 .lecture-boxes {
   display: flex;
   flex-direction: column;
@@ -14,57 +23,44 @@
   gap: 10px;
 }
 
-/* Individual lecture box */
+/* ✅ Chapter Box Styling */
 .lecture-box {
   width: 80%;
-  max-width: 350px;
+  max-width: 300px;
   padding: 15px;
-  text-align: left; /* Align text to the left */
-  background: #ffffff; /* White box */
+  text-align: center;
+  background: #ffffff; /* Light background */
   color: #333; /* Dark text */
   border-radius: 10px;
   text-decoration: none;
   font-size: 18px;
   font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
   transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
-  padding-right: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ✅ Subtle shadow */
 }
 
-/* Hover effect for lecture boxes */
 .lecture-box:hover {
-  background: #e8e8ff; /* Light purple shade */
+  background: #e9ecef; /* Lighter shade on hover */
   transform: scale(1.05);
 }
 
-/* Icons on the right side */
-.lecture-icon {
-  width: 30px;
-  height: 30px;
+/* ✅ Live Class Section Aligned */
+.live-class-section {
+  margin-top: 20px;
+  width: 80%;
+  max-width: 300px;
+  padding: 15px;
+  text-align: center;
+  background: #ffcccc; /* Light red for live class */
+  color: #990000; /* Darker red for contrast */
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
 }
 
-/* Live Class Box Styling */
-.live-class {
-  background: #ffcc00; /* Yellow highlight */
-  color: #333;
-}
-
-.live-class:hover {
-  background: #ffdb4d; /* Lighter yellow on hover */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .lecture-box {
-    max-width: 90%;
-    font-size: 16px;
-  }
-
-  .lecture-icon {
-    width: 25px;
-    height: 25px;
-  }
+.live-class-section:hover {
+  background: #ffaaaa;
+  transform: scale(1.05);
 }
