@@ -1,39 +1,36 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import "../styles/Lectures.css";
-import mlogo from "../assets/ntmlogo.jpg";
+import "../styles/ChapterLectures.css";
 
 const ChapterLectures = () => {
-  const { subject, chapter } = useParams();
+  const { subject, chapterIndex } = useParams();
 
-  // Define M3U8 links for each lecture
-  const lectures = {
+  const chapterLectures = {
     Science: {
-      "Chapter 1": [
+      0: [
         { name: "Lecture 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/4254694/173402301054458296383/173402301054458296383_8296383.m3u8" },
-        { name: "Lecture 2", m3u8Url: "YOUR_M3U8_LINK_2" },
+        { name: "Lecture 2", m3u8Url: "YOUR_M3U8_LINK_HERE" },
       ],
-      "Chapter 2": [
-        { name: "Lecture 1", m3u8Url: "YOUR_M3U8_LINK_3" },
+      1: [
+        { name: "Lecture 1", m3u8Url: "YOUR_M3U8_LINK_HERE" },
       ],
     },
     Maths: {
-      "Chapter 1": [
-        { name: "Lecture 1", m3u8Url: "YOUR_M3U8_LINK_4" },
+      0: [
+        { name: "Lecture 1", m3u8Url: "YOUR_M3U8_LINK_HERE" },
+        { name: "Lecture 2", m3u8Url: "YOUR_M3U8_LINK_HERE" },
       ],
     },
   };
 
   return (
-    <div className="lectures-container">
-      <img src={mlogo} alt="Logo" className="big-logo" />
-      <h2>{chapter} - {subject}</h2>
-
+    <div className="chapter-lectures-container">
+      <h2>{subject} - Chapter {parseInt(chapterIndex) + 1}</h2>
       <div className="lecture-boxes">
-        {lectures[subject]?.[chapter]?.map((lecture, index) => (
+        {chapterLectures[subject]?.[chapterIndex]?.map((lecture, index) => (
           <Link
             key={index}
-            to={`/video/${subject}/${chapter}/${index}`}
+            to={`/video/${subject}/${chapterIndex}`}
             state={{ chapterName: lecture.name, m3u8Url: lecture.m3u8Url }}
             className="lecture-box"
           >
