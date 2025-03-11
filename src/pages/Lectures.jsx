@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import "../styles/Lectures.css"; // ✅ Use the correct CSS file
-import mlogo from "./assets/ntmlogo.jpg"
+import mlogo from "../assets/ntmlogo.jpg"
 
 const Lectures = () => {
   const { subject } = useParams();
