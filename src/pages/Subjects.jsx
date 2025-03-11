@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/global.css";
-import mlogo from "./assets/ntmlogo.jpg"
+import mlogo from "../assets/ntmlogo.jpg"
 
 const subjects = ["SST", "Science", "Maths", "IT", "English", "Hindi"];
 
