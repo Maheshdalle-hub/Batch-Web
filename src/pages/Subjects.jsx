@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/global.css";
+import mlogo from "./assets/ntmlogo.jpg"
 
 const subjects = ["SST", "Science", "Maths", "IT", "English", "Hindi"];
 
@@ -10,7 +11,7 @@ const Subjects = () => {
   return (
     <div className="container">
       {/* ✅ Big Logo */}
-      <img src="https://images.app.goo.gl/mm63uNUVpmDpUFU99" alt="Logo" className="big-logo" />
+      <img src={mlogo} alt="Logo" className="big-logo" />
 
       <h2>Select a Subject</h2>
       <div className="subject-grid">
