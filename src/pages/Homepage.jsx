@@ -9,7 +9,7 @@ const Homepage = () => {
   return (
     <div className="container">
       {/* ✅ Big Logo */}
-      <img src="PUT_YOUR_LOGO_URL_HERE" alt="Logo" className="big-logo" />
+      <img src="https://images.app.goo.gl/mm63uNUVpmDpUFU99" alt="Logo" className="big-logo" />
 
       <div className="click-box" onClick={() => navigate("/subjects")}>
         <img src={imageUrl} alt="Aarambh Batch 2025-26" className="homepage-image" />
