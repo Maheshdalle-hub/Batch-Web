@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import "../styles/Lectures.css"; // ✅ Use the correct CSS file
+import mlogo from "./assets/ntmlogo.jpg"
 
 const Lectures = () => {
   const { subject } = useParams();
@@ -20,7 +21,7 @@ const Lectures = () => {
   return (
     <div className="lectures-container">
       {/* ✅ Big Logo at the Top */}
-      <img src="https://images.app.goo.gl/mm63uNUVpmDpUFU99" alt="Logo" className="big-logo" />
+      <img src={mlogo} alt="Logo" className="big-logo" />
 
       <h2>{subject} Lectures</h2>
       <div className="lecture-boxes">
