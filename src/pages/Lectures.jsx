@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import "../styles/lectures.css"; // ✅ Use the correct CSS file
+import "../styles/Lectures.css"; // ✅ Use the correct CSS file
 
 const Lectures = () => {
   const { subject } = useParams();
