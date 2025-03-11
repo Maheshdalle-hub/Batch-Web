@@ -83,4 +83,12 @@ body {
     width: 150px;
     height: 150px;
   }
+  /* ✅ Big Logo Styling */
+.big-logo {
+  width: 250px; /* Adjust size */
+  max-width: 80%;
+  display: block;
+  margin: 20px auto; /* Center the logo */
+  border-radius: 10px;
+}
     }
