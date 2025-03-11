@@ -10,7 +10,7 @@ const Subjects = () => {
   return (
     <div className="container">
       {/* ✅ Big Logo */}
-      <img src="PUT_YOUR_LOGO_URL_HERE" alt="Logo" className="big-logo" />
+      <img src="https://images.app.goo.gl/mm63uNUVpmDpUFU99" alt="Logo" className="big-logo" />
 
       <h2>Select a Subject</h2>
       <div className="subject-grid">
