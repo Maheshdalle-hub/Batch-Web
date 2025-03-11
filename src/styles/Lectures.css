@@ -1,4 +1,4 @@
-/* ✅ Light Theme Background */
+/* ✅ General Styles */
 .lectures-container {
   text-align: center;
   padding: 20px;
@@ -8,84 +8,31 @@
 
 /* ✅ Big Logo Styling */
 .big-logo {
-  width: 250px; /* Adjust size */
+  width: 250px;
   max-width: 80%;
   display: block;
-  margin: 20px auto; /* Center the logo */
+  margin: 20px auto;
   border-radius: 10px;
 }
 
-/* ✅ Lecture Boxes */
+/* ✅ Grid Layout for Books, Chapters & Lectures */
 .lecture-boxes {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-/* ✅ Chapter Box Styling */
-.lecture-box {
-  width: 80%;
-  max-width: 300px;
-  padding: 15px;
-  text-align: center;
-  background: #ffffff; /* Light background */
-  color: #333; /* Dark text */
-  border-radius: 10px;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: bold;
-  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ✅ Subtle shadow */
-}
-
-.lecture-box:hover {
-  background: #e9ecef; /* Lighter shade on hover */
-  transform: scale(1.05);
-}
-
-/* ✅ Live Class Section Aligned */
-.live-class-section {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
   margin-top: 20px;
-  width: 80%;
-  max-width: 300px;
+}
+
+/* ✅ Box Styling for Books, Chapters & Lectures */
+.lecture-box {
+  width: 45%;
+  max-width: 280px;
   padding: 15px;
   text-align: center;
-  background: #ffcccc; /* Light red for live class */
-  color: #990000; /* Darker red for contrast */
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
-}
-
-.live-class-section:hover {
-  background: #ffaaaa;
-  transform: scale(1.05);
-}
-
-/* ✅ Chapter Selection Page */
-.chapter-container {
-  text-align: center;
-  padding: 20px;
-}
-
-.chapter-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.chapter-box {
-  width: 80%;
-  max-width: 300px;
-  padding: 15px;
-  background: #fff;
+  background: #ffffff; /* White background */
   color: #333;
   border-radius: 10px;
-  text-align: center;
   text-decoration: none;
   font-size: 18px;
   font-weight: bold;
@@ -93,34 +40,36 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.chapter-box:hover {
+/* ✅ Hover Effect */
+.lecture-box:hover {
   background: #e9ecef;
   transform: scale(1.05);
 }
 
-/* ✅ Lecture List for Each Chapter */
-.lecture-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.lecture-item {
-  width: 80%;
-  max-width: 300px;
+/* ✅ Live Class Box (Same Size & Alignment as Chapters) */
+.live-class-section {
+  width: 45%;
+  max-width: 280px;
   padding: 15px;
-  background: #f1f1f1;
-  color: #333;
-  border-radius: 10px;
   text-align: center;
-  text-decoration: none;
-  font-size: 16px;
+  background: #ffcccc;
+  color: #990000;
+  border-radius: 10px;
+  font-size: 18px;
   font-weight: bold;
+  cursor: pointer;
   transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
 }
 
-.lecture-item:hover {
-  background: #ddd;
+/* ✅ Live Class Hover Effect */
+.live-class-section:hover {
+  background: #ffaaaa;
   transform: scale(1.05);
+}
+
+/* ✅ Mobile Responsive */
+@media (max-width: 600px) {
+  .lecture-box, .live-class-section {
+    width: 90%;
+  }
 }
