@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import "../styles/Lectures.css";
+import "../styles/ChapterLectures.css";
+import mlogo from "../assets/ntmlogo.jpg"; // ✅ Import logo
 
 const ChapterLectures = () => {
   const { subject, chapterIndex } = useParams();
@@ -25,6 +26,9 @@ const ChapterLectures = () => {
 
   return (
     <div className="chapter-lectures-container">
+      {/* ✅ Big Logo at the Top */}
+      <img src={mlogo} alt="Logo" className="big-logo" />
+      
       <h2>{subject} - Chapter {parseInt(chapterIndex) + 1}</h2>
       <div className="lecture-boxes">
         {chapterLectures[subject]?.[chapterIndex]?.map((lecture, index) => (
