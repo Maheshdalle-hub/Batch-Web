@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/global.css";
 import imageUrl from "./IMG_20250227_100103_636.jpg";  // ✅ Replace with your actual file name
-import mlogo from "./assets/ntmlogo.jpg";
+import mlogo from "../assets/ntmlogo.jpg";
 
 const Homepage = () => {
   const navigate = useNavigate();
