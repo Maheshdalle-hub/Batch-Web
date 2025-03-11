@@ -11,7 +11,7 @@ const VideoPlayer = () => {
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
 
-  const { chapterName, m3u8Url } = location.state || {};
+  const { chapterName, lectureName, m3u8Url } = location.state || {};
 
   useEffect(() => {
     if (videoRef.current && m3u8Url) {
@@ -101,7 +101,7 @@ const VideoPlayer = () => {
 
   return (
     <div>
-      <h2>Now Playing: {chapterName || "Unknown Chapter"}</h2>
+      <h2>Now Playing: {chapterName} - {lectureName || "Unknown Lecture"}</h2>
       <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
     </div>
   );
