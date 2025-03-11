@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import "../styles/ChapterLectures.css";
+import "../styles/Lectures.css";
 
 const ChapterLectures = () => {
   const { subject, chapterIndex } = useParams();
