@@ -1,74 +1,51 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
-import "../styles/Lectures.css"; // ✅ Use the correct CSS file
+import { Link, useParams, useNavigate } from "react-router-dom";
+import "../styles/Lectures.css";
 import mlogo from "../assets/ntmlogo.jpg";
 
 const Lectures = () => {
   const { subject } = useParams();
+  const navigate = useNavigate();
 
-  // Define M3U8 links for each chapter & lecture
-  const lectures = {
-    Science: {
-      "Chapter 1": [
-        { name: "Lecture 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/4254694/173402301054458296383/173402301054458296383_8296383.m3u8" },
-        { name: "Lecture 2", m3u8Url: "YOUR_M3U8_LINK_HERE" },
-      ],
-      "Chapter 2": [
-        { name: "Lecture 1", m3u8Url: "YOUR_M3U8_LINK_HERE" },
-        { name: "Lecture 2", m3u8Url: "YOUR_M3U8_LINK_HERE" },
-      ],
-    },
-    Maths: {
-      "Chapter 1": [
-        { name: "Lecture 1", m3u8Url: "YOUR_M3U8_LINK_HERE" },
-        { name: "Lecture 2", m3u8Url: "YOUR_M3U8_LINK_HERE" },
-      ],
-      "Chapter 2": [
-        { name: "Lecture 1", m3u8Url: "YOUR_M3U8_LINK_HERE" },
-        { name: "Lecture 2", m3u8Url: "YOUR_M3U8_LINK_HERE" },
-      ],
-    },
+  // Define chapters for each subject
+  const chapters = {
+    Science: ["Chapter 1", "Chapter 2"],
+    Maths: ["Chapter 1", "Chapter 2"],
+    SST: ["Chapter 1", "Chapter 2"], 
+    IT: ["Chapter 1", "Chapter 2"],
+    English: ["Chapter 1"],
   };
 
-  // Subjects that have live classes
-  const subjectsWithLive = ["Science", "Maths", "SST"];
+  // ✅ Define M3U8 Live Class links
+  const liveClassLinks = {
+    Science: "YOUR_SCIENCE_LIVE_M3U8_LINK",
+    Maths: "YOUR_MATHS_LIVE_M3U8_LINK",
+    SST: "YOUR_SST_LIVE_M3U8_LINK",
+  };
 
   return (
     <div className="lectures-container">
-      {/* ✅ Big Logo at the Top */}
       <img src={mlogo} alt="Logo" className="big-logo" />
+      <h2>{subject} Chapters</h2>
 
-      <h2>{subject} Lectures</h2>
+      {/* ✅ Live Class Section (Only for subjects with M3U8 live streams) */}
+      {liveClassLinks[subject] && (
+        <div
+          className="live-class-section"
+          onClick={() =>
+            navigate("/video/live", { state: { chapterName: "Live Class", m3u8Url: liveClassLinks[subject] } })
+          }
+        >
+          🔴 Live Class (Click to Watch)
+        </div>
+      )}
 
       <div className="lecture-boxes">
-        {/* ✅ Show Live Class Only for Certain Subjects */}
-        {subjectsWithLive.includes(subject) && (
-          <div className="live-class-section">
-            🔴 Live Class (Click to Join)
-          </div>
-        )}
-
-        {/* ✅ Loop Through Chapters */}
-        {lectures[subject] &&
-          Object.entries(lectures[subject]).map(([chapter, lectureList], chapterIndex) => (
-            <div key={chapterIndex} className="chapter-container">
-              <h3 className="chapter-title">{chapter}</h3>
-
-              {/* ✅ Loop Through Lectures in Each Chapter */}
-              <div className="lecture-list">
-                {lectureList.map((lecture, lectureIndex) => (
-                  <Link
-                    key={lectureIndex}
-                    to={`/video/${subject}/${chapterIndex}/${lectureIndex}`}
-                    state={{ chapterName: chapter, lectureName: lecture.name, m3u8Url: lecture.m3u8Url }}
-                    className="lecture-box"
-                  >
-                    {lecture.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
+        {chapters[subject]?.map((chapter, index) => (
+          <Link key={index} to={`/lectures/${subject}/${chapter}`} className="lecture-box">
+            {chapter}
+          </Link>
+        ))}
       </div>
     </div>
   );
