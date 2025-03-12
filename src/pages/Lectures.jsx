@@ -15,6 +15,14 @@ const Lectures = () => {
       { name: "Chapter 1", index: 0 },
       { name: "Chapter 2", index: 1 },
     ],
+    SST: [
+      { name: "Chapter 1", index: 0 },
+      { name: "Chapter 2", index: 1 },
+    ],
+    IT: [
+      { name: "Chapter 1", index: 0 },
+      { name: "Chapter 2", index: 1 },
+    ],
   };
 
   return (
@@ -22,7 +30,6 @@ const Lectures = () => {
       <img src={mlogo} alt="Logo" className="big-logo" />
       <h2>{subject} Lectures</h2>
       <div className="lecture-boxes">
-        <div className="live-class-section">🔴 Live Class (Click to Join)</div>
         {lectures[subject]?.map((lecture, index) => (
           <Link
             key={index}
