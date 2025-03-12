@@ -79,13 +79,11 @@ body {
 }
 
 .homepage-image {
-  width: 80%; /* Ensures good size */
-  height: 80%;
-  object-fit: contain; /* Prevents stretching/cropping */
+  width: 100%; /* Make image fill the box */
+  height: 100%;
+  object-fit: cover; /* Ensures it covers the box fully */
   display: block;
-  margin-bottom: 10px; /* Adds spacing between image and text */
 }
-
 .click-box h1 {
   font-size: 18px;
   text-align: center;
