@@ -1,24 +1,40 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import "../styles/global.css";
-import mlogo from "../assets/ntmlogo.jpg"
-
-const subjects = ["SST", "Science", "Maths", "IT", "English", "Hindi"];
+import { Link } from "react-router-dom";
+import "../styles/global.css"; 
+import mlogo from "../assets/ntmlogo.jpg";
 
 const Subjects = () => {
-  const navigate = useNavigate();
+  const subjects = [
+    { name: "Science", path: "/lectures/Science" },
+    { name: "Maths", path: "/lectures/Maths" },
+    { name: "SST", path: "/lectures/SST" },
+    { name: "English", path: "/lectures/English" },
+    { name: "Hindi", path: "/lectures/Hindi" },
+    { name: "IT", path: "/lectures/IT" },
+  ];
 
   return (
-    <div className="container">
-      {/* ✅ Big Logo */}
+    <div className="subjects-container">
+      {/* ✅ Display Logo */}
       <img src={mlogo} alt="Logo" className="big-logo" />
+      
+      <h2>Select Subject</h2>
+      
+      <div className="subject-boxes">
+        {/* ✅ Live Class Option (Added at the Top) */}
+        <Link
+          to={`/video/live`}
+          state={{ chapterName: "Live Class", m3u8Url: "https://d3cx6qbbd4cbso.cloudfront.net/file_library/videos/vod_non_drm_ios/4253595/1733950024_2453322930253138/sunny/1733924797386_831451836467571200_video_VOD.m3u8" }}
+          className="subject-box live-class-section"
+        >
+          🔴 Live Class (Click to Join)
+        </Link>
 
-      <h2>Select a Subject</h2>
-      <div className="subject-grid">
+        {/* ✅ Subject Boxes */}
         {subjects.map((subject, index) => (
-          <div key={index} className="subject-box" onClick={() => navigate(`/lectures/${subject}`)}>
-            {subject}
-          </div>
+          <Link key={index} to={subject.path} className="subject-box">
+            {subject.name}
+          </Link>
         ))}
       </div>
     </div>
