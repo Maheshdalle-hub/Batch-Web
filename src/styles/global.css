@@ -1,11 +1,11 @@
-/* ✅ Light Theme Background */
+/* ✅ Dark Theme Background */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   text-align: center;
-  background: #f8f9fa; /* Light gray background */
-  color: #333; /* Dark text for contrast */
+  background: #121212; /* Dark background */
+  color: #e0e0e0; /* Light text */
 }
 
 /* ✅ Main Container */
@@ -18,15 +18,15 @@ body {
 .subject-box,
 .chapter-box,
 .live-class-box {
-  background: #ffffff; /* White background */
-  color: #333;
+  background: #1e1e1e; /* Darker box background */
+  color: #e0e0e0; /* Light text */
   padding: 20px;
   margin: 10px auto;
   width: 80%;
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s, background 0.3s;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Stronger shadow */
   text-decoration: none;
   display: flex;
   justify-content: space-between;
@@ -40,7 +40,7 @@ body {
 .subject-box:hover,
 .chapter-box:hover,
 .live-class-box:hover {
-  background: #e8e8ff; /* Light purple shade */
+  background: #252525; /* Slightly lighter */
   transform: scale(1.05);
 }
 
@@ -50,27 +50,29 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px; /* Increased spacing */
+  gap: 15px;
 }
 
-/* ✅ Live Class Box Styling (Standalone) */
+/* ✅ Live Class Box Styling */
 .live-class-box {
-  background: #ffcccc; /* Light red for live class */
-  color: #990000; /* Darker red for contrast */
+  background: #ff4444; /* Bright red for live */
+  color: white;
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
-  margin-bottom: 25px; /* Increased space below Live Class */
+  margin-bottom: 25px;
 }
 
 /* ✅ Homepage Image */
 .homepage-image {
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  max-width: 250px;
+  height: 250px;
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 10px;
-  }
+}
+
 /* ✅ Custom Video Player */
 .video-container {
   text-align: center;
@@ -82,9 +84,6 @@ body {
   max-width: 800px;
   border-radius: 10px;
   outline: none;
-}
-
-.custom-video-player:fullscreen {
   background: black;
 }
 
@@ -105,10 +104,10 @@ body {
 
   /* ✅ Big Logo Styling */
   .big-logo {
-    width: 250px; /* Adjust size */
+    width: 250px;
     max-width: 80%;
     display: block;
-    margin: 20px auto; /* Center the logo */
+    margin: 20px auto;
     border-radius: 10px;
   }
-}
+    }
