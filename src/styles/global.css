@@ -65,7 +65,6 @@ body {
 
 /* ✅ Homepage Image */
 .click-box {
-.click-box {
   position: relative;
   width: 80%; /* Adjust width */
   max-width: 400px; /* Prevents it from getting too big */
