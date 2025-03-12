@@ -65,36 +65,33 @@ body {
 
 /* ✅ Homepage Image */
 .click-box {
-  position: relative; /* Needed for absolute positioning of text */
+.click-box {
+  position: relative;
   width: 80%; /* Adjust width */
   max-width: 400px; /* Prevents it from getting too big */
   height: 250px; /* Ensures box is rectangular */
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-end; /* Moves text to the bottom */
-  overflow: hidden; /* Prevents image overflow */
+  justify-content: center;
+  overflow: hidden; /* Prevents overflow */
+  border-radius: 10px; /* Optional: adds smooth corners */
 }
 
 .homepage-image {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover; /* Fully covers the box */
-  z-index: -1; /* Moves behind text */
 }
 
 .click-box h1 {
-  position: relative;
-  background: rgba(0, 0, 0, 0.6); /* Dark background for better readability */
+  position: absolute;
+  bottom: 10px; /* Moves text to bottom */
   color: white;
-  padding: 10px;
-  width: 100%;
+  font-size: 18px;
   text-align: center;
+  width: 100%;
   margin: 0;
-  }
+}
 /* ✅ Custom Video Player */
 .video-container {
   text-align: center;
