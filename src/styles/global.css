@@ -66,31 +66,31 @@ body {
 /* ✅ Homepage Image */
 .click-box {
   position: relative;
-  width: 80%; /* Adjust width */
-  max-width: 400px; /* Prevents it from getting too big */
-  height: 250px; /* Ensures box is rectangular */
+  width: 90%; /* Make it wider */
+  max-width: 500px; /* Adjust size */
+  height: 280px; /* Ensure it's rectangular */
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* Prevents overflow */
-  border-radius: 10px; /* Optional: adds smooth corners */
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 .homepage-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Fully covers the box */
+  object-fit: cover; /* Ensures it covers the box completely */
 }
 
 .click-box h1 {
   position: absolute;
-  bottom: 10px; /* Moves text to bottom */
+  bottom: 10px;
   color: black;
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
   width: 100%;
   margin: 0;
-}
+    }
 /* ✅ Custom Video Player */
 .video-container {
   text-align: center;
