@@ -1,4 +1,4 @@
-/* Global Reset */
+/* ✅ Light Theme Background */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -8,13 +8,16 @@ body {
   color: #333; /* Dark text for contrast */
 }
 
-/* Main Container */
+/* ✅ Main Container */
 .container {
   padding: 20px;
 }
 
-/* Common Box Styles */
-.click-box, .subject-box, .chapter-box {
+/* ✅ Common Box Styles */
+.click-box,
+.subject-box,
+.chapter-box,
+.live-class-box {
   background: #ffffff; /* White background */
   color: #333;
   padding: 20px;
@@ -32,21 +35,35 @@ body {
   font-weight: bold;
 }
 
-/* Hover Effect */
-.click-box:hover, .subject-box:hover, .chapter-box:hover {
+/* ✅ Hover Effect */
+.click-box:hover,
+.subject-box:hover,
+.chapter-box:hover,
+.live-class-box:hover {
   background: #e8e8ff; /* Light purple shade */
   transform: scale(1.05);
 }
 
-/* Grid Layout for Subjects & Chapters */
-.subject-grid, .chapter-grid {
+/* ✅ Grid Layout for Subjects & Chapters */
+.subject-grid,
+.chapter-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
+  gap: 15px; /* Increased spacing */
 }
 
-/* Homepage Image */
+/* ✅ Live Class Box Styling (Standalone) */
+.live-class-box {
+  background: #ffcccc; /* Light red for live class */
+  color: #990000; /* Darker red for contrast */
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+  margin-bottom: 25px; /* Increased space below Live Class */
+}
+
+/* ✅ Homepage Image */
 .homepage-image {
   width: 200px;
   height: 200px;
@@ -55,7 +72,7 @@ body {
   margin-bottom: 10px;
 }
 
-/* Custom Video Player */
+/* ✅ Custom Video Player */
 .video-container {
   text-align: center;
   padding: 20px;
@@ -72,9 +89,12 @@ body {
   background: black;
 }
 
-/* Responsive Design */
+/* ✅ Responsive Design */
 @media (max-width: 768px) {
-  .click-box, .subject-box, .chapter-box {
+  .click-box,
+  .subject-box,
+  .chapter-box,
+  .live-class-box {
     width: 90%;
     font-size: 16px;
   }
@@ -83,12 +103,13 @@ body {
     width: 150px;
     height: 150px;
   }
+
   /* ✅ Big Logo Styling */
-.big-logo {
-  width: 250px; /* Adjust size */
-  max-width: 80%;
-  display: block;
-  margin: 20px auto; /* Center the logo */
-  border-radius: 10px;
+  .big-logo {
+    width: 250px; /* Adjust size */
+    max-width: 80%;
+    display: block;
+    margin: 20px auto; /* Center the logo */
+    border-radius: 10px;
+  }
 }
-    }
