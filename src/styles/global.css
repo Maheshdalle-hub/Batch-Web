@@ -64,33 +64,13 @@ body {
 }
 
 /* ✅ Homepage Image */
-.click-box {
-  position: relative;
-  width: 90%; /* Make it wider */
-  max-width: 500px; /* Adjust size */
-  height: 280px; /* Ensure it's rectangular */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 10px;
-}
-
 .homepage-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures it covers the box completely */
-}
-
-.click-box h1 {
-  position: absolute;
-  bottom: 10px;
-  color: black;
-  font-size: 20px;
-  text-align: center;
-  width: 100%;
-  margin: 0;
-    }
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  }
 /* ✅ Custom Video Player */
 .video-container {
   text-align: center;
