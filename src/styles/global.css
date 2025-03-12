@@ -85,7 +85,7 @@ body {
 .click-box h1 {
   position: absolute;
   bottom: 10px; /* Moves text to bottom */
-  color: white;
+  color: black;
   font-size: 18px;
   text-align: center;
   width: 100%;
