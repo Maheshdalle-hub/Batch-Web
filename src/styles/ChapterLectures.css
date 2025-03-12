@@ -1,8 +1,9 @@
+/* ✅ Dark Theme Background */
 .chapter-lectures-container {
   text-align: center;
   padding: 20px;
-  background: #f8f9fa; /* Light background */
-  color: #333; /* Dark text */
+  background: #121212; /* Dark background */
+  color: #e0e0e0; /* Light text */
 }
 
 /* ✅ Big Logo Styling */
@@ -28,17 +29,17 @@
   max-width: 300px;
   padding: 15px;
   text-align: center;
-  background: #ffffff; /* Light background */
-  color: #333; /* Dark text */
+  background: #1e1e1e; /* Dark box */
+  color: #e0e0e0; /* Light text */
   border-radius: 10px;
   text-decoration: none;
   font-size: 18px;
   font-weight: bold;
   transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ✅ Subtle shadow */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Stronger shadow */
 }
 
 .lecture-box:hover {
-  background: #e9ecef; /* Lighter shade on hover */
+  background: #252525; /* Slightly lighter hover */
   transform: scale(1.05);
-  }
+}
