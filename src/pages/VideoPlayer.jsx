@@ -2,16 +2,18 @@ import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "videojs-hls-quality-selector"; 
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 const VideoPlayer = () => {
   const location = useLocation();
+  const { book, chapterIndex } = useParams();
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
 
-  const { chapterName, lectureName, m3u8Url } = location.state || {};
+  // ✅ Extract passed state (for both normal videos & live)
+  const { chapterName = "Live Class", lectureName, m3u8Url } = location.state || {};
 
   useEffect(() => {
     if (videoRef.current && m3u8Url) {
@@ -19,10 +21,14 @@ const VideoPlayer = () => {
         controls: true,
         autoplay: false,
         fluid: true,
-        playbackRates: [0.5, 1, 1.5, 2], 
+        playbackRates: [ 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2], 
       });
 
-      playerRef.current.src({ src: m3u8Url, type: "application/x-mpegURL" });
+      // ✅ Use the passed M3U8 link (no hardcoded link)
+      playerRef.current.src({
+        src: m3u8Url,
+        type: "application/x-mpegURL",
+      });
 
       playerRef.current.ready(() => {
         if (playerRef.current.hlsQualitySelector) {
@@ -38,7 +44,7 @@ const VideoPlayer = () => {
         }
       });
 
-      // ✅ Gesture Controls (More Accurate)
+      // ✅ Gesture Controls (Same as before)
       const videoContainer = videoRef.current.parentElement;
 
       videoContainer.addEventListener("touchstart", (event) => {
@@ -49,10 +55,8 @@ const VideoPlayer = () => {
         const videoWidth = rect.width;
         const videoHeight = rect.height;
 
-        // ✅ Ignore taps near the bottom (where controls are)
         if (tapY > videoHeight - 50) return;
 
-        // ✅ Hold to speed up
         holdTimer.current = setTimeout(() => {
           playerRef.current.playbackRate(2);
         }, 600);
@@ -73,7 +77,6 @@ const VideoPlayer = () => {
         const videoWidth = rect.width;
         const videoHeight = rect.height;
 
-        // ✅ Ignore taps near controls
         if (tapY > videoHeight - 50) return;
 
         if (tapGap < 300) {
@@ -101,7 +104,9 @@ const VideoPlayer = () => {
 
   return (
     <div>
-      <h2>Now Playing: {chapterName} - {lectureName || "Unknown Lecture"}</h2>
+      <h2>
+        {chapterName} {lectureName ? `- ${lectureName}` : ""}
+      </h2>
       <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
     </div>
   );
