@@ -56,17 +56,20 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h2>🔑 Login Required</h2>
+      <h2>Login Required</h2>
+      <p>© opyright se bachne ke liye tumhari 1 minute chahiye so click the button below 👇</p>
 
       {loading ? (
-        <p>🔄 Checking shortener completion...</p>
+        <p>Generating your verification link...</p>
       ) : (
         shortenerLink && (
           <a href={shortenerLink} target="_blank" rel="noopener noreferrer" className="shortener-button">
-            Complete Shortener ✅
+            Start Verification ✅
           </a>
         )
       )}
+
+      <p>After completing the verification, you will be automatically redirected.</p>
     </div>
   );
 };
