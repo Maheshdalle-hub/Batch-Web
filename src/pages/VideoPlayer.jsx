@@ -18,7 +18,7 @@ const VideoPlayer = () => {
   const isLive = location.pathname.includes("/video/live");
 
   // ✅ Default Live Class URL
-  const defaultLiveUrl = "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/4254694/173402301054458296383/173402301054458296383_8296383.m3u8";
+  const defaultLiveUrl = "m3u8_link_here";
 
   useEffect(() => {
     if (!videoRef.current) return;
