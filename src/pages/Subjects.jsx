@@ -1,9 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/global.css"; 
 import mlogo from "../assets/ntmlogo.jpg";
 
 const Subjects = () => {
+  const navigate = useNavigate();
+
+  // ✅ Redirect if user is not logged in
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (!isLoggedIn) {
+      navigate("/login"); // Redirect to login if not logged in
+    }
+  }, [navigate]);
+
   const subjects = [
     { name: "Science", path: "/lectures/Science" },
     { name: "Maths", path: "/lectures/Maths" },
@@ -20,7 +30,7 @@ const Subjects = () => {
       
       <h2>Select Subject</h2>
 
-      {/* ✅ Live Class (Added Space Below) */}
+      {/* ✅ Live Class */}
       <div className="live-class-container">
         <Link
           to={`/video/live`}
@@ -31,7 +41,7 @@ const Subjects = () => {
         </Link>
       </div>
 
-      {/* ✅ Subjects with Space Above */}
+      {/* ✅ Subjects */}
       <div className="subject-boxes">
         {subjects.map((subject, index) => (
           <Link key={index} to={subject.path} className="subject-box">
