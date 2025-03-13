@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import "videojs-hls-quality-selector";
+import "videojs-hls-quality-selector"; 
 import { useLocation } from "react-router-dom";
 
 const VideoPlayer = () => {
@@ -10,9 +10,8 @@ const VideoPlayer = () => {
   const playerRef = useRef(null);
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
-  const isPortrait = useRef(true); // ✅ Tracks if the user is holding the phone vertically
 
-  // ✅ Extract passed state
+  // ✅ Extract passed state (for normal videos)
   const { chapterName, lectureName, m3u8Url } = location.state || {};
 
   // ✅ Detect if it's a Live Class
@@ -28,11 +27,14 @@ const VideoPlayer = () => {
       controls: true,
       autoplay: false,
       fluid: true,
-      playbackRates: [0.5, 1, 1.5, 2],
+      playbackRates: [0.5, 1, 1.5, 2], 
     });
 
     // ✅ Set correct video source
-    const videoSource = isLive ? defaultLiveUrl : m3u8Url;
+    const videoSource = isLive ? defaultLiveUrl : m3u8Url || defaultLiveUrl;
+
+    console.log("Video Source:", videoSource); // ✅ Debugging log
+
     if (!videoSource) {
       console.error("❌ No video source provided!");
       return;
@@ -43,44 +45,23 @@ const VideoPlayer = () => {
       type: "application/x-mpegURL",
     });
 
-    // ✅ Enable HLS Quality Selector
     playerRef.current.ready(() => {
       if (playerRef.current.hlsQualitySelector) {
         playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
       }
     });
 
-    // ✅ Detect how the user is holding the phone (Portrait or Landscape)
-    const updateOrientation = () => {
-      if (window.innerHeight > window.innerWidth) {
-        isPortrait.current = true;
-      } else {
-        isPortrait.current = false;
-      }
-    };
-
-    window.addEventListener("resize", updateOrientation);
-    updateOrientation(); // ✅ Check initial orientation
-
-    // ✅ Handle Fullscreen based on User Holding Position
-    const toggleFullscreen = () => {
-      const player = playerRef.current.el();
-
-      if (!document.fullscreenElement) {
-        if (isPortrait.current) {
-          player.requestFullscreen({ navigationUI: "hide" }).catch((err) => console.error("Fullscreen error:", err));
-          player.style.transform = "rotate(0deg)";
+    playerRef.current.on("fullscreenchange", () => {
+      try {
+        if (document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
         } else {
-          player.requestFullscreen({ navigationUI: "hide" }).catch((err) => console.error("Fullscreen error:", err));
-          player.style.transform = "rotate(90deg)";
+          document.exitFullscreen();
         }
-      } else {
-        document.exitFullscreen().catch((err) => console.error("Exit fullscreen error:", err));
-        player.style.transform = "rotate(0deg)";
+      } catch (error) {
+        console.error("Fullscreen error:", error);
       }
-    };
-
-    playerRef.current.on("fullscreenchange", toggleFullscreen);
+    });
 
     // ✅ Gesture Controls
     const videoContainer = videoRef.current.parentElement;
@@ -122,9 +103,7 @@ const VideoPlayer = () => {
       }
     });
 
-    // ✅ Cleanup function
     return () => {
-      window.removeEventListener("resize", updateOrientation);
       if (playerRef.current) {
         playerRef.current.dispose();
       }
