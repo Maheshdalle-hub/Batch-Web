@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/global.css";
 import imageUrl from "./IMG_20250227_100103_636.jpg";  
@@ -7,19 +7,16 @@ import mlogo from "../assets/ntmlogo.jpg";
 const Homepage = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    if (!isLoggedIn) {
-      navigate("/login"); // Redirect to login if not logged in
-    }
-  }, [navigate]);
+  const handleClick = () => {
+    navigate("/login"); // ✅ Redirects to login page on click
+  };
 
   return (
     <div className="container">
       {/* ✅ Big Logo */}
       <img src={mlogo} alt="Logo" className="big-logo" />
 
-      <div className="click-box" onClick={() => navigate("/subjects")}>
+      <div className="click-box" onClick={handleClick}>
         <img src={imageUrl} alt="Aarambh Batch 2025-26" className="homepage-image" />
         <h1>Aarambh Batch 2025-26</h1>
       </div>
