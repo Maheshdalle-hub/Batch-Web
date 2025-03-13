@@ -9,7 +9,7 @@ const ChapterLectures = () => {
   const chapterLectures = {
     Science: {
       0: [
-        { name: "Lecture 1 (nhi hus batch shuru) ", m3u8Url: "m3u8_link_here" },
+        { name: "Lecture 1 (nhi hua batch shuru) ", m3u8Url: "m3u8_link_here" },
         { name: "Lecture 2", m3u8Url: "YOUR_M3U8_LINK_HERE" },
       ],
       1: [
