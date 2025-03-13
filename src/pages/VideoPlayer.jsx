@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import "videojs-hls-quality-selector";
-import "videojs-contrib-quality-levels";
+import "videojs-hls-quality-selector"; 
 import { useLocation } from "react-router-dom";
 
 const VideoPlayer = () => {
@@ -12,7 +11,7 @@ const VideoPlayer = () => {
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
 
-  // ✅ Extract passed state (for normal videos)
+  // ✅ Extract state (for normal videos)
   const { chapterName, lectureName, m3u8Url } = location.state || {};
 
   // ✅ Detect if it's a Live Class
@@ -28,10 +27,10 @@ const VideoPlayer = () => {
       controls: true,
       autoplay: false,
       fluid: true,
-      playbackRates: [0.5, 1, 1.5, 2],
+      playbackRates: [0.5, 1, 1.5, 2], 
     });
 
-    // ✅ Set correct video source
+    // ✅ Set video source
     const videoSource = isLive ? defaultLiveUrl : m3u8Url || defaultLiveUrl;
 
     if (!videoSource) {
@@ -44,14 +43,25 @@ const VideoPlayer = () => {
       type: "application/x-mpegURL",
     });
 
-    // ✅ Register HLS Quality Selector
     playerRef.current.ready(() => {
-      playerRef.current.hlsQualitySelector({
-        displayCurrentQuality: true,
-      });
+      if (playerRef.current.hlsQualitySelector) {
+        playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
+      }
     });
 
-    // ✅ Gesture Controls (No changes here)
+    playerRef.current.on("fullscreenchange", () => {
+      try {
+        if (!document.fullscreenElement) {
+          videoRef.current.requestFullscreen().catch((err) => {
+            console.error("Fullscreen request failed:", err);
+          });
+        }
+      } catch (error) {
+        console.error("Fullscreen error:", error);
+      }
+    });
+
+    // ✅ Gesture Controls
     const videoContainer = videoRef.current.parentElement;
 
     videoContainer.addEventListener("touchstart", (event) => {
