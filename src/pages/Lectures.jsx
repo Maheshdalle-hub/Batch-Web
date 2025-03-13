@@ -1,10 +1,19 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import "../styles/Lectures.css"; 
 import mlogo from "../assets/ntmlogo.jpg";
 
 const Lectures = () => {
   const { subject } = useParams();
+  const navigate = useNavigate();
+
+  // ✅ Redirect if user is not logged in
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (!isLoggedIn) {
+      navigate("/login"); // Redirect to login
+    }
+  }, [navigate]);
 
   const lectures = {
     Science: [
@@ -25,10 +34,10 @@ const Lectures = () => {
     ],
     English: [
       { name: "Chapter 1", index: 0 },
-      ],
+    ],
     Hindi: [
       { name: "Chapter 1", index: 0 },
-    ]
+    ],
   };
 
   return (
