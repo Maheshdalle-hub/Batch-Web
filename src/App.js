@@ -11,8 +11,9 @@ function App() {
       <Route path="/" element={<Homepage />} />
       <Route path="/subjects" element={<Subjects />} />
       <Route path="/lectures/:subject" element={<Lectures />} />
-      <Route path="/chapter-lectures/:subject/:chapterIndex" element={<ChapterLectures />} /> {/* ✅ Kept this */}
+      <Route path="/chapter-lectures/:subject/:chapterIndex" element={<ChapterLectures />} /> 
       <Route path="/video/:subject/:chapterIndex" element={<VideoPlayer />} />
+      <Route path="/video/live" element={<VideoPlayer />} />  {/* ✅ Added Live Class Route */}
     </Routes>
   );
 }
