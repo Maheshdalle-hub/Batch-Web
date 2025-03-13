@@ -9,8 +9,6 @@ const VideoPlayer = () => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const lastTap = useRef(0);
-  const holdTimer = useRef(null);
-  const [isPortrait, setIsPortrait] = useState(window.innerHeight > window.innerWidth); 
 
   // ✅ Extract passed state
   const { chapterName, lectureName, m3u8Url } = location.state || {};
@@ -20,6 +18,9 @@ const VideoPlayer = () => {
 
   // ✅ Default Live Class URL
   const defaultLiveUrl = "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/4254694/173402301054458296383/173402301054458296383_8296383.m3u8";
+
+  // ✅ Detect device orientation
+  const [isPortrait, setIsPortrait] = useState(window.innerHeight > window.innerWidth);
 
   useEffect(() => {
     if (!videoRef.current) return;
@@ -50,80 +51,35 @@ const VideoPlayer = () => {
       }
     });
 
-    // ✅ Detect device orientation
+    // ✅ Detect phone orientation dynamically
     const updateOrientation = () => {
       setIsPortrait(window.innerHeight > window.innerWidth);
     };
-
     window.addEventListener("resize", updateOrientation);
-    updateOrientation(); // Check initial orientation
+    updateOrientation();
 
-    // ✅ Fullscreen Handling Based on User's Holding Position
-    const toggleFullscreen = () => {
-      const player = playerRef.current.el();
-      if (!document.fullscreenElement) {
-        player.requestFullscreen({ navigationUI: "hide" }).catch(err => console.error("Fullscreen error:", err));
-        
-        // ✅ Adjust screen rotation dynamically
-        if (isPortrait) {
-          player.style.transform = "rotate(0deg)";
+    // ✅ Fullscreen mode based on orientation
+    playerRef.current.on("fullscreenchange", () => {
+      try {
+        if (document.fullscreenElement) {
+          if (isPortrait) {
+            screen.orientation.lock("portrait");
+          } else {
+            screen.orientation.lock("landscape");
+          }
         } else {
-          player.style.transform = "rotate(0deg)"; // Landscape by default
+          screen.orientation.unlock();
         }
-      } else {
-        document.exitFullscreen().catch(err => console.error("Exit fullscreen error:", err));
-        player.style.transform = "rotate(0deg)"; // Reset rotation
-      }
-    };
-
-    playerRef.current.on("fullscreenchange", toggleFullscreen);
-
-    // ✅ Gesture Controls
-    const videoContainer = videoRef.current.parentElement;
-
-    videoContainer.addEventListener("touchstart", (event) => {
-      const touch = event.touches[0];
-      const rect = videoContainer.getBoundingClientRect();
-      const tapY = touch.clientY - rect.top;
-      const videoHeight = rect.height;
-
-      if (tapY > videoHeight - 50) return;
-
-      holdTimer.current = setTimeout(() => {
-        playerRef.current.playbackRate(2);
-      }, 600);
-    });
-
-    videoContainer.addEventListener("touchend", (event) => {
-      clearTimeout(holdTimer.current);
-      playerRef.current.playbackRate(1);
-
-      const currentTime = Date.now();
-      const tapGap = currentTime - lastTap.current;
-      lastTap.current = currentTime;
-
-      const touch = event.changedTouches[0];
-      const rect = videoContainer.getBoundingClientRect();
-      const tapX = touch.clientX - rect.left;
-      const videoWidth = rect.width;
-
-      if (tapGap < 300) {
-        if (tapX < videoWidth / 3) {
-          playerRef.current.currentTime(playerRef.current.currentTime() - 10);
-        } else if (tapX > (2 * videoWidth) / 3) {
-          playerRef.current.currentTime(playerRef.current.currentTime() + 10);
-        } else {
-          playerRef.current.paused() ? playerRef.current.play() : playerRef.current.pause();
-        }
+      } catch (error) {
+        console.error("Fullscreen error:", error);
       }
     });
 
-    // ✅ Cleanup function
     return () => {
-      window.removeEventListener("resize", updateOrientation);
       if (playerRef.current) {
         playerRef.current.dispose();
       }
+      window.removeEventListener("resize", updateOrientation);
     };
   }, [m3u8Url, isLive, isPortrait]);
 
