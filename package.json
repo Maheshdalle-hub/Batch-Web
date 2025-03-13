@@ -2,16 +2,16 @@
   "name": "batch-web-app",
   "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "react": "latest",
-    "react-dom": "latest",
-    "react-router-dom": "latest",
-    "hls.js": "latest",
-    "framer-motion": "latest",
-    "react-scripts": "latest",
-    "video.js": "latest",
-    "videojs-hls-quality-selector": "latest"
-  },
+"dependencies": {
+  "react": "^18.2.0",
+  "react-dom": "^18.2.0",
+  "react-router-dom": "^6.18.0",
+  "hls.js": "^1.4.12",
+  "framer-motion": "^10.16.1",
+  "react-scripts": "^5.0.1",
+  "video.js": "^8.0.0",
+  "videojs-hls-quality-selector": "^1.1.0"
+},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
