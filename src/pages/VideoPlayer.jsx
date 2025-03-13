@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "videojs-hls-quality-selector";
@@ -10,6 +10,7 @@ const VideoPlayer = () => {
   const playerRef = useRef(null);
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
+  const [isPortrait, setIsPortrait] = useState(window.innerHeight > window.innerWidth); 
 
   // ✅ Extract passed state
   const { chapterName, lectureName, m3u8Url } = location.state || {};
@@ -49,21 +50,33 @@ const VideoPlayer = () => {
       }
     });
 
-    // ✅ Detect Device Orientation & Adjust Fullscreen Mode
-    const handleOrientationChange = () => {
-      if (window.screen.orientation) {
-        const { type } = window.screen.orientation;
+    // ✅ Detect device orientation
+    const updateOrientation = () => {
+      setIsPortrait(window.innerHeight > window.innerWidth);
+    };
 
-        if (type.includes("landscape")) {
-          playerRef.current.requestFullscreen();
-        } else if (type.includes("portrait")) {
-          document.exitFullscreen().catch((err) => console.error("Exit fullscreen error:", err));
+    window.addEventListener("resize", updateOrientation);
+    updateOrientation(); // Check initial orientation
+
+    // ✅ Fullscreen Handling Based on User's Holding Position
+    const toggleFullscreen = () => {
+      const player = playerRef.current.el();
+      if (!document.fullscreenElement) {
+        player.requestFullscreen({ navigationUI: "hide" }).catch(err => console.error("Fullscreen error:", err));
+        
+        // ✅ Adjust screen rotation dynamically
+        if (isPortrait) {
+          player.style.transform = "rotate(0deg)";
+        } else {
+          player.style.transform = "rotate(0deg)"; // Landscape by default
         }
+      } else {
+        document.exitFullscreen().catch(err => console.error("Exit fullscreen error:", err));
+        player.style.transform = "rotate(0deg)"; // Reset rotation
       }
     };
 
-    // ✅ Listen for orientation changes
-    window.addEventListener("orientationchange", handleOrientationChange);
+    playerRef.current.on("fullscreenchange", toggleFullscreen);
 
     // ✅ Gesture Controls
     const videoContainer = videoRef.current.parentElement;
@@ -107,12 +120,12 @@ const VideoPlayer = () => {
 
     // ✅ Cleanup function
     return () => {
-      window.removeEventListener("orientationchange", handleOrientationChange);
+      window.removeEventListener("resize", updateOrientation);
       if (playerRef.current) {
         playerRef.current.dispose();
       }
     };
-  }, [m3u8Url, isLive]);
+  }, [m3u8Url, isLive, isPortrait]);
 
   return (
     <div>
