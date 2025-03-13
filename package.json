@@ -8,7 +8,8 @@
   "react-router-dom": "^6.18.0",
   "hls.js": "^1.4.12",
   "framer-motion": "^10.16.1",
-  "react-scripts": "^5.0.1"
+  "react-scripts": "^5.0.1",
+  "video.js": "^8.0.0"  // Ensure this exists
 },
 "scripts": {
   "start": "react-scripts start",
