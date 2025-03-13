@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
-import "video.js/dist/video-js.css";
+import "video.js/dist/css/video-js.css";
 import "videojs-hls-quality-selector"; 
 import { useLocation } from "react-router-dom";
 
