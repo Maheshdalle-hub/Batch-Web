@@ -2,10 +2,11 @@ import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "videojs-hls-quality-selector"; 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const VideoPlayer = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const lastTap = useRef(0);
@@ -19,6 +20,14 @@ const VideoPlayer = () => {
 
   // ✅ Default Live Class URL
   const defaultLiveUrl = "m3u8_link_here";
+
+  // ✅ Check if user is logged in
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (!isLoggedIn) {
+      navigate("/login"); // 🔴 Redirect to login if not logged in
+    }
+  }, [navigate]);
 
   useEffect(() => {
     if (!videoRef.current) return;
