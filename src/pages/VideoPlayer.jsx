@@ -111,7 +111,7 @@ const VideoPlayer = () => {
   return (
     <div>
       <h2>
-        {isLive ? "🔴 Live Class" : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
+        {isLive ? "🔴 Live Class (nhi hus batch shuru)" : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
       <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
     </div>
