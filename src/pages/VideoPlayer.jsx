@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
+import "videojs-contrib-quality-levels";
 import "videojs-hls-quality-selector"; 
 import { useLocation } from "react-router-dom";
 
@@ -38,9 +39,12 @@ const VideoPlayer = () => {
       type: "application/x-mpegURL",
     });
 
-    // ✅ Ensure quality selection works
+    // ✅ Initialize HLS Quality Selector
     playerRef.current.ready(() => {
-      playerRef.current.hlsQualitySelector();
+      playerRef.current.qualityLevels();
+      playerRef.current.hlsQualitySelector({
+        displayCurrentQuality: true,
+      });
     });
 
     playerRef.current.on("fullscreenchange", () => {
