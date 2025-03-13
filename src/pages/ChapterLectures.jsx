@@ -1,10 +1,19 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import "../styles/ChapterLectures.css";
 import mlogo from "../assets/ntmlogo.jpg"; // ✅ Import logo
 
 const ChapterLectures = () => {
   const { subject, chapterIndex } = useParams();
+  const navigate = useNavigate();
+
+  // ✅ Redirect if user is not logged in
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (!isLoggedIn) {
+      navigate("/login"); // Redirect to login
+    }
+  }, [navigate]);
 
   const chapterLectures = {
     Science: {
