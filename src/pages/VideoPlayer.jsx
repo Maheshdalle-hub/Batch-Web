@@ -10,6 +10,7 @@ const VideoPlayer = () => {
   const playerRef = useRef(null);
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
+  const isPortrait = useRef(true); // ✅ Tracks if the user is holding the phone vertically
 
   // ✅ Extract passed state
   const { chapterName, lectureName, m3u8Url } = location.state || {};
@@ -49,21 +50,37 @@ const VideoPlayer = () => {
       }
     });
 
-    // ✅ Detect Device Orientation & Adjust Fullscreen Mode
-    const handleOrientationChange = () => {
-      if (window.screen.orientation) {
-        const { type } = window.screen.orientation;
-
-        if (type.includes("landscape")) {
-          playerRef.current.requestFullscreen();
-        } else if (type.includes("portrait")) {
-          document.exitFullscreen().catch((err) => console.error("Exit fullscreen error:", err));
-        }
+    // ✅ Detect how the user is holding the phone (Portrait or Landscape)
+    const updateOrientation = () => {
+      if (window.innerHeight > window.innerWidth) {
+        isPortrait.current = true;
+      } else {
+        isPortrait.current = false;
       }
     };
 
-    // ✅ Listen for orientation changes
-    window.addEventListener("orientationchange", handleOrientationChange);
+    window.addEventListener("resize", updateOrientation);
+    updateOrientation(); // ✅ Check initial orientation
+
+    // ✅ Handle Fullscreen based on User Holding Position
+    const toggleFullscreen = () => {
+      const player = playerRef.current.el();
+
+      if (!document.fullscreenElement) {
+        if (isPortrait.current) {
+          player.requestFullscreen({ navigationUI: "hide" }).catch((err) => console.error("Fullscreen error:", err));
+          player.style.transform = "rotate(0deg)";
+        } else {
+          player.requestFullscreen({ navigationUI: "hide" }).catch((err) => console.error("Fullscreen error:", err));
+          player.style.transform = "rotate(90deg)";
+        }
+      } else {
+        document.exitFullscreen().catch((err) => console.error("Exit fullscreen error:", err));
+        player.style.transform = "rotate(0deg)";
+      }
+    };
+
+    playerRef.current.on("fullscreenchange", toggleFullscreen);
 
     // ✅ Gesture Controls
     const videoContainer = videoRef.current.parentElement;
@@ -107,7 +124,7 @@ const VideoPlayer = () => {
 
     // ✅ Cleanup function
     return () => {
-      window.removeEventListener("orientationchange", handleOrientationChange);
+      window.removeEventListener("resize", updateOrientation);
       if (playerRef.current) {
         playerRef.current.dispose();
       }
