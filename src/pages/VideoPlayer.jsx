@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
-import 'video.js/dist/video-js.css';
+import "video.js/dist/video-js.css";
 import "videojs-hls-quality-selector"; 
 import { useLocation } from "react-router-dom";
 
@@ -11,13 +11,8 @@ const VideoPlayer = () => {
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
 
-  // ✅ Extract passed state (for normal videos)
   const { chapterName, lectureName, m3u8Url } = location.state || {};
-
-  // ✅ Detect if it's a Live Class
   const isLive = location.pathname.includes("/video/live");
-
-  // ✅ Default Live Class URL
   const defaultLiveUrl = "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/4254694/173402301054458296383/173402301054458296383_8296383.m3u8";
 
   useEffect(() => {
@@ -30,10 +25,8 @@ const VideoPlayer = () => {
       playbackRates: [0.5, 1, 1.5, 2], 
     });
 
-    // ✅ Set correct video source
     const videoSource = isLive ? defaultLiveUrl : m3u8Url || defaultLiveUrl;
-
-    console.log("Video Source:", videoSource); // ✅ Debugging log
+    console.log("Video Source:", videoSource);
 
     if (!videoSource) {
       console.error("❌ No video source provided!");
@@ -45,23 +38,23 @@ const VideoPlayer = () => {
       type: "application/x-mpegURL",
     });
 
+    // ✅ Ensure quality selection works
     playerRef.current.ready(() => {
-      if (playerRef.current.hlsQualitySelector) {
-        playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
-      }
+      playerRef.current.hlsQualitySelector();
     });
 
     playerRef.current.on("fullscreenchange", () => {
-  try {
-    if (!document.fullscreenElement) {
-      videoRef.current.requestFullscreen().catch((err) => {
-        console.error("Fullscreen request failed:", err);
-      });
-    }
-  } catch (error) {
-    console.error("Fullscreen error:", error);
-  }
-});
+      try {
+        if (!document.fullscreenElement) {
+          videoRef.current.requestFullscreen().catch((err) => {
+            console.error("Fullscreen request failed:", err);
+          });
+        }
+      } catch (error) {
+        console.error("Fullscreen error:", error);
+      }
+    });
+
     // ✅ Gesture Controls
     const videoContainer = videoRef.current.parentElement;
 
