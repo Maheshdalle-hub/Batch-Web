@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/global.css";
-import imageUrl from "./IMG_20250227_100103_636.jpg";  // ✅ Replace with your actual file name
+import imageUrl from "./IMG_20250227_100103_636.jpg";  
 import mlogo from "../assets/ntmlogo.jpg";
 
 const Homepage = () => {
   const navigate = useNavigate();
-  
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (!isLoggedIn) {
+      navigate("/login"); // Redirect to login if not logged in
+    }
+  }, [navigate]);
+
   return (
     <div className="container">
       {/* ✅ Big Logo */}
