@@ -28,6 +28,7 @@ const Login = () => {
       const isCompleted = await checkShortenerCompletion(userToken);
       if (isCompleted) {
         localStorage.setItem("shortenerCompleted", "true");
+        localStorage.setItem("isLoggedIn", "true");  // ✅ Set as logged in
         navigate("/subjects");
       }
 
@@ -46,6 +47,7 @@ const Login = () => {
       const isCompleted = await checkShortenerCompletion(token);
       if (isCompleted) {
         localStorage.setItem("shortenerCompleted", "true");
+        localStorage.setItem("isLoggedIn", "true"); // ✅ Mark user as logged in
         clearInterval(interval);
         navigate("/subjects");
       }
