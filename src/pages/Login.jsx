@@ -5,7 +5,6 @@ import { generateUserToken } from "../utils/tokenGenerator";
 import { generateShortenedLink, checkShortenerCompletion } from "../utils/shortener"; 
 
 const Login = () => {
-  const [password, setPassword] = useState("");
   const [shortenerLink, setShortenerLink] = useState("");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -15,6 +14,7 @@ const Login = () => {
       let userToken = localStorage.getItem("userToken");
       if (!userToken) {
         userToken = generateUserToken();
+        localStorage.setItem("userToken", userToken);
       }
 
       // ✅ Generate Shortener Link
@@ -28,13 +28,14 @@ const Login = () => {
       const isCompleted = await checkShortenerCompletion(userToken);
       if (isCompleted) {
         localStorage.setItem("shortenerCompleted", "true");
+        navigate("/subjects");
       }
 
       setLoading(false);
     };
 
     initializeLogin();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     // ✅ Auto-check every 5 seconds if shortener is completed
@@ -60,22 +61,11 @@ const Login = () => {
       {loading ? (
         <p>🔄 Checking shortener completion...</p>
       ) : (
-        <>
-          {shortenerLink && (
-            <a href={shortenerLink} target="_blank" rel="noopener noreferrer" className="shortener-button">
-              Complete Shortener ✅
-            </a>
-          )}
-
-          <input
-            type="password"
-            placeholder="Enter Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="login-input"
-          />
-          <button onClick={() => navigate("/subjects")} className="login-button">Login</button>
-        </>
+        shortenerLink && (
+          <a href={shortenerLink} target="_blank" rel="noopener noreferrer" className="shortener-button">
+            Complete Shortener ✅
+          </a>
+        )
       )}
     </div>
   );
