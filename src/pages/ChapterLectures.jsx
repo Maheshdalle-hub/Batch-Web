@@ -9,7 +9,7 @@ const ChapterLectures = () => {
   const chapterLectures = {
     Science: {
       0: [
-        { name: "Lecture 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/4254694/173402301054458296383/173402301054458296383_8296383.m3u8" },
+        { name: "Lecture 1 (nhi hus batch shuru) ", m3u8Url: "m3u8_link_here" },
         { name: "Lecture 2", m3u8Url: "YOUR_M3U8_LINK_HERE" },
       ],
       1: [
