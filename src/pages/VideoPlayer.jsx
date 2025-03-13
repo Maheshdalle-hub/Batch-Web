@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import "videojs-hls-quality-selector"; 
+import "videojs-hls-quality-selector";
 import { useLocation } from "react-router-dom";
 
 const VideoPlayer = () => {
@@ -11,7 +11,7 @@ const VideoPlayer = () => {
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
 
-  // ✅ Extract passed state (for normal videos)
+  // ✅ Extract passed state
   const { chapterName, lectureName, m3u8Url } = location.state || {};
 
   // ✅ Detect if it's a Live Class
@@ -27,14 +27,11 @@ const VideoPlayer = () => {
       controls: true,
       autoplay: false,
       fluid: true,
-      playbackRates: [0.5, 1, 1.5, 2], 
+      playbackRates: [0.5, 1, 1.5, 2],
     });
 
     // ✅ Set correct video source
-    const videoSource = isLive ? defaultLiveUrl : m3u8Url || defaultLiveUrl;
-
-    console.log("Video Source:", videoSource); // ✅ Debugging log
-
+    const videoSource = isLive ? defaultLiveUrl : m3u8Url;
     if (!videoSource) {
       console.error("❌ No video source provided!");
       return;
@@ -45,23 +42,28 @@ const VideoPlayer = () => {
       type: "application/x-mpegURL",
     });
 
+    // ✅ Enable HLS Quality Selector
     playerRef.current.ready(() => {
       if (playerRef.current.hlsQualitySelector) {
         playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
       }
     });
 
-    playerRef.current.on("fullscreenchange", () => {
-      try {
-        if (document.fullscreenElement) {
-          document.documentElement.requestFullscreen();
-        } else {
-          document.exitFullscreen();
+    // ✅ Detect Device Orientation & Adjust Fullscreen Mode
+    const handleOrientationChange = () => {
+      if (window.screen.orientation) {
+        const { type } = window.screen.orientation;
+
+        if (type.includes("landscape")) {
+          playerRef.current.requestFullscreen();
+        } else if (type.includes("portrait")) {
+          document.exitFullscreen().catch((err) => console.error("Exit fullscreen error:", err));
         }
-      } catch (error) {
-        console.error("Fullscreen error:", error);
       }
-    });
+    };
+
+    // ✅ Listen for orientation changes
+    window.addEventListener("orientationchange", handleOrientationChange);
 
     // ✅ Gesture Controls
     const videoContainer = videoRef.current.parentElement;
@@ -103,7 +105,9 @@ const VideoPlayer = () => {
       }
     });
 
+    // ✅ Cleanup function
     return () => {
+      window.removeEventListener("orientationchange", handleOrientationChange);
       if (playerRef.current) {
         playerRef.current.dispose();
       }
