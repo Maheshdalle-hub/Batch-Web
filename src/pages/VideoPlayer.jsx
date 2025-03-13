@@ -17,7 +17,7 @@ const VideoPlayer = () => {
   // ✅ Detect if it's a Live Class
   const isLive = location.pathname.includes("/video/live");
 
-  // ✅ Default Live Class URL (use this if none is provided)
+  // ✅ Default Live Class URL
   const defaultLiveUrl = "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/4254694/173402301054458296383/173402301054458296383_8296383.m3u8";
 
   useEffect(() => {
@@ -31,8 +31,10 @@ const VideoPlayer = () => {
     });
 
     // ✅ Set correct video source
-    const videoSource = isLive ? defaultLiveUrl : m3u8Url;
-    
+    const videoSource = isLive ? defaultLiveUrl : m3u8Url || defaultLiveUrl;
+
+    console.log("Video Source:", videoSource); // ✅ Debugging log
+
     if (!videoSource) {
       console.error("❌ No video source provided!");
       return;
