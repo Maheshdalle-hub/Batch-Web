@@ -1,33 +1,18 @@
-import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { checkShortenerCompletion } from "../utils/shortener";
 
 const ProtectedRoute = ({ children }) => {
-  const [isVerified, setIsVerified] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const expiresAt = localStorage.getItem("verificationExpires");
 
-  useEffect(() => {
-    const verifyShortener = async () => {
-      const token = localStorage.getItem("userToken");
-      if (!token) {
-        setLoading(false);
-        return;
-      }
+  // ✅ Check if verification expired
+  if (!isLoggedIn || !expiresAt || Date.now() > expiresAt) {
+    localStorage.removeItem("isLoggedIn"); // ❌ Remove expired session
+    localStorage.removeItem("verificationToken");
+    localStorage.removeItem("verificationExpires");
+    return <Navigate to="/login" />;
+  }
 
-      const isCompleted = await checkShortenerCompletion(token);
-      if (isCompleted) {
-        localStorage.setItem("shortenerCompleted", "true");
-        setIsVerified(true);
-      }
-      setLoading(false);
-    };
-
-    verifyShortener();
-  }, []);
-
-  if (loading) return <p>🔄 Verifying access...</p>;
-
-  return isVerified ? children : <Navigate to="/login" />;
+  return children;
 };
 
 export default ProtectedRoute;
