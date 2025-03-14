@@ -2,19 +2,18 @@ import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 const Verify = () => {
-  const { token } = useParams(); // ✅ Get token from URL
+  const { token } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
-      const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000; // ✅ Expires in 2 days
+      const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000; // ✅ 2 days from now
 
-      // ✅ Store verification with expiration
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("verificationToken", token);
       localStorage.setItem("verificationExpires", expirationTime);
 
-      navigate("/subjects"); // ✅ Redirect after verification
+      navigate("/subjects"); // ✅ Redirect after storing data
     }
   }, [token, navigate]);
 
