@@ -11,23 +11,31 @@ const Login = () => {
 
   useEffect(() => {
     const initializeLogin = async () => {
+      const isCompleted = localStorage.getItem("shortenerCompleted") === "true";
+      if (isCompleted) {
+        localStorage.setItem("isLoggedIn", "true");
+        navigate("/subjects");
+        return;
+      }
+
       let userToken = localStorage.getItem("userToken");
       if (!userToken) {
         userToken = generateUserToken();
         localStorage.setItem("userToken", userToken);
       }
 
-      // ✅ Generate Shortener Link (but do NOT store the alias)
+      // ✅ Generate Shortener Link
       const link = await generateShortenedLink(userToken);
       if (link) {
-        setShortenerLink(link);  // Only store locally in state
+        setShortenerLink(link);
+        localStorage.setItem("shortenerLink", link);
       }
 
       // ✅ Check if shortener is completed
-      const isCompleted = await checkShortenerCompletion(userToken);
-      if (isCompleted) {
+      const completed = await checkShortenerCompletion(userToken);
+      if (completed) {
         localStorage.setItem("shortenerCompleted", "true");
-        localStorage.setItem("isLoggedIn", "true");  // ✅ Set user as logged in
+        localStorage.setItem("isLoggedIn", "true");
         navigate("/subjects");
       }
 
@@ -46,11 +54,11 @@ const Login = () => {
       const isCompleted = await checkShortenerCompletion(token);
       if (isCompleted) {
         localStorage.setItem("shortenerCompleted", "true");
-        localStorage.setItem("isLoggedIn", "true"); // ✅ Mark user as logged in
+        localStorage.setItem("isLoggedIn", "true");
         clearInterval(interval);
         navigate("/subjects");
       }
-    }, 5000); // 🔄 Check every 5 seconds
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [navigate]);
@@ -61,11 +69,11 @@ const Login = () => {
       <p>© opyright se bachne ke liye tumhari 1 minute chahiye so click the button below 👇</p>
 
       {loading ? (
-        <p className="loading-text">Generating your link...</p>
+        <p>Generating your verification link...</p>
       ) : (
         shortenerLink && (
           <a href={shortenerLink} target="_blank" rel="noopener noreferrer" className="shortener-button">
-            Click Here ✅
+            Start Verification ✅
           </a>
         )
       )}
