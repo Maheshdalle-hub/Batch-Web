@@ -10,6 +10,16 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // ✅ Check if user is already verified and the token is still valid
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const expiresAt = localStorage.getItem("verificationExpires");
+
+    if (isLoggedIn && expiresAt && Date.now() < Number(expiresAt)) {
+      navigate("/subjects");  // ✅ If still valid, go to subjects directly
+      return;
+    }
+
+    // ✅ If expired or not verified, proceed with normal verification process
     const initializeLogin = async () => {
       let userToken = localStorage.getItem("userToken");
       if (!userToken) {
@@ -17,16 +27,22 @@ const Login = () => {
         localStorage.setItem("userToken", userToken);
       }
 
-      // ✅ Generate Shortener Link (Alias NOT stored)
+      // ✅ Generate Shortener Link
       const link = await generateShortenedLink(userToken);
       if (link) {
         setShortenerLink(link);
+        localStorage.setItem("shortenerLink", link);
       }
 
       // ✅ Check if shortener is completed
       const isCompleted = await checkShortenerCompletion(userToken);
       if (isCompleted) {
-        navigate(`/verify/${userToken}`);
+        const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000; // ✅ 2 days from now
+
+        localStorage.setItem("shortenerCompleted", "true");
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("verificationExpires", expirationTime);
+        navigate("/subjects");
       }
 
       setLoading(false);
@@ -35,18 +51,24 @@ const Login = () => {
     initializeLogin();
   }, [navigate]);
 
+  // ✅ Auto-check every 5 seconds if shortener is completed
   useEffect(() => {
-    // ✅ Auto-check every 5 seconds if shortener is completed
     const interval = setInterval(async () => {
       const token = localStorage.getItem("userToken");
       if (!token) return;
 
       const isCompleted = await checkShortenerCompletion(token);
       if (isCompleted) {
+        const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000; // ✅ 2 days from now
+
+        localStorage.setItem("shortenerCompleted", "true");
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("verificationExpires", expirationTime);
+        
         clearInterval(interval);
-        navigate(`/verify/${token}`);
+        navigate("/subjects");
       }
-    }, 5000); // 🔄 Check every 5 seconds
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [navigate]);
