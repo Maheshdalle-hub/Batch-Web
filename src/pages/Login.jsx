@@ -82,9 +82,9 @@ const Login = () => {
         <p>Generating your link...</p>
       ) : (
         shortenerLink && (
-          <a href={shortenerLink} target="_blank" rel="noopener noreferrer" className="shortener-button">
-            Click Here ✅
-          </a>
+         <a href={shortenerLink} className="shortener-button">
+  Click Here ✅
+</a>
         )
       )}
 
