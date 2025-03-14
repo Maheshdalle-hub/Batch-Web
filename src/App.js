@@ -5,7 +5,7 @@ import Lectures from "./pages/Lectures";
 import VideoPlayer from "./pages/VideoPlayer";
 import ChapterLectures from "./pages/ChapterLectures";
 import Login from "./pages/Login";
-import Verify from "./pages/Verify"; // ✅ Ensures verification with userToken
+import Verify from "./pages/Verify"; // ✅ Keep this
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -13,9 +13,9 @@ function App() {
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/verify/:token" element={<Verify />} />  {/* ✅ Verifies userToken, NOT alias */}
+      <Route path="/verify/:token" element={<Verify />} />  {/* ✅ Corrected this route */}
 
-      {/* ✅ Protected Routes (Accessible only after verification) */}
+      {/* ✅ Protected Routes */}
       <Route path="/subjects" element={<ProtectedRoute><Subjects /></ProtectedRoute>} />
       <Route path="/lectures/:subject" element={<ProtectedRoute><Lectures /></ProtectedRoute>} />
       <Route path="/chapter-lectures/:subject/:chapterIndex" element={<ProtectedRoute><ChapterLectures /></ProtectedRoute>} />
