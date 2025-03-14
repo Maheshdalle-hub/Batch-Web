@@ -17,18 +17,17 @@ const Login = () => {
         localStorage.setItem("userToken", userToken);
       }
 
-      // ✅ Generate Shortener Link
+      // ✅ Generate Shortener Link (but do NOT store the alias)
       const link = await generateShortenedLink(userToken);
       if (link) {
-        setShortenerLink(link);
-        localStorage.setItem("shortenerLink", link);
+        setShortenerLink(link);  // Only store locally in state
       }
 
       // ✅ Check if shortener is completed
       const isCompleted = await checkShortenerCompletion(userToken);
       if (isCompleted) {
         localStorage.setItem("shortenerCompleted", "true");
-        localStorage.setItem("isLoggedIn", "true");  // ✅ Set as logged in
+        localStorage.setItem("isLoggedIn", "true");  // ✅ Set user as logged in
         navigate("/subjects");
       }
 
@@ -62,11 +61,11 @@ const Login = () => {
       <p>© opyright se bachne ke liye tumhari 1 minute chahiye so click the button below 👇</p>
 
       {loading ? (
-        <p>Generating your verification link...</p>
+        <p className="loading-text">Generating your link...</p>
       ) : (
         shortenerLink && (
           <a href={shortenerLink} target="_blank" rel="noopener noreferrer" className="shortener-button">
-            Start Verification ✅
+            Click Here ✅
           </a>
         )
       )}
