@@ -1,25 +1,22 @@
 import { useEffect } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Verify = () => {
-  const { token: urlToken } = useParams(); // Token from URL path
-  const location = useLocation();
+  const { token } = useParams(); // ✅ Get token from URL
   const navigate = useNavigate();
 
   useEffect(() => {
-    // ✅ Extract token from query parameters if it exists
-    const queryParams = new URLSearchParams(location.search);
-    const queryToken = queryParams.get("token");
+    if (token) {
+      const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000; // ✅ Expires in 2 days
 
-    // ✅ Use either URL token or query token
-    const finalToken = urlToken || queryToken;
+      // ✅ Store verification with expiration
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("verificationToken", token);
+      localStorage.setItem("verificationExpires", expirationTime);
 
-    if (finalToken) {
-      localStorage.setItem(`shortenerCompleted-${finalToken}`, "true");
-      localStorage.setItem("isLoggedIn", "true"); // ✅ Mark user as logged in
-      navigate("/subjects"); // Redirect to subjects page
+      navigate("/subjects"); // ✅ Redirect after verification
     }
-  }, [urlToken, location, navigate]);
+  }, [token, navigate]);
 
   return <p>✅ Hogaya successful! Redirecting...</p>;
 };
