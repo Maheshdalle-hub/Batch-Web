@@ -15,6 +15,7 @@ const Subjects = () => {
   }, [navigate]);
 
   const subjects = [
+    { name: "Notice", path: "/lectures/Notice" },
     { name: "Science", path: "/lectures/Science" },
     { name: "Maths", path: "/lectures/Maths" },
     { name: "SST", path: "/lectures/SST" },
