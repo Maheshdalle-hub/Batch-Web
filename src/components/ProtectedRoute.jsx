@@ -4,9 +4,9 @@ const ProtectedRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   const expiresAt = localStorage.getItem("verificationExpires");
 
-  // ✅ Check if verification expired
-  if (!isLoggedIn || !expiresAt || Date.now() > expiresAt) {
-    localStorage.removeItem("isLoggedIn"); // ❌ Remove expired session
+  // ✅ If expired or missing, force re-login
+  if (!isLoggedIn || !expiresAt || Date.now() > Number(expiresAt)) {
+    localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("verificationToken");
     localStorage.removeItem("verificationExpires");
     return <Navigate to="/login" />;
