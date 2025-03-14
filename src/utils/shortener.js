@@ -1,5 +1,5 @@
 const API_KEY = "0a0c7508fe669b4259d5f70d55dfdc467ea177bc";
-const CALLBACK_BASE_URL = "https://nxt-batch-web-delta.vercel.app/verify"; // Replace with your actual site URL
+const CALLBACK_BASE_URL = "https://nt-batch-web.vercel.app/verify"; // Replace with your actual site URL
 
 // ✅ Generate a secure token
 const generateSecureToken = () => {
