@@ -59,16 +59,10 @@ const VideoPlayer = () => {
     });
 
     playerRef.current.on("fullscreenchange", () => {
-      try {
-        if (!document.fullscreenElement) {
-          videoRef.current.requestFullscreen().catch((err) => {
-            console.error("Fullscreen request failed:", err);
-          });
-        }
-      } catch (error) {
-        console.error("Fullscreen error:", error);
-      }
-    });
+  if (document.fullscreenElement === null) {
+    return; // ✅ Prevents error when exiting fullscreen
+  }
+});
 
     // ✅ Gesture Controls
     const videoContainer = videoRef.current.parentElement;
