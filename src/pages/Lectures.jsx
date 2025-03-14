@@ -16,6 +16,9 @@ const Lectures = () => {
   }, [navigate]);
 
   const lectures = {
+    Notice: [
+      { name: "Introduction", index:0},
+],
     Science: [
       { name: "Chapter 1", index: 0 },
       { name: "Chapter 2", index: 1 },
