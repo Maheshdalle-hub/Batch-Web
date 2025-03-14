@@ -11,32 +11,22 @@ const Login = () => {
 
   useEffect(() => {
     const initializeLogin = async () => {
-      const isCompleted = localStorage.getItem("shortenerCompleted") === "true";
-      if (isCompleted) {
-        localStorage.setItem("isLoggedIn", "true");
-        navigate("/subjects");
-        return;
-      }
-
       let userToken = localStorage.getItem("userToken");
       if (!userToken) {
         userToken = generateUserToken();
         localStorage.setItem("userToken", userToken);
       }
 
-      // ✅ Generate Shortener Link
+      // ✅ Generate Shortener Link (Alias NOT stored)
       const link = await generateShortenedLink(userToken);
       if (link) {
         setShortenerLink(link);
-        localStorage.setItem("shortenerLink", link);
       }
 
       // ✅ Check if shortener is completed
-      const completed = await checkShortenerCompletion(userToken);
-      if (completed) {
-        localStorage.setItem("shortenerCompleted", "true");
-        localStorage.setItem("isLoggedIn", "true");
-        navigate("/subjects");
+      const isCompleted = await checkShortenerCompletion(userToken);
+      if (isCompleted) {
+        navigate(`/verify/${userToken}`);
       }
 
       setLoading(false);
@@ -53,12 +43,10 @@ const Login = () => {
 
       const isCompleted = await checkShortenerCompletion(token);
       if (isCompleted) {
-        localStorage.setItem("shortenerCompleted", "true");
-        localStorage.setItem("isLoggedIn", "true");
         clearInterval(interval);
-        navigate("/subjects");
+        navigate(`/verify/${token}`);
       }
-    }, 5000);
+    }, 5000); // 🔄 Check every 5 seconds
 
     return () => clearInterval(interval);
   }, [navigate]);
