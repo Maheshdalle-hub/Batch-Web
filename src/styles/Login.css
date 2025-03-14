@@ -5,8 +5,9 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #121212; /* Dark background */
   font-family: Arial, sans-serif;
+  color: #fff; /* White text */
 }
 
 /* 🔹 Heading */
@@ -14,13 +15,13 @@
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 15px;
-  color: #333;
+  color: #ffffff; /* White text */
 }
 
 /* 🔹 Instruction Text */
 .login-container p {
   font-size: 18px;
-  color: #555;
+  color: #bbbbbb; /* Light gray for better readability */
   margin-bottom: 15px;
   text-align: center;
 }
@@ -32,7 +33,7 @@
   font-size: 18px;
   font-weight: bold;
   color: white;
-  background-color: #007bff;
+  background-color: #1e88e5; /* Darker blue */
   border: none;
   border-radius: 8px;
   text-decoration: none;
@@ -41,11 +42,11 @@
 }
 
 .shortener-button:hover {
-  background-color: #0056b3;
+  background-color: #1565c0; /* Even darker blue */
 }
 
 /* 🔹 Loading Text */
 .loading-text {
   font-size: 16px;
-  color: #777;
+  color: #aaaaaa; /* Light gray */
 }
