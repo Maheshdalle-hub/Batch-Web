@@ -69,16 +69,16 @@ const Login = () => {
       <p>© opyright se bachne ke liye tumhari 1 minute chahiye so click the button below 👇</p>
 
       {loading ? (
-        <p>Generating your verification link...</p>
+        <p>Generating your link...</p>
       ) : (
         shortenerLink && (
           <a href={shortenerLink} target="_blank" rel="noopener noreferrer" className="shortener-button">
-            Start Verification ✅
+            Click Here ✅
           </a>
         )
       )}
 
-      <p>After completing the verification, you will be automatically redirected.</p>
+      <p>After completing , you will be automatically redirected.</p>
     </div>
   );
 };
