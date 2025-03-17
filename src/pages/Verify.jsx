@@ -8,24 +8,24 @@ const Verify = () => {
   useEffect(() => {
     if (!token) return;
 
-    // ✅ Retrieve used tokens from localStorage
+    // ✅ Get used tokens list from localStorage
     let usedTokens = JSON.parse(localStorage.getItem("usedTokens")) || [];
 
-    // ✅ If token is already used, reject and send back to login
+    // ✅ Check if the token was already used
     if (usedTokens.includes(token)) {
       console.log("❌ Token already used! Redirecting to login...");
       navigate("/login");
       return;
     }
 
-    // ✅ Store token as used immediately to prevent re-use
+    // ✅ Set token expiry (2 days from now)
+    const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000;
+
+    // ✅ Mark this token as used
     usedTokens.push(token);
     localStorage.setItem("usedTokens", JSON.stringify(usedTokens));
 
-    // ✅ Set expiration time (2 days from now)
-    const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000;
-    
-    // ✅ Save login status and expiry
+    // ✅ Store verification details
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("verificationToken", token);
     localStorage.setItem("verificationExpires", expirationTime);
