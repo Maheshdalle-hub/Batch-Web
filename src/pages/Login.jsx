@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
-import { generateUserToken } from "../utils/tokenGenerator"; 
 import { generateShortenedLink, checkShortenerCompletion } from "../utils/shortener"; 
 
 const Login = () => {
@@ -10,7 +9,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // ✅ Check if user is already verified and the token is still valid
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const expiresAt = localStorage.getItem("verificationExpires");
 
@@ -21,27 +19,27 @@ const Login = () => {
 
     // ✅ If expired or not verified, proceed with normal verification process
     const initializeLogin = async () => {
+      // ✅ Get existing link if available
+      let storedLink = localStorage.getItem("shortenerLink");
       let userToken = localStorage.getItem("userToken");
-      if (!userToken) {
-        userToken = generateUserToken();
-        localStorage.setItem("userToken", userToken);
+
+      if (!storedLink || !userToken) {
+        // ✅ If no stored link or token, generate new one
+        const newLink = await generateShortenedLink();
+        if (newLink) {
+          setShortenerLink(newLink);
+          localStorage.setItem("shortenerLink", newLink);
+        }
+      } else {
+        // ✅ If stored link exists, reuse it
+        setShortenerLink(storedLink);
       }
 
-      // ✅ Generate Shortener Link
-      const link = await generateShortenedLink(userToken);
-      if (link) {
-        setShortenerLink(link);
-        localStorage.setItem("shortenerLink", link);
-      }
-
-      // ✅ Check if shortener is completed
-      const isCompleted = await checkShortenerCompletion(userToken);
+      // ✅ Check if shortener is already completed
+      const isCompleted = checkShortenerCompletion();
       if (isCompleted) {
-        const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000; // ✅ 2 days from now
-
-        localStorage.setItem("shortenerCompleted", "true");
         localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("verificationExpires", expirationTime);
+        localStorage.setItem("verificationExpires", Date.now() + 2 * 24 * 60 * 60 * 1000);
         navigate("/subjects");
       }
 
@@ -53,18 +51,11 @@ const Login = () => {
 
   // ✅ Auto-check every 5 seconds if shortener is completed
   useEffect(() => {
-    const interval = setInterval(async () => {
-      const token = localStorage.getItem("userToken");
-      if (!token) return;
-
-      const isCompleted = await checkShortenerCompletion(token);
+    const interval = setInterval(() => {
+      const isCompleted = checkShortenerCompletion();
       if (isCompleted) {
-        const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000; // ✅ 2 days from now
-
-        localStorage.setItem("shortenerCompleted", "true");
         localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("verificationExpires", expirationTime);
-        
+        localStorage.setItem("verificationExpires", Date.now() + 2 * 24 * 60 * 60 * 1000);
         clearInterval(interval);
         navigate("/subjects");
       }
@@ -76,19 +67,19 @@ const Login = () => {
   return (
     <div className="login-container">
       <h2>Login Required</h2>
-      <p>© opyright se bachne ke liye tumhari 1 minute chahiye so click the button below 👇</p>
+      <p>© Opyright se bachne ke liye tumhari 1 minute chahiye so click the button below 👇</p>
 
       {loading ? (
         <p>Generating your link...</p>
       ) : (
         shortenerLink && (
-         <a href={shortenerLink} className="shortener-button">
-  Click Here ✅
-</a>
+          <a href={shortenerLink} className="shortener-button">
+            Click Here ✅
+          </a>
         )
       )}
 
-      <p>After completing , you will be automatically redirected.</p>
+      <p>After completing, you will be automatically redirected.</p>
     </div>
   );
 };
