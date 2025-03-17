@@ -8,9 +8,11 @@ const generateSecureToken = () => {
 
 // ✅ Generate a shortened link (NO alias set by us)
 export const generateShortenedLink = async () => {
-  const userToken = generateSecureToken();  
-  localStorage.setItem("userToken", userToken); // Store only the token
-
+  let userToken = generateSecureToken();
+  
+  // ✅ Ensure a fresh token every time (remove old token if it exists)
+  localStorage.setItem("userToken", userToken);
+  
   const callbackUrl = `${CALLBACK_BASE_URL}/token=${userToken}`; // Redirects back for verification
 
   try {
@@ -32,5 +34,30 @@ export const generateShortenedLink = async () => {
 // ✅ Check if the shortener was completed
 export const checkShortenerCompletion = async () => {
   const storedToken = localStorage.getItem("userToken");
-  return localStorage.getItem(`shortenerCompleted-${storedToken}`) === "true"; 
+  if (!storedToken) return false; // If no token exists, return false
+
+  // ✅ Get used tokens list from localStorage
+  const usedTokens = JSON.parse(localStorage.getItem("usedTokens")) || [];
+
+  // ✅ Prevent reused tokens
+  if (usedTokens.includes(storedToken)) {
+    console.log("❌ Token already used! Generate a new one.");
+    return false;
+  }
+
+  try {
+    // ✅ Check if the shortener was completed (Replace with actual API call if needed)
+    const isCompleted = localStorage.getItem(`shortenerCompleted-${storedToken}`) === "true";
+
+    if (isCompleted) {
+      // ✅ Mark token as used
+      usedTokens.push(storedToken);
+      localStorage.setItem("usedTokens", JSON.stringify(usedTokens));
+      return true; // Shortener verified
+    }
+  } catch (error) {
+    console.error("❌ Error checking verification:", error);
+  }
+
+  return false;
 };
