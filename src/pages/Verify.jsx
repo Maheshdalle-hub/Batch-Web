@@ -11,24 +11,24 @@ const Verify = () => {
     // ✅ Get the list of used tokens
     let usedTokens = JSON.parse(localStorage.getItem("usedTokens")) || [];
 
-    // ✅ Check if token was already used
+    // ✅ Check if the token was already used
     if (usedTokens.includes(token)) {
       console.log("❌ Token already used! Redirecting to login...");
-      navigate("/login");
+      navigate("/login");  // 🚨 Immediately reject and send to login
       return;
     }
 
-    // ✅ Mark token as used
+    // ✅ Mark this token as used
     usedTokens.push(token);
     localStorage.setItem("usedTokens", JSON.stringify(usedTokens));
 
-    // ✅ Set token expiry (2 days)
+    // ✅ Set session expiry (2 days)
     const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000;
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("verificationToken", token);
     localStorage.setItem("verificationExpires", expirationTime);
 
-    navigate("/subjects"); // ✅ Redirect to subjects
+    navigate("/subjects");  // ✅ Redirect after storing verification
   }, [token, navigate]);
 
   return <p>✅ Verification successful! Redirecting...</p>;
