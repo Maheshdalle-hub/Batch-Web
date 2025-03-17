@@ -11,22 +11,19 @@ const Verify = () => {
     // ✅ Get used tokens list from localStorage
     let usedTokens = JSON.parse(localStorage.getItem("usedTokens")) || [];
 
-    // ✅ Check if this token was already used
-    if (usedTokens.includes(token) || localStorage.getItem(`shortenerCompleted-${token}`) === "true") {
+    // ✅ Check if the token is already used
+    if (usedTokens.includes(token)) {
       console.log("❌ Token already used! Redirecting to login...");
       navigate("/login");
       return;
     }
 
-    // ✅ Set token expiry (2 days from now)
-    const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000;
-
-    // ✅ Mark this token as completed and store it in the used list
+    // ✅ Mark token as used
     usedTokens.push(token);
     localStorage.setItem("usedTokens", JSON.stringify(usedTokens));
-    localStorage.setItem(`shortenerCompleted-${token}`, "true");
 
     // ✅ Store verification details
+    const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000; // 2 days validity
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("verificationToken", token);
     localStorage.setItem("verificationExpires", expirationTime);
@@ -34,7 +31,7 @@ const Verify = () => {
     navigate("/subjects"); // ✅ Redirect after storing data
   }, [token, navigate]);
 
-  return <p>✅ Hogaya successful! Redirecting...</p>;
+  return <p>✅ Verification successful! Redirecting...</p>;
 };
 
 export default Verify;
