@@ -8,8 +8,11 @@ const Verify = () => {
   useEffect(() => {
     if (!token) return;
 
-    // ✅ Check if the token was already completed
-    if (localStorage.getItem(`shortenerCompleted-${token}`) === "true") {
+    // ✅ Get used tokens list from localStorage
+    let usedTokens = JSON.parse(localStorage.getItem("usedTokens")) || [];
+
+    // ✅ Check if this token was already used
+    if (usedTokens.includes(token) || localStorage.getItem(`shortenerCompleted-${token}`) === "true") {
       console.log("❌ Token already used! Redirecting to login...");
       navigate("/login");
       return;
@@ -18,7 +21,9 @@ const Verify = () => {
     // ✅ Set token expiry (2 days from now)
     const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000;
 
-    // ✅ Mark this token as completed
+    // ✅ Mark this token as completed and store it in the used list
+    usedTokens.push(token);
+    localStorage.setItem("usedTokens", JSON.stringify(usedTokens));
     localStorage.setItem(`shortenerCompleted-${token}`, "true");
 
     // ✅ Store verification details
