@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "videojs-hls-quality-selector";
@@ -11,7 +11,7 @@ const VideoPlayer = () => {
   const playerRef = useRef(null);
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
-  const savedSpeed = useRef(1);  // ✅ Store playback speed
+  const [playbackSpeed, setPlaybackSpeed] = useState(1);  // ✅ Persistent playback speed state
 
   const { chapterName, lectureName, m3u8Url } = location.state || {};
   const isLive = location.pathname.includes("/video/live");
@@ -57,27 +57,36 @@ const VideoPlayer = () => {
       if (controlBar && !controlBar.getChild("PlaybackRateMenuButton")) {
         controlBar.addChild("PlaybackRateMenuButton", {}, 8);
       }
+
+      // ✅ Apply stored playback speed on player ready
+      playerRef.current.playbackRate(playbackSpeed);
     });
 
-    // ✅ Save current speed before gesture actions
+    // ✅ Store the current playback speed
     const savePlaybackSpeed = () => {
-      savedSpeed.current = playerRef.current.playbackRate();
+      if (playerRef.current) {
+        setPlaybackSpeed(playerRef.current.playbackRate());
+      }
     };
 
-    // ✅ Restore the saved speed after gesture actions
+    // ✅ Restore the saved playback speed
     const restorePlaybackSpeed = () => {
-      playerRef.current.playbackRate(savedSpeed.current);
+      if (playerRef.current) {
+        playerRef.current.playbackRate(playbackSpeed);
+      }
     };
 
+    // ✅ Handle fullscreen gesture
     playerRef.current.on("fullscreenchange", () => {
       savePlaybackSpeed();
-      setTimeout(restorePlaybackSpeed, 100); 
+      setTimeout(restorePlaybackSpeed, 100);
     });
 
+    // ✅ Gesture controls
     const videoContainer = videoRef.current.parentElement;
 
     videoContainer.addEventListener("touchstart", (event) => {
-      if (event.target.closest(".vjs-control-bar")) return; 
+      if (event.target.closest(".vjs-control-bar")) return;
 
       const touch = event.touches[0];
       const rect = videoContainer.getBoundingClientRect();
@@ -87,7 +96,7 @@ const VideoPlayer = () => {
       if (tapY > videoHeight - 50) return;
 
       holdTimer.current = setTimeout(() => {
-        savedSpeed.current = 2;  // ✅ Hold gesture temporarily changes speed
+        setPlaybackSpeed(2);  // ✅ Temporarily speed up
         playerRef.current.playbackRate(2);
       }, 600);
     });
@@ -96,7 +105,7 @@ const VideoPlayer = () => {
       if (event.target.closest(".vjs-control-bar")) return;
 
       clearTimeout(holdTimer.current);
-      restorePlaybackSpeed();  // ✅ Restore original speed
+      restorePlaybackSpeed();
 
       const currentTime = Date.now();
       const tapGap = currentTime - lastTap.current;
@@ -125,7 +134,7 @@ const VideoPlayer = () => {
         playerRef.current.dispose();
       }
     };
-  }, [m3u8Url, isLive]);
+  }, [m3u8Url, isLive, playbackSpeed]);
 
   return (
     <div>
