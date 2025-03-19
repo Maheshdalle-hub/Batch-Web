@@ -52,7 +52,7 @@ const VideoPlayer = () => {
         playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
       }
 
-      // ✅ Force-enable speed control
+      // ✅ Add Playback Speed Menu
       const controlBar = playerRef.current.controlBar;
       if (controlBar && !controlBar.getChild("PlaybackRateMenuButton")) {
         controlBar.addChild("PlaybackRateMenuButton", {}, 8);
@@ -75,12 +75,6 @@ const VideoPlayer = () => {
         playerRef.current.playbackRate(playbackSpeed);
       }
     };
-
-    // ✅ Handle fullscreen gesture
-    playerRef.current.on("fullscreenchange", () => {
-      savePlaybackSpeed();
-      setTimeout(restorePlaybackSpeed, 100);
-    });
 
     // ✅ Gesture controls
     const videoContainer = videoRef.current.parentElement;
@@ -141,6 +135,30 @@ const VideoPlayer = () => {
       <h2>
         {isLive ? "🔴 Live Class (nhi hua batch shuru)" : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
+      
+      {/* ✅ Fullscreen toggle button */}
+      <button
+        onClick={() => {
+          if (playerRef.current) {
+            if (playerRef.current.isFullscreen()) {
+              playerRef.current.exitFullscreen();
+            } else {
+              playerRef.current.requestFullscreen();
+            }
+          }
+        }}
+        style={{
+          marginBottom: "10px",
+          padding: "10px 20px",
+          backgroundColor: "#007bff",
+          color: "#fff",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
+        Toggle Fullscreen
+      </button>
+
       <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
     </div>
   );
