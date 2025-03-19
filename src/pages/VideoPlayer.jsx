@@ -11,6 +11,7 @@ const VideoPlayer = () => {
   const playerRef = useRef(null);
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
+  const savedSpeed = useRef(1);  // ✅ Store playback speed
 
   const { chapterName, lectureName, m3u8Url } = location.state || {};
   const isLive = location.pathname.includes("/video/live");
@@ -31,7 +32,7 @@ const VideoPlayer = () => {
       controls: true,
       autoplay: false,
       fluid: true,
-      playbackRates: [0.5, 1, 1.5, 2, 2.5, 3],  // ✅ More speed options
+      playbackRates: [0.5, 1, 1.5, 2, 2.5, 3],
     });
 
     const videoSource = isLive ? defaultLiveUrl : m3u8Url || defaultLiveUrl;
@@ -58,20 +59,25 @@ const VideoPlayer = () => {
       }
     });
 
+    // ✅ Save current speed before gesture actions
+    const savePlaybackSpeed = () => {
+      savedSpeed.current = playerRef.current.playbackRate();
+    };
+
+    // ✅ Restore the saved speed after gesture actions
+    const restorePlaybackSpeed = () => {
+      playerRef.current.playbackRate(savedSpeed.current);
+    };
+
     playerRef.current.on("fullscreenchange", () => {
-      if (document.fullscreenElement === null) {
-        return;
-      }
+      savePlaybackSpeed();
+      setTimeout(restorePlaybackSpeed, 100); 
     });
 
-    // ✅ Gesture Controls with Mistouch Prevention
     const videoContainer = videoRef.current.parentElement;
 
     videoContainer.addEventListener("touchstart", (event) => {
-      // ✅ Ignore gestures on the control bar
-      if (event.target.closest(".vjs-control-bar")) {
-        return; 
-      }
+      if (event.target.closest(".vjs-control-bar")) return; 
 
       const touch = event.touches[0];
       const rect = videoContainer.getBoundingClientRect();
@@ -81,18 +87,16 @@ const VideoPlayer = () => {
       if (tapY > videoHeight - 50) return;
 
       holdTimer.current = setTimeout(() => {
+        savedSpeed.current = 2;  // ✅ Hold gesture temporarily changes speed
         playerRef.current.playbackRate(2);
       }, 600);
     });
 
     videoContainer.addEventListener("touchend", (event) => {
-      // ✅ Ignore gestures on the control bar
-      if (event.target.closest(".vjs-control-bar")) {
-        return; 
-      }
+      if (event.target.closest(".vjs-control-bar")) return;
 
       clearTimeout(holdTimer.current);
-      playerRef.current.playbackRate(1);
+      restorePlaybackSpeed();  // ✅ Restore original speed
 
       const currentTime = Date.now();
       const tapGap = currentTime - lastTap.current;
@@ -104,6 +108,7 @@ const VideoPlayer = () => {
       const videoWidth = rect.width;
 
       if (tapGap < 300) {
+        savePlaybackSpeed();  // ✅ Save speed before gesture action
         if (tapX < videoWidth / 3) {
           playerRef.current.currentTime(playerRef.current.currentTime() - 10);
         } else if (tapX > (2 * videoWidth) / 3) {
@@ -111,6 +116,7 @@ const VideoPlayer = () => {
         } else {
           playerRef.current.paused() ? playerRef.current.play() : playerRef.current.pause();
         }
+        setTimeout(restorePlaybackSpeed, 100);  // ✅ Restore speed after gesture
       }
     });
 
