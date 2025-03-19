@@ -54,7 +54,7 @@ const VideoPlayer = () => {
       // ✅ Force-enable speed control
       const controlBar = playerRef.current.controlBar;
       if (controlBar && !controlBar.getChild("PlaybackRateMenuButton")) {
-        controlBar.addChild("PlaybackRateMenuButton", {}, 8); 
+        controlBar.addChild("PlaybackRateMenuButton", {}, 8);
       }
     });
 
@@ -64,10 +64,15 @@ const VideoPlayer = () => {
       }
     });
 
-    // ✅ Gesture Controls
+    // ✅ Gesture Controls with Mistouch Prevention
     const videoContainer = videoRef.current.parentElement;
 
     videoContainer.addEventListener("touchstart", (event) => {
+      // ✅ Ignore gestures on the control bar
+      if (event.target.closest(".vjs-control-bar")) {
+        return; 
+      }
+
       const touch = event.touches[0];
       const rect = videoContainer.getBoundingClientRect();
       const tapY = touch.clientY - rect.top;
@@ -81,6 +86,11 @@ const VideoPlayer = () => {
     });
 
     videoContainer.addEventListener("touchend", (event) => {
+      // ✅ Ignore gestures on the control bar
+      if (event.target.closest(".vjs-control-bar")) {
+        return; 
+      }
+
       clearTimeout(holdTimer.current);
       playerRef.current.playbackRate(1);
 
