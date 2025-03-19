@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "videojs-hls-quality-selector"; 
@@ -11,29 +11,36 @@ const VideoPlayer = () => {
   const playerRef = useRef(null);
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
-  const [playbackRate, setPlaybackRate] = useState(1); // ✅ State to track speed
 
+  // ✅ Extract state (for normal videos)
   const { chapterName, lectureName, m3u8Url } = location.state || {};
+
+  // ✅ Detect if it's a Live Class
   const isLive = location.pathname.includes("/video/live");
+
+  // ✅ Default Live Class URL
   const defaultLiveUrl = "m3u8_link_here";
 
+  // ✅ Check if user is logged in
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     if (!isLoggedIn) {
-      navigate("/login");
+      navigate("/login"); // 🔴 Redirect to login if not logged in
     }
   }, [navigate]);
 
   useEffect(() => {
     if (!videoRef.current) return;
 
+    // ✅ Initialize Video.js player
     playerRef.current = videojs(videoRef.current, {
       controls: true,
       autoplay: false,
       fluid: true,
-      playbackRates: [0.5, 1, 1.5, 2, 2.5, 3], // ✅ Added more speed options
+      playbackRates: [0.5, 1, 1.5, 2, 2.5, 3],  // ✅ Added more speed options
     });
 
+    // ✅ Set video source
     const videoSource = isLive ? defaultLiveUrl : m3u8Url || defaultLiveUrl;
 
     if (!videoSource) {
@@ -50,11 +57,12 @@ const VideoPlayer = () => {
       if (playerRef.current.hlsQualitySelector) {
         playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
       }
+    });
 
-      // ✅ Sync state with player speed
-      playerRef.current.on("ratechange", () => {
-        setPlaybackRate(playerRef.current.playbackRate());
-      });
+    playerRef.current.on("fullscreenchange", () => {
+      if (document.fullscreenElement === null) {
+        return; // ✅ Prevents error when exiting fullscreen
+      }
     });
 
     // ✅ Gesture Controls
@@ -104,30 +112,11 @@ const VideoPlayer = () => {
     };
   }, [m3u8Url, isLive]);
 
-  // ✅ Function to handle speed change
-  const handleSpeedChange = (rate) => {
-    playerRef.current.playbackRate(rate);
-    setPlaybackRate(rate);
-  };
-
   return (
     <div>
       <h2>
         {isLive ? "🔴 Live Class (nhi hua batch shuru)" : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
-
-      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
-        <label>Playback Speed:</label>
-        <select value={playbackRate} onChange={(e) => handleSpeedChange(parseFloat(e.target.value))}>
-          <option value="0.5">0.5x</option>
-          <option value="1">1x (Normal)</option>
-          <option value="1.5">1.5x</option>
-          <option value="2">2x</option>
-          <option value="2.5">2.5x</option>
-          <option value="3">3x</option>
-        </select>
-      </div>
-
       <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
     </div>
   );
