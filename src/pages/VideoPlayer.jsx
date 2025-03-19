@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import "videojs-hls-quality-selector"; 
+import "videojs-hls-quality-selector";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const VideoPlayer = () => {
@@ -12,20 +12,14 @@ const VideoPlayer = () => {
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
 
-  // ✅ Extract state (for normal videos)
   const { chapterName, lectureName, m3u8Url } = location.state || {};
-
-  // ✅ Detect if it's a Live Class
   const isLive = location.pathname.includes("/video/live");
-
-  // ✅ Default Live Class URL
   const defaultLiveUrl = "m3u8_link_here";
 
-  // ✅ Check if user is logged in
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     if (!isLoggedIn) {
-      navigate("/login"); // 🔴 Redirect to login if not logged in
+      navigate("/login");
     }
   }, [navigate]);
 
@@ -37,10 +31,9 @@ const VideoPlayer = () => {
       controls: true,
       autoplay: false,
       fluid: true,
-      playbackRates: [0.5, 1, 1.5, 2, 2.5, 3],  // ✅ Added more speed options
+      playbackRates: [0.5, 1, 1.5, 2, 2.5, 3],  // ✅ More speed options
     });
 
-    // ✅ Set video source
     const videoSource = isLive ? defaultLiveUrl : m3u8Url || defaultLiveUrl;
 
     if (!videoSource) {
@@ -57,11 +50,17 @@ const VideoPlayer = () => {
       if (playerRef.current.hlsQualitySelector) {
         playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
       }
+
+      // ✅ Force-enable speed control
+      const controlBar = playerRef.current.controlBar;
+      if (controlBar && !controlBar.getChild("PlaybackRateMenuButton")) {
+        controlBar.addChild("PlaybackRateMenuButton", {}, 8); 
+      }
     });
 
     playerRef.current.on("fullscreenchange", () => {
       if (document.fullscreenElement === null) {
-        return; // ✅ Prevents error when exiting fullscreen
+        return;
       }
     });
 
