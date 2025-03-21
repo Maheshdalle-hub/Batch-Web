@@ -33,7 +33,7 @@ const VideoPlayer = () => {
       controls: true,
       autoplay: false,
       fluid: true,
-      playbackRates: [0.5, 1, 1.5, 2, 2.5, 3],
+      playbackRates: [0.5, 1, 1.25, 1.5, 2,],
       html5: {
         vhs: {
           overrideNative: true,
@@ -43,12 +43,12 @@ const VideoPlayer = () => {
       controlBar: {
         children: [
           "playToggle",
-          "currentTimeDisplay",
-          "timeDivider",
-          "durationDisplay", // Ensure this is included
-          "progressControl",
-          "playbackRateMenuButton",
           "volumePanel",
+          "progressControl",
+          "currentTimeDisplay",   // ✅ Current time element
+          "timeDivider",
+          "durationDisplay",      // ✅ Duration element
+          "playbackRateMenuButton",
           "qualitySelector",
           "fullscreenToggle"
         ],
@@ -69,28 +69,23 @@ const VideoPlayer = () => {
 
       const controlBar = playerRef.current.controlBar;
 
-      // ✅ Ensure the durationDisplay is properly initialized
+      // ✅ Add currentTimeDisplay if missing
+      if (!controlBar.getChild("currentTimeDisplay")) {
+        controlBar.addChild("currentTimeDisplay", {}, 1);
+      }
+
+      // ✅ Add durationDisplay if missing
       if (!controlBar.getChild("durationDisplay")) {
         controlBar.addChild("durationDisplay", {}, 3);
       }
 
-      // ✅ Listen for the "loadedmetadata" event to ensure duration is available
-      playerRef.current.on("loadedmetadata", () => {
-        const duration = playerRef.current.duration();
-        if (duration && !isNaN(duration)) {
-          controlBar.durationDisplay?.updateContent(duration); // Update duration display
-        }
+      // ✅ Listen for the "timeupdate" event to update the current time dynamically
+      playerRef.current.on("timeupdate", () => {
+        const currentTime = playerRef.current.currentTime();
+        controlBar.currentTimeDisplay?.updateContent(currentTime);
       });
 
-      // ✅ Listen for the "durationchange" event to handle dynamic duration updates
-      playerRef.current.on("durationchange", () => {
-        const duration = playerRef.current.duration();
-        if (duration && !isNaN(duration)) {
-          controlBar.durationDisplay?.updateContent(duration); // Update duration display
-        }
-      });
-
-      // ✅ Delay to ensure visibility
+      // ✅ Ensure visibility with a delay
       setTimeout(() => {
         controlBar.show();
         controlBar.currentTimeDisplay?.show();
