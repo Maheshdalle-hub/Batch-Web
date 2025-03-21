@@ -1,15 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
+import Plyr from "plyr";  // ✅ Import Plyr
+import "plyr/dist/plyr.css";  // ✅ Import Plyr CSS
 import { useLocation, useNavigate } from "react-router-dom";
-import "video.js/dist/video-js.css";
-import "videojs-hls-quality-selector";
 
 const VideoPlayer = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const videoRef = useRef(null);
   const lastTap = useRef(0);
-
-  const [playbackSpeed, setPlaybackSpeed] = useState(1);
 
   const { chapterName, lectureName, m3u8Url } = location.state || {};
   const isLive = location.pathname.includes("/video/live");
@@ -29,8 +27,8 @@ const VideoPlayer = () => {
 
     const player = new Plyr(videoRef.current, {
       controls: [
-        "play", "progress", "current-time", "duration", "mute", "volume", "captions", 
-        "settings", "fullscreen", "airplay"
+        "play", "progress", "current-time", "duration", "mute", "volume", 
+        "captions", "settings", "fullscreen", "airplay"
       ],
       settings: ["speed", "quality", "loop"],
       speed: { selected: 1, options: [0.5, 1, 1.5, 2, 2.5] },
@@ -75,7 +73,7 @@ const VideoPlayer = () => {
     return () => {
       player.destroy();
     };
-  }, [m3u8Url, isLive, playbackSpeed]);
+  }, [m3u8Url, isLive]);
 
   return (
     <div>
