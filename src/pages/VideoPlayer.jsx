@@ -1,13 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import Plyr from "plyr";  
-import "plyr/dist/plyr.css";  
+import videojs from "video.js";
+import "video.js/dist/video-js.css";
+import "videojs-hls-quality-selector";  
 import { useLocation, useNavigate } from "react-router-dom";
 
 const VideoPlayer = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const videoRef = useRef(null);
+  const playerRef = useRef(null);
   const lastTap = useRef(0);
+
+  const [playbackSpeed, setPlaybackSpeed] = useState(1);  
 
   const { chapterName, lectureName, m3u8Url } = location.state || {};
   const isLive = location.pathname.includes("/video/live");
@@ -25,47 +29,38 @@ const VideoPlayer = () => {
 
     const videoSource = isLive ? defaultLiveUrl : m3u8Url || defaultLiveUrl;
 
-    const player = new Plyr(videoRef.current, {
-      controls: [
-        "play", "progress", "current-time", "duration", "mute", "volume",
-        "captions", "settings", "fullscreen", "airplay"
-      ],
-      settings: ["speed", "quality", "loop"],
-      speed: { selected: 1, options: [0.5, 1, 1.5, 2, 2.5] },
-      quality: { default: 1080, options: [240, 360, 720, 1080] },
+    playerRef.current = videojs(videoRef.current, {
+      controls: true,
+      autoplay: false,
+      fluid: true,
+      playbackRates: [0.5, 1, 1.25, 1.5, 2,],
+      controlBar: {
+        children: [
+          "playToggle", 
+          "volumePanel", 
+          "currentTimeDisplay", 
+          "timeDivider", 
+          "durationDisplay", 
+          "progressControl", 
+          "fullscreenToggle",
+        ],
+      },
     });
 
-    player.source = {
-      type: "video",
-      title: lectureName || "Unknown Lecture",
-      sources: [
-        {
-          src: videoSource,
-          type: "application/x-mpegURL",
-        },
-      ],
-    };
+    playerRef.current.src({
+      src: videoSource,
+      type: "application/x-mpegURL",
+    });
 
-    // ✅ Prevent black screen by reloading the source after skipping
-    const reloadVideo = () => {
-      const currentTime = player.currentTime;
-      const speed = player.speed;
+    playerRef.current.ready(() => {
+      if (playerRef.current.hlsQualitySelector) {
+        playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
+      }
 
-      player.source = {
-        type: "video",
-        title: lectureName || "Unknown Lecture",
-        sources: [{ src: videoSource, type: "application/x-mpegURL" }],
-      };
+      playerRef.current.playbackRate(playbackSpeed);
+    });
 
-      // Restore playback position and speed
-      player.once("ready", () => {
-        player.currentTime = currentTime;
-        player.speed = speed;
-        player.play();
-      });
-    };
-
-    // ✅ Gesture Controls (double tap with reload)
+    // ✅ Gesture Controls (Double Tap Skip)
     const videoContainer = videoRef.current.parentElement;
 
     videoContainer.addEventListener("touchend", (event) => {
@@ -80,29 +75,29 @@ const VideoPlayer = () => {
 
       if (tapGap < 300) {
         if (tapX < videoWidth / 3) {
-          player.rewind(10);
-          reloadVideo();  // ✅ Reload after backward skip
+          playerRef.current.currentTime(playerRef.current.currentTime() - 10);  
         } else if (tapX > (2 * videoWidth) / 3) {
-          player.forward(10);
-          reloadVideo();  // ✅ Reload after forward skip
+          playerRef.current.currentTime(playerRef.current.currentTime() + 10);  
         } else {
-          player.togglePlay();
+          playerRef.current.paused() ? playerRef.current.play() : playerRef.current.pause();
         }
       }
     });
 
     return () => {
-      player.destroy();
+      if (playerRef.current) {
+        playerRef.current.dispose();
+      }
     };
-  }, [m3u8Url, isLive]);
+  }, [m3u8Url, isLive, playbackSpeed]);
 
   return (
     <div>
       <h2>
-        {isLive ? "🔴 Live Class (nhi hua batch shuru)" : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
+        {isLive ? "🔴 Live Class(nhi hua batch shuru)" : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
 
-      <video ref={videoRef} className="plyr" />
+      <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
     </div>
   );
 };
