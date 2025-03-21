@@ -28,6 +28,7 @@ const VideoPlayer = () => {
 
     const videoSource = isLive ? defaultLiveUrl : m3u8Url || defaultLiveUrl;
 
+    // ✅ Initialize the Video.js player
     playerRef.current = videojs(videoRef.current, {
       controls: true,
       autoplay: false,
@@ -58,16 +59,16 @@ const VideoPlayer = () => {
       type: "application/x-mpegURL",
     });
 
-    // ✅ Enable Quality Levels and Quality Selector
+    // ✅ Ensure Quality Levels and Selector
     playerRef.current.ready(() => {
       playerRef.current.qualityLevels();
       playerRef.current.hlsQualitySelector({
         displayCurrentQuality: true,
       });
 
-      // ✅ Ensure Timestamps and Duration Display
       const controlBar = playerRef.current.controlBar;
 
+      // ✅ Add time displays if missing
       if (!controlBar.getChild("currentTimeDisplay")) {
         controlBar.addChild("currentTimeDisplay", {}, 1);
       }
@@ -78,12 +79,13 @@ const VideoPlayer = () => {
         controlBar.addChild("durationDisplay", {}, 3);
       }
 
-      playerRef.current.on("loadedmetadata", () => {
+      // ✅ Delay to ensure visibility
+      setTimeout(() => {
         controlBar.show();
-        controlBar.currentTimeDisplay.show();
-        controlBar.timeDivider.show();
-        controlBar.durationDisplay.show();
-      });
+        controlBar.currentTimeDisplay?.show();
+        controlBar.timeDivider?.show();
+        controlBar.durationDisplay?.show();
+      }, 300);  // Slight delay for proper rendering
     });
 
     // ✅ Double Tap Gesture Controls
