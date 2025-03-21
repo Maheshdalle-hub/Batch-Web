@@ -35,20 +35,20 @@ const VideoPlayer = () => {
       playbackRates: [0.5, 1, 1.5, 2, 2.5, 3],
       html5: {
         vhs: {
-          overrideNative: true, // ✅ Enable custom HLS handling
-          enableLowInitialPlaylist: true, // ✅ Faster quality switching
+          overrideNative: true,
+          enableLowInitialPlaylist: true,
         }
       },
       controlBar: {
         children: [
-          "playToggle",             // ✅ Play/Pause  
-          "currentTimeDisplay",     // ✅ Current Time  
-          "timeDivider",            // ✅ Divider  
-          "durationDisplay",        // ✅ Total Duration  
-          "playbackRateMenuButton", // ✅ Speed  
-          "volumePanel",            // ✅ Volume  
-          "qualitySelector",        // ✅ Quality  
-          "fullscreenToggle"        // ✅ Fullscreen  
+          "playToggle",
+          "currentTimeDisplay",
+          "timeDivider",
+          "durationDisplay",
+          "playbackRateMenuButton",
+          "volumePanel",
+          "qualitySelector",
+          "fullscreenToggle"
         ],
       },
     });
@@ -58,39 +58,12 @@ const VideoPlayer = () => {
       type: "application/x-mpegURL",
     });
 
-    // ✅ Force timestamp rendering with event listeners
+    // ✅ Enable Quality Levels and Quality Selector
     playerRef.current.ready(() => {
-      const controlBar = playerRef.current.controlBar;
-
-      if (!controlBar.getChild("currentTimeDisplay")) {
-        controlBar.addChild("currentTimeDisplay", {}, 1);
-      }
-      if (!controlBar.getChild("timeDivider")) {
-        controlBar.addChild("timeDivider", {}, 2);
-      }
-      if (!controlBar.getChild("durationDisplay")) {
-        controlBar.addChild("durationDisplay", {}, 3);
-      }
-
-      playerRef.current.tech_.on("loadedmetadata", () => {
-        playerRef.current.controlBar.show();
-        playerRef.current.controlBar.currentTimeDisplay.show();
-        playerRef.current.controlBar.timeDivider.show();
-        playerRef.current.controlBar.durationDisplay.show();
+      playerRef.current.qualityLevels();
+      playerRef.current.hlsQualitySelector({
+        displayCurrentQuality: true,
       });
-
-      // ✅ Fast quality switching
-      const qualityLevels = playerRef.current.qualityLevels();
-      qualityLevels.on("change", () => {
-        const currentLevel = qualityLevels[qualityLevels.selectedIndex];
-        console.log(`Switched to quality: ${currentLevel.height}p`);
-      });
-
-      if (playerRef.current.hlsQualitySelector) {
-        playerRef.current.hlsQualitySelector({
-          displayCurrentQuality: true,
-        });
-      }
     });
 
     // ✅ Double Tap Gesture Controls
@@ -108,9 +81,9 @@ const VideoPlayer = () => {
 
       if (tapGap < 300) {
         if (tapX < videoWidth / 3) {
-          playerRef.current.currentTime(playerRef.current.currentTime() - 10);  // ⏪ Skip back
+          playerRef.current.currentTime(playerRef.current.currentTime() - 10);
         } else if (tapX > (2 * videoWidth) / 3) {
-          playerRef.current.currentTime(playerRef.current.currentTime() + 10);  // ⏩ Skip forward
+          playerRef.current.currentTime(playerRef.current.currentTime() + 10);
         } else {
           playerRef.current.paused() ? playerRef.current.play() : playerRef.current.pause();
         }
