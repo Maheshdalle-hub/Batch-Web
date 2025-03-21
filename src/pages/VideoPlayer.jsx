@@ -64,6 +64,26 @@ const VideoPlayer = () => {
       playerRef.current.hlsQualitySelector({
         displayCurrentQuality: true,
       });
+
+      // ✅ Ensure Timestamps and Duration Display
+      const controlBar = playerRef.current.controlBar;
+
+      if (!controlBar.getChild("currentTimeDisplay")) {
+        controlBar.addChild("currentTimeDisplay", {}, 1);
+      }
+      if (!controlBar.getChild("timeDivider")) {
+        controlBar.addChild("timeDivider", {}, 2);
+      }
+      if (!controlBar.getChild("durationDisplay")) {
+        controlBar.addChild("durationDisplay", {}, 3);
+      }
+
+      playerRef.current.on("loadedmetadata", () => {
+        controlBar.show();
+        controlBar.currentTimeDisplay.show();
+        controlBar.timeDivider.show();
+        controlBar.durationDisplay.show();
+      });
     });
 
     // ✅ Double Tap Gesture Controls
