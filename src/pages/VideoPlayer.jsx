@@ -46,6 +46,7 @@ const VideoPlayer = () => {
           "currentTimeDisplay",
           "timeDivider",
           "durationDisplay",
+          "progressControl", // Add progressControl to ensure the timeline is visible
           "playbackRateMenuButton",
           "volumePanel",
           "qualitySelector",
@@ -68,7 +69,7 @@ const VideoPlayer = () => {
 
       const controlBar = playerRef.current.controlBar;
 
-      // ✅ Add time displays if missing
+      // ✅ Ensure the time displays are properly initialized
       if (!controlBar.getChild("currentTimeDisplay")) {
         controlBar.addChild("currentTimeDisplay", {}, 1);
       }
