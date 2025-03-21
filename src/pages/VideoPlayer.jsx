@@ -43,12 +43,12 @@ const VideoPlayer = () => {
       controlBar: {
         children: [
           "playToggle",
-          "volumePanel",
-          "progressControl",
           "currentTimeDisplay",   // ✅ Current time element
           "timeDivider",
           "durationDisplay",      // ✅ Duration element
+          "progressControl",
           "playbackRateMenuButton",
+          "volumePanel",
           "qualitySelector",
           "fullscreenToggle"
         ],
@@ -79,10 +79,16 @@ const VideoPlayer = () => {
         controlBar.addChild("durationDisplay", {}, 3);
       }
 
-      // ✅ Listen for the "timeupdate" event to update the current time dynamically
+      // ✅ Listen for time updates and force manual rendering of current time
       playerRef.current.on("timeupdate", () => {
         const currentTime = playerRef.current.currentTime();
-        controlBar.currentTimeDisplay?.updateContent(currentTime);
+        
+        // ✅ Force currentTimeDisplay to update
+        const currentTimeEl = controlBar.getChild("currentTimeDisplay")?.el();
+        if (currentTimeEl) {
+          const formattedTime = new Date(currentTime * 1000).toISOString().substring(11, 19);
+          currentTimeEl.textContent = formattedTime;  // Update the display manually
+        }
       });
 
       // ✅ Ensure visibility with a delay
