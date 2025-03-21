@@ -14,7 +14,7 @@ const VideoPlayer = () => {
   const holdTimer = useRef(null);
 
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
-  const [volume, setVolume] = useState(0.5); 
+  const [volume, setVolume] = useState(0.5);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [qualityLevels, setQualityLevels] = useState([]);
   const [selectedQuality, setSelectedQuality] = useState("auto");
@@ -150,8 +150,9 @@ const VideoPlayer = () => {
       </h2>
 
       {/* ✅ Advanced Player */}
-      <div>
-        {/* ✅ Video element with no HTML5 controls */}
+      <div style={{ position: "relative", width: "100%", maxWidth: "1000px", margin: "0 auto" }}>
+        
+        {/* ✅ Video Element */}
         <video
           ref={videoRef}
           className="video-js vjs-default-skin"
@@ -159,36 +160,61 @@ const VideoPlayer = () => {
           style={{ width: "100%", height: "100%" }}
         />
 
-        {/* ✅ Custom Controls */}
-        <div>
-          <div>
-            <span>{formatTime(playerRef.current?.currentTime() || 0)} / </span>
-            <span>{formatTime(playerRef.current?.duration() || 0)}</span>
+        {/* ✅ Custom Controls Inside the Player */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "10px",
+            left: "10px",
+            right: "10px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            background: "rgba(0, 0, 0, 0.7)",
+            padding: "10px",
+            borderRadius: "5px",
+            zIndex: 10,
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <span style={{ color: "#fff", marginRight: "10px" }}>
+              {formatTime(playerRef.current?.currentTime() || 0)} / {formatTime(playerRef.current?.duration() || 0)}
+            </span>
+
+            <select
+              value={playbackSpeed}
+              onChange={(e) => setPlaybackSpeed(parseFloat(e.target.value))}
+              style={{ marginRight: "10px" }}
+            >
+              {[0.5, 1, 1.25, 1.5, 2, 2.5].map((speed) => (
+                <option key={speed} value={speed}>
+                  {speed}x
+                </option>
+              ))}
+            </select>
+
+            <select
+              value={selectedQuality}
+              onChange={(e) => setSelectedQuality(e.target.value)}
+            >
+              {qualityLevels.map((level, index) => (
+                <option key={index} value={level.label}>
+                  {level.label}
+                </option>
+              ))}
+            </select>
           </div>
 
-          <select
-            value={playbackSpeed}
-            onChange={(e) => setPlaybackSpeed(parseFloat(e.target.value))}
+          <button
+            onClick={toggleFullscreen}
+            style={{
+              background: "transparent",
+              color: "#fff",
+              border: "1px solid #fff",
+              padding: "5px 15px",
+              cursor: "pointer",
+            }}
           >
-            {[0.5, 1, 1.25, 1.5, 2, 2.5].map((speed) => (
-              <option key={speed} value={speed}>
-                {speed}x
-              </option>
-            ))}
-          </select>
-
-          <select
-            value={selectedQuality}
-            onChange={(e) => setSelectedQuality(e.target.value)}
-          >
-            {qualityLevels.map((level, index) => (
-              <option key={index} value={level.label}>
-                {level.label}
-              </option>
-            ))}
-          </select>
-
-          <button onClick={toggleFullscreen}>
             {isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
           </button>
         </div>
