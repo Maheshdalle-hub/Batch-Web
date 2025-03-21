@@ -13,6 +13,8 @@ const VideoPlayer = () => {
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [qualityLevels, setQualityLevels] = useState([]);
   const [selectedQuality, setSelectedQuality] = useState("auto");
+  const [volume, setVolume] = useState(0.5); // Default volume
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const { chapterName, lectureName, m3u8Url } = location.state || {};
   const isLive = location.pathname.includes("/video/live");
@@ -55,10 +57,24 @@ const VideoPlayer = () => {
       const touch = event.touches[0];
       const rect = video.getBoundingClientRect();
       const tapX = touch.clientX - rect.left;
+      const tapY = touch.clientY - rect.top;
       const videoWidth = rect.width;
+      const videoHeight = rect.height;
 
+      // ✅ Swipe gestures for volume control
+      if (tapX > videoWidth * 0.75) {
+        // Right side -> Volume
+        video.volume = Math.min(1, video.volume + 0.1);
+        setVolume(video.volume);
+      } else if (tapX < videoWidth * 0.25) {
+        // Left side -> Lower volume
+        video.volume = Math.max(0, video.volume - 0.1);
+        setVolume(video.volume);
+      }
+
+      // ✅ Hold gesture for 2x speed
       holdTimer.current = setTimeout(() => {
-        video.playbackRate = 2;  // ✅ Temporary 2x speed boost
+        video.playbackRate = 2;  // ✅ Temporary speed boost
       }, 600);
 
       const currentTime = Date.now();
@@ -126,6 +142,26 @@ const VideoPlayer = () => {
     }
   };
 
+  // ✅ Toggle fullscreen
+  const toggleFullscreen = () => {
+    const video = videoRef.current;
+    if (!isFullscreen) {
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+      }
+      setIsFullscreen(true);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+      setIsFullscreen(false);
+    }
+  };
+
   // ✅ Convert time to hh:mm:ss format
   const formatTime = (time) => {
     const hours = Math.floor(time / 3600);
@@ -173,54 +209,17 @@ const VideoPlayer = () => {
             zIndex: 10,
           }}
         >
-          {/* ✅ Play/Pause Button */}
-          <button
-            onClick={togglePlay}
-            style={{
-              background: "rgba(0, 0, 0, 0.7)",
-              color: "#fff",
-              border: "none",
-              padding: "10px",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
+          <button onClick={togglePlay}>
             {isPlaying ? "❚❚" : "▶️"}
           </button>
 
-          {/* ✅ Speed Selection */}
-          <select
-            onChange={(e) => changeSpeed(parseFloat(e.target.value))}
-            value={playbackSpeed}
-            style={{
-              background: "rgba(0, 0, 0, 0.7)",
-              color: "#fff",
-              border: "none",
-              padding: "10px",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
+          <select onChange={(e) => changeSpeed(parseFloat(e.target.value))}>
             {[0.5, 1, 1.25, 1.5, 2, 2.5, 3].map((speed) => (
-              <option key={speed} value={speed}>
-                {speed}x
-              </option>
+              <option key={speed} value={speed}>{speed}x</option>
             ))}
           </select>
 
-          {/* ✅ Quality Selection */}
-          <select
-            onChange={(e) => handleQualityChange(parseInt(e.target.value))}
-            value={selectedQuality}
-            style={{
-              background: "rgba(0, 0, 0, 0.7)",
-              color: "#fff",
-              border: "none",
-              padding: "10px",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
+          <select onChange={(e) => handleQualityChange(parseInt(e.target.value))}>
             {qualityLevels.map((level, index) => (
               <option key={index} value={level.index}>
                 {level.label}
@@ -228,11 +227,14 @@ const VideoPlayer = () => {
             ))}
           </select>
 
-          {/* ✅ Timestamp */}
-          <div style={{ color: "#fff" }}>
+          <div>
             {formatTime(videoRef.current?.currentTime || 0)} /{" "}
             {formatTime(videoRef.current?.duration || 0)}
           </div>
+
+          <button onClick={toggleFullscreen}>
+            {isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+          </button>
         </div>
       </div>
     </div>
