@@ -51,28 +51,35 @@ const VideoPlayer = () => {
       type: "application/x-mpegURL",
     });
 
+    // ✅ Force timestamp rendering using Video.js tech layer
     playerRef.current.ready(() => {
       if (playerRef.current.hlsQualitySelector) {
         playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
       }
 
-      // ✅ Force timestamp & duration display
       const controlBar = playerRef.current.controlBar;
 
+      // ✅ Ensure timestamp & duration components are rendered
       if (!controlBar.getChild("currentTimeDisplay")) {
         controlBar.addChild("currentTimeDisplay", {}, 1);
       }
-
       if (!controlBar.getChild("timeDivider")) {
         controlBar.addChild("timeDivider", {}, 2);
       }
-
       if (!controlBar.getChild("durationDisplay")) {
         controlBar.addChild("durationDisplay", {}, 3);
       }
+
+      // ✅ Force refresh to guarantee visibility
+      playerRef.current.tech_.on("loadedmetadata", () => {
+        playerRef.current.controlBar.show();
+        playerRef.current.controlBar.currentTimeDisplay.show();
+        playerRef.current.controlBar.timeDivider.show();
+        playerRef.current.controlBar.durationDisplay.show();
+      });
     });
 
-    // ✅ Gesture Controls (Double Tap Skip)
+    // ✅ Double Tap Gesture Controls
     const videoContainer = videoRef.current.parentElement;
 
     videoContainer.addEventListener("touchend", (event) => {
