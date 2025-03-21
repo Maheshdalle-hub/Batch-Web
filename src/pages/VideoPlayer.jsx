@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Hls from "hls.js";
 
 const VideoPlayer = () => {
   const location = useLocation();
@@ -10,6 +11,8 @@ const VideoPlayer = () => {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
+  const [qualityLevels, setQualityLevels] = useState([]);
+  const [selectedQuality, setSelectedQuality] = useState("auto");
 
   const { chapterName, lectureName, m3u8Url } = location.state || {};
   const isLive = location.pathname.includes("/video/live");
@@ -26,8 +29,26 @@ const VideoPlayer = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    video.src = m3u8Url || defaultLiveUrl;
-    video.playbackRate = playbackSpeed;
+    let hls;
+    if (Hls.isSupported()) {
+      hls = new Hls();
+      hls.loadSource(m3u8Url || defaultLiveUrl);
+      hls.attachMedia(video);
+
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        const levels = hls.levels.map((level, index) => ({
+          label: `${level.height}p`,
+          index,
+        }));
+        setQualityLevels([{ label: "Auto", index: -1 }, ...levels]);
+      });
+
+      hls.on(Hls.Events.ERROR, (event, data) => {
+        console.error("HLS error:", data);
+      });
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      video.src = m3u8Url || defaultLiveUrl;
+    }
 
     // ✅ Gesture controls
     const handleTouchStart = (event) => {
@@ -36,9 +57,8 @@ const VideoPlayer = () => {
       const tapX = touch.clientX - rect.left;
       const videoWidth = rect.width;
 
-      // ✅ Hold gesture for temporary 2x speed boost
       holdTimer.current = setTimeout(() => {
-        video.playbackRate = 2;
+        video.playbackRate = 2;  // ✅ Temporary 2x speed boost
       }, 600);
 
       const currentTime = Date.now();
@@ -58,7 +78,7 @@ const VideoPlayer = () => {
 
     const handleTouchEnd = () => {
       clearTimeout(holdTimer.current);
-      video.playbackRate = playbackSpeed;  // ✅ Restore normal speed
+      videoRef.current.playbackRate = playbackSpeed;  // ✅ Restore speed
     };
 
     video.addEventListener("touchstart", handleTouchStart);
@@ -67,8 +87,11 @@ const VideoPlayer = () => {
     return () => {
       video.removeEventListener("touchstart", handleTouchStart);
       video.removeEventListener("touchend", handleTouchEnd);
+      if (hls) {
+        hls.destroy();
+      }
     };
-  }, [m3u8Url, playbackSpeed, defaultLiveUrl]);
+  }, [m3u8Url, defaultLiveUrl, playbackSpeed]);
 
   // ✅ Toggle play/pause
   const togglePlay = () => {
@@ -82,13 +105,33 @@ const VideoPlayer = () => {
     }
   };
 
-  // ✅ Cycle through playback speeds
-  const cycleSpeed = () => {
-    const speeds = [0.5, 1, 1.25, 1.5, 2, 2.5, 3];
-    const currentIndex = speeds.indexOf(playbackSpeed);
-    const newSpeed = speeds[(currentIndex + 1) % speeds.length];
-    setPlaybackSpeed(newSpeed);
-    videoRef.current.playbackRate = newSpeed;
+  // ✅ Handle speed change
+  const changeSpeed = (speed) => {
+    setPlaybackSpeed(speed);
+    videoRef.current.playbackRate = speed;
+  };
+
+  // ✅ Handle quality change
+  const handleQualityChange = (index) => {
+    if (Hls.isSupported()) {
+      const video = videoRef.current;
+      const hls = video.hls;
+      if (index === -1) {
+        hls.currentLevel = -1; // Auto quality
+        setSelectedQuality("auto");
+      } else {
+        hls.currentLevel = index;
+        setSelectedQuality(qualityLevels[index + 1]?.label || "auto");
+      }
+    }
+  };
+
+  // ✅ Convert time to hh:mm:ss format
+  const formatTime = (time) => {
+    const hours = Math.floor(time / 3600);
+    const minutes = Math.floor((time % 3600) / 60);
+    const seconds = Math.floor(time % 60);
+    return `${hours > 0 ? `${hours}:` : ""}${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
   };
 
   return (
@@ -99,7 +142,7 @@ const VideoPlayer = () => {
           : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
 
-      {/* ✅ Custom Video Player */}
+      {/* ✅ Advanced Video Player */}
       <div
         style={{
           position: "relative",
@@ -114,6 +157,7 @@ const VideoPlayer = () => {
           ref={videoRef}
           style={{ width: "100%", display: "block" }}
           playsInline
+          controls={false}
         />
 
         {/* ✅ Custom Controls */}
@@ -144,9 +188,10 @@ const VideoPlayer = () => {
             {isPlaying ? "❚❚" : "▶️"}
           </button>
 
-          {/* ✅ Speed Control Button */}
-          <button
-            onClick={cycleSpeed}
+          {/* ✅ Speed Selection */}
+          <select
+            onChange={(e) => changeSpeed(parseFloat(e.target.value))}
+            value={playbackSpeed}
             style={{
               background: "rgba(0, 0, 0, 0.7)",
               color: "#fff",
@@ -156,8 +201,38 @@ const VideoPlayer = () => {
               cursor: "pointer",
             }}
           >
-            {playbackSpeed}x
-          </button>
+            {[0.5, 1, 1.25, 1.5, 2, 2.5, 3].map((speed) => (
+              <option key={speed} value={speed}>
+                {speed}x
+              </option>
+            ))}
+          </select>
+
+          {/* ✅ Quality Selection */}
+          <select
+            onChange={(e) => handleQualityChange(parseInt(e.target.value))}
+            value={selectedQuality}
+            style={{
+              background: "rgba(0, 0, 0, 0.7)",
+              color: "#fff",
+              border: "none",
+              padding: "10px",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            {qualityLevels.map((level, index) => (
+              <option key={index} value={level.index}>
+                {level.label}
+              </option>
+            ))}
+          </select>
+
+          {/* ✅ Timestamp */}
+          <div style={{ color: "#fff" }}>
+            {formatTime(videoRef.current?.currentTime || 0)} /{" "}
+            {formatTime(videoRef.current?.duration || 0)}
+          </div>
         </div>
       </div>
     </div>
