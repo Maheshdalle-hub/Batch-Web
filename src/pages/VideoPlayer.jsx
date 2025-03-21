@@ -34,14 +34,14 @@ const VideoPlayer = () => {
       playbackRates: [0.5, 1, 1.5, 2, 2.5, 3],
       controlBar: {
         children: [
-          "playToggle",            // ✅ Play/Pause  
-          "currentTimeDisplay",    // ✅ Timestamp (current time)  
-          "timeDivider",           // ✅ Divider  
-          "durationDisplay",       // ✅ Total duration  
-          "playbackRateMenuButton",// ✅ Speed control  
-          "volumePanel",           // ✅ Volume  
-          "qualitySelector",       // ✅ Quality  
-          "fullscreenToggle"       // ✅ Fullscreen  
+          "playToggle",             // ✅ Play/Pause  
+          "currentTimeDisplay",     // ✅ Current Time  
+          "timeDivider",            // ✅ Divider  
+          "durationDisplay",        // ✅ Total Duration  
+          "playbackRateMenuButton", // ✅ Speed  
+          "volumePanel",            // ✅ Volume  
+          "qualitySelector",        // ✅ Quality  
+          "fullscreenToggle"        // ✅ Fullscreen  
         ],
       },
     });
@@ -54,6 +54,21 @@ const VideoPlayer = () => {
     playerRef.current.ready(() => {
       if (playerRef.current.hlsQualitySelector) {
         playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
+      }
+
+      // ✅ Force timestamp & duration display
+      const controlBar = playerRef.current.controlBar;
+
+      if (!controlBar.getChild("currentTimeDisplay")) {
+        controlBar.addChild("currentTimeDisplay", {}, 1);
+      }
+
+      if (!controlBar.getChild("timeDivider")) {
+        controlBar.addChild("timeDivider", {}, 2);
+      }
+
+      if (!controlBar.getChild("durationDisplay")) {
+        controlBar.addChild("durationDisplay", {}, 3);
       }
     });
 
