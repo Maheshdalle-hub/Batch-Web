@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import "videojs-hls-quality-selector";  
+import "videojs-hls-quality-selector";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const VideoPlayer = () => {
@@ -10,8 +10,6 @@ const VideoPlayer = () => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const lastTap = useRef(0);
-
-  const [currentTime, setCurrentTime] = useState("0:00");
 
   const { chapterName, lectureName, m3u8Url } = location.state || {};
   const isLive = location.pathname.includes("/video/live");
@@ -33,17 +31,17 @@ const VideoPlayer = () => {
       controls: true,
       autoplay: false,
       fluid: true,
-      playbackRates: [0.5, 1, 1.25, 1.5, 2],
+      playbackRates: [0.5, 1, 1.5, 2, 2.5, 3],
       controlBar: {
         children: [
-          "playToggle", 
-          "volumePanel", 
-          "currentTimeDisplay", 
-          "timeDivider", 
-          "durationDisplay", 
-          "progressControl", 
-          "fullscreenToggle",
-          "playbackRateMenuButton"  
+          "playToggle",            // ✅ Play/Pause  
+          "currentTimeDisplay",    // ✅ Built-in Timestamp  
+          "timeDivider",           // ✅ Divider  
+          "durationDisplay",       // ✅ Total duration  
+          "playbackRateMenuButton",// ✅ Speed control  
+          "volumePanel",           // ✅ Volume  
+          "qualitySelector",       // ✅ Quality  
+          "fullscreenToggle"       // ✅ Fullscreen  
         ],
       },
     });
@@ -57,13 +55,6 @@ const VideoPlayer = () => {
       if (playerRef.current.hlsQualitySelector) {
         playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
       }
-
-      playerRef.current.on("timeupdate", () => {
-        const time = playerRef.current.currentTime();
-        const minutes = Math.floor(time / 60);
-        const seconds = Math.floor(time % 60);
-        setCurrentTime(`${minutes}:${seconds < 10 ? "0" : ""}${seconds}`);
-      });
     });
 
     // ✅ Gesture Controls (Double Tap Skip)
@@ -81,9 +72,9 @@ const VideoPlayer = () => {
 
       if (tapGap < 300) {
         if (tapX < videoWidth / 3) {
-          playerRef.current.currentTime(playerRef.current.currentTime() - 10);  
+          playerRef.current.currentTime(playerRef.current.currentTime() - 10);  // ⏪ Skip back
         } else if (tapX > (2 * videoWidth) / 3) {
-          playerRef.current.currentTime(playerRef.current.currentTime() + 10);  
+          playerRef.current.currentTime(playerRef.current.currentTime() + 10);  // ⏩ Skip forward
         } else {
           playerRef.current.paused() ? playerRef.current.play() : playerRef.current.pause();
         }
@@ -100,13 +91,10 @@ const VideoPlayer = () => {
   return (
     <div>
       <h2>
-        {isLive ? "🔴 Live Class(nhi hua batch shuru)" : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
+        {isLive ? "🔴 Live Class" : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
 
-      {/* ✅ Timestamp with only time */}
-      <p>{currentTime}</p>
-
-      <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
+      <video ref={videoRef} className="video-js vjs-default-skin" />
     </div>
   );
 };
