@@ -11,6 +11,7 @@ const VideoPlayer = () => {
   const playerRef = useRef(null);
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
+
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [qualityLevels, setQualityLevels] = useState([]);
   const [selectedQuality, setSelectedQuality] = useState("auto");
@@ -64,20 +65,6 @@ const VideoPlayer = () => {
       }
     });
 
-    // ✅ Store the current playback speed
-    const savePlaybackSpeed = () => {
-      if (playerRef.current) {
-        setPlaybackSpeed(playerRef.current.playbackRate());
-      }
-    };
-
-    // ✅ Restore the saved playback speed
-    const restorePlaybackSpeed = () => {
-      if (playerRef.current) {
-        playerRef.current.playbackRate(playbackSpeed);
-      }
-    };
-
     // ✅ Gesture controls
     const videoContainer = videoRef.current.parentElement;
 
@@ -86,45 +73,33 @@ const VideoPlayer = () => {
 
       const touch = event.touches[0];
       const rect = videoContainer.getBoundingClientRect();
-      const tapY = touch.clientY - rect.top;
-      const videoHeight = rect.height;
+      const tapX = touch.clientX - rect.left;
+      const videoWidth = rect.width;
 
-      if (tapY > videoHeight - 50) return;
-
+      // ✅ Hold to temporarily speed up
       holdTimer.current = setTimeout(() => {
-        setPlaybackSpeed(2);  // ✅ Temporarily speed up
+        setPlaybackSpeed(2);  // Temporary speed boost
         playerRef.current.playbackRate(2);
       }, 600);
-    });
-
-    videoContainer.addEventListener("touchend", (event) => {
-      if (event.target.closest(".vjs-control-bar")) return;
-
-      clearTimeout(holdTimer.current);
-      restorePlaybackSpeed();
 
       const currentTime = Date.now();
       const tapGap = currentTime - lastTap.current;
       lastTap.current = currentTime;
 
-      const touch = event.changedTouches[0];
-      const rect = videoContainer.getBoundingClientRect();
-      const tapX = touch.clientX - rect.left;
-      const videoWidth = rect.width;
-
       if (tapGap < 300) {
-        savePlaybackSpeed();
         if (tapX < videoWidth / 3) {
-          playerRef.current.currentTime(playerRef.current.currentTime() - 10);  // ⏪ Skip backward
+          playerRef.current.currentTime(playerRef.current.currentTime() - 10);  // ⏪ Skip back
         } else if (tapX > (2 * videoWidth) / 3) {
           playerRef.current.currentTime(playerRef.current.currentTime() + 10);  // ⏩ Skip forward
         } else {
-          playerRef.current.paused()
-            ? playerRef.current.play()
-            : playerRef.current.pause();
+          playerRef.current.paused() ? playerRef.current.play() : playerRef.current.pause();
         }
-        setTimeout(restorePlaybackSpeed, 100);
       }
+    });
+
+    videoContainer.addEventListener("touchend", () => {
+      clearTimeout(holdTimer.current);
+      playerRef.current.playbackRate(playbackSpeed);
     });
 
     return () => {
@@ -134,6 +109,15 @@ const VideoPlayer = () => {
     };
   }, [m3u8Url, isLive, playbackSpeed]);
 
+  // ✅ Handle Speed Change
+  const handleSpeedChange = (event) => {
+    const newSpeed = parseFloat(event.target.value);
+    setPlaybackSpeed(newSpeed);
+    if (playerRef.current) {
+      playerRef.current.playbackRate(newSpeed);
+    }
+  };
+
   return (
     <div>
       <h2>
@@ -141,6 +125,22 @@ const VideoPlayer = () => {
           ? "🔴 Live Class (nhi hua batch shuru)"
           : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
+
+      {/* ✅ Playback Speed Control */}
+      <div style={{ marginBottom: "15px" }}>
+        <label>Speed: </label>
+        <select
+          value={playbackSpeed}
+          onChange={handleSpeedChange}
+          style={{ padding: "5px", fontSize: "14px" }}
+        >
+          {[0.5, 1, 1.25, 1.5, 2, 2.5, 3].map((rate) => (
+            <option key={rate} value={rate}>
+              {rate}x
+            </option>
+          ))}
+        </select>
+      </div>
 
       <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
     </div>
