@@ -35,7 +35,7 @@ const VideoPlayer = () => {
       controlBar: {
         children: [
           "playToggle",            // ✅ Play/Pause  
-          "currentTimeDisplay",    // ✅ Built-in Timestamp  
+          "currentTimeDisplay",    // ✅ Timestamp (current time)  
           "timeDivider",           // ✅ Divider  
           "durationDisplay",       // ✅ Total duration  
           "playbackRateMenuButton",// ✅ Speed control  
