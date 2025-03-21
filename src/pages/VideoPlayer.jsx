@@ -33,7 +33,7 @@ const VideoPlayer = () => {
       controls: true,
       autoplay: false,
       fluid: true,
-      playbackRates: [0.5, 1, 1.25, 1.5, 2,],
+      playbackRates: [0.5, 1, 1.25, 1.5, 1.75, 2],
       html5: {
         vhs: {
           overrideNative: true,
@@ -43,12 +43,9 @@ const VideoPlayer = () => {
       controlBar: {
         children: [
           "playToggle",
-          "currentTimeDisplay",   // ✅ Current time element
-          "timeDivider",
-          "durationDisplay",      // ✅ Duration element
           "progressControl",
-          "playbackRateMenuButton",
           "volumePanel",
+          "playbackRateMenuButton",
           "qualitySelector",
           "fullscreenToggle"
         ],
@@ -69,35 +66,37 @@ const VideoPlayer = () => {
 
       const controlBar = playerRef.current.controlBar;
 
-      // ✅ Add currentTimeDisplay if missing
-      if (!controlBar.getChild("currentTimeDisplay")) {
-        controlBar.addChild("currentTimeDisplay", {}, 1);
+      // ✅ Add custom current time and duration display
+      const timeDisplay = document.createElement("div");
+      timeDisplay.className = "vjs-custom-time-display";
+      timeDisplay.style.position = "absolute";
+      timeDisplay.style.bottom = "5px";
+      timeDisplay.style.left = "10px";
+      timeDisplay.style.background = "rgba(0, 0, 0, 0.6)";  // Semi-transparent background
+      timeDisplay.style.color = "#fff";
+      timeDisplay.style.fontSize = "12px";
+      timeDisplay.style.padding = "4px 8px";
+      timeDisplay.style.borderRadius = "4px";
+      timeDisplay.style.zIndex = "10";
+      timeDisplay.textContent = "00:00 / 00:00";
+
+      // Append the time display near the progress bar
+      const progressControl = controlBar.getChild("progressControl")?.el();
+      if (progressControl) {
+        progressControl.appendChild(timeDisplay);
       }
 
-      // ✅ Add durationDisplay if missing
-      if (!controlBar.getChild("durationDisplay")) {
-        controlBar.addChild("durationDisplay", {}, 3);
-      }
-
-      // ✅ Listen for time updates and force manual rendering of current time
-      playerRef.current.on("timeupdate", () => {
-        const currentTime = playerRef.current.currentTime();
-        
-        // ✅ Force currentTimeDisplay to update
-        const currentTimeEl = controlBar.getChild("currentTimeDisplay")?.el();
-        if (currentTimeEl) {
-          const formattedTime = new Date(currentTime * 1000).toISOString().substring(11, 19);
-          currentTimeEl.textContent = formattedTime;  // Update the display manually
-        }
+      // ✅ Listen for metadata and time updates
+      playerRef.current.on("loadedmetadata", () => {
+        const duration = formatTime(playerRef.current.duration());
+        timeDisplay.textContent = `00:00 / ${duration}`;
       });
 
-      // ✅ Ensure visibility with a delay
-      setTimeout(() => {
-        controlBar.show();
-        controlBar.currentTimeDisplay?.show();
-        controlBar.timeDivider?.show();
-        controlBar.durationDisplay?.show();
-      }, 300);  // Slight delay for proper rendering
+      playerRef.current.on("timeupdate", () => {
+        const currentTime = formatTime(playerRef.current.currentTime());
+        const duration = formatTime(playerRef.current.duration());
+        timeDisplay.textContent = `${currentTime} / ${duration}`;
+      });
     });
 
     // ✅ Double Tap Gesture Controls
@@ -130,6 +129,14 @@ const VideoPlayer = () => {
       }
     };
   }, [m3u8Url, isLive]);
+
+  // ✅ Time formatting function
+  const formatTime = (timeInSeconds) => {
+    if (isNaN(timeInSeconds) || timeInSeconds < 0) return "00:00";
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = Math.floor(timeInSeconds % 60);
+    return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+  };
 
   return (
     <div>
