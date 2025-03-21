@@ -1,17 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import videojs from "video.js";
-import "video.js/dist/video-js.css";
-import "videojs-hls-quality-selector";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const VideoPlayer = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const videoRef = useRef(null);
-  const playerRef = useRef(null);
   const lastTap = useRef(0);
   const holdTimer = useRef(null);
 
+  const [isPlaying, setIsPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
 
   const { chapterName, lectureName, m3u8Url } = location.state || {};
@@ -26,110 +23,72 @@ const VideoPlayer = () => {
   }, [navigate]);
 
   useEffect(() => {
-    if (!videoRef.current) return;
+    const video = videoRef.current;
+    if (!video) return;
 
-    // ✅ Initialize Video.js player
-    playerRef.current = videojs(videoRef.current, {
-      controls: true,
-      autoplay: false,
-      fluid: true,
-      playbackRates: [0.5, 1, 1.25, 1.5, 2, 2.5, 3],
-    });
+    video.src = m3u8Url || defaultLiveUrl;
+    video.playbackRate = playbackSpeed;
 
-    const videoSource = isLive ? defaultLiveUrl : m3u8Url || defaultLiveUrl;
-
-    if (!videoSource) {
-      console.error("❌ No video source provided!");
-      return;
-    }
-
-    playerRef.current.src({
-      src: videoSource,
-      type: "application/x-mpegURL",
-    });
-
-    playerRef.current.ready(() => {
-      if (playerRef.current.hlsQualitySelector) {
-        playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
-      }
-
-      // ✅ Add Speed Button Properly Inside Player
-      const controlBar = playerRef.current.controlBar;
-
-      if (!controlBar.getChild("SpeedButton")) {
-        const speedButton = controlBar.addChild("button", {}, 10);
-        speedButton.addClass("vjs-speed-button");
-        speedButton.controlText(`${playbackSpeed}x`);
-
-        speedButton.on("click", () => {
-          const newSpeed = getNextSpeed(playbackSpeed);
-          setPlaybackSpeed(newSpeed);
-          playerRef.current.playbackRate(newSpeed);
-          speedButton.controlText(`${newSpeed}x`);
-        });
-
-        // ✅ Styling the button properly
-        const buttonElement = speedButton.el();
-        buttonElement.style.padding = "8px";
-        buttonElement.style.backgroundColor = "#007bff";
-        buttonElement.style.color = "#fff";
-        buttonElement.style.borderRadius = "4px";
-        buttonElement.style.cursor = "pointer";
-        buttonElement.style.margin = "0 10px";
-        buttonElement.innerText = `${playbackSpeed}x`; // Display current speed
-      }
-
-      playerRef.current.playbackRate(playbackSpeed);
-    });
-
-    // ✅ Gesture Controls
-    const videoContainer = videoRef.current.parentElement;
-
-    videoContainer.addEventListener("touchstart", (event) => {
-      if (event.target.closest(".vjs-control-bar")) return;
-
+    // ✅ Gesture controls
+    const handleTouchStart = (event) => {
       const touch = event.touches[0];
-      const rect = videoContainer.getBoundingClientRect();
+      const rect = video.getBoundingClientRect();
       const tapX = touch.clientX - rect.left;
       const videoWidth = rect.width;
 
-      // ✅ Hold gesture for temporary speed boost
+      // ✅ Hold gesture for temporary 2x speed boost
       holdTimer.current = setTimeout(() => {
-        playerRef.current.playbackRate(2);
+        video.playbackRate = 2;
       }, 600);
 
       const currentTime = Date.now();
       const tapGap = currentTime - lastTap.current;
-      lastTap.current = currentTime;
 
       if (tapGap < 300) {
         if (tapX < videoWidth / 3) {
-          playerRef.current.currentTime(playerRef.current.currentTime() - 10);  // ⏪ Skip back
+          video.currentTime -= 10;  // ⏪ Skip back
         } else if (tapX > (2 * videoWidth) / 3) {
-          playerRef.current.currentTime(playerRef.current.currentTime() + 10);  // ⏩ Skip forward
+          video.currentTime += 10;  // ⏩ Skip forward
         } else {
-          playerRef.current.paused() ? playerRef.current.play() : playerRef.current.pause();
+          togglePlay();
         }
       }
-    });
+      lastTap.current = currentTime;
+    };
 
-    videoContainer.addEventListener("touchend", () => {
+    const handleTouchEnd = () => {
       clearTimeout(holdTimer.current);
-      playerRef.current.playbackRate(playbackSpeed);
-    });
+      video.playbackRate = playbackSpeed;  // ✅ Restore normal speed
+    };
+
+    video.addEventListener("touchstart", handleTouchStart);
+    video.addEventListener("touchend", handleTouchEnd);
 
     return () => {
-      if (playerRef.current) {
-        playerRef.current.dispose();
-      }
+      video.removeEventListener("touchstart", handleTouchStart);
+      video.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [m3u8Url, isLive, playbackSpeed]);
+  }, [m3u8Url, playbackSpeed, defaultLiveUrl]);
 
-  // ✅ Get the next speed in the loop
-  const getNextSpeed = (currentSpeed) => {
+  // ✅ Toggle play/pause
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (video.paused) {
+      video.play();
+      setIsPlaying(true);
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  // ✅ Cycle through playback speeds
+  const cycleSpeed = () => {
     const speeds = [0.5, 1, 1.25, 1.5, 2, 2.5, 3];
-    const currentIndex = speeds.indexOf(currentSpeed);
-    return speeds[(currentIndex + 1) % speeds.length];  // Loop through speeds
+    const currentIndex = speeds.indexOf(playbackSpeed);
+    const newSpeed = speeds[(currentIndex + 1) % speeds.length];
+    setPlaybackSpeed(newSpeed);
+    videoRef.current.playbackRate = newSpeed;
   };
 
   return (
@@ -140,7 +99,67 @@ const VideoPlayer = () => {
           : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
 
-      <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
+      {/* ✅ Custom Video Player */}
+      <div
+        style={{
+          position: "relative",
+          maxWidth: "100%",
+          background: "#000",
+          overflow: "hidden",
+          borderRadius: "8px",
+        }}
+      >
+        {/* ✅ Video */}
+        <video
+          ref={videoRef}
+          style={{ width: "100%", display: "block" }}
+          playsInline
+        />
+
+        {/* ✅ Custom Controls */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "10px",
+            left: "10px",
+            right: "10px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            zIndex: 10,
+          }}
+        >
+          {/* ✅ Play/Pause Button */}
+          <button
+            onClick={togglePlay}
+            style={{
+              background: "rgba(0, 0, 0, 0.7)",
+              color: "#fff",
+              border: "none",
+              padding: "10px",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            {isPlaying ? "❚❚" : "▶️"}
+          </button>
+
+          {/* ✅ Speed Control Button */}
+          <button
+            onClick={cycleSpeed}
+            style={{
+              background: "rgba(0, 0, 0, 0.7)",
+              color: "#fff",
+              border: "none",
+              padding: "10px",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            {playbackSpeed}x
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
