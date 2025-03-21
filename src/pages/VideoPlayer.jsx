@@ -54,14 +54,14 @@ const VideoPlayer = () => {
         playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
       }
 
+      // ✅ Apply saved playback speed
+      playerRef.current.playbackRate(playbackSpeed);
+
       // ✅ Add Playback Speed Menu
       const controlBar = playerRef.current.controlBar;
       if (controlBar && !controlBar.getChild("PlaybackRateMenuButton")) {
         controlBar.addChild("PlaybackRateMenuButton", {}, 8);
       }
-
-      // ✅ Apply stored playback speed on player ready
-      playerRef.current.playbackRate(playbackSpeed);
     });
 
     // ✅ Store the current playback speed
@@ -113,17 +113,17 @@ const VideoPlayer = () => {
       const videoWidth = rect.width;
 
       if (tapGap < 300) {
-        savePlaybackSpeed();  // ✅ Save speed before gesture action
+        savePlaybackSpeed();
         if (tapX < videoWidth / 3) {
-          playerRef.current.currentTime(playerRef.current.currentTime() - 10);
+          playerRef.current.currentTime(playerRef.current.currentTime() - 10);  // ⏪ Skip backward
         } else if (tapX > (2 * videoWidth) / 3) {
-          playerRef.current.currentTime(playerRef.current.currentTime() + 10);
+          playerRef.current.currentTime(playerRef.current.currentTime() + 10);  // ⏩ Skip forward
         } else {
           playerRef.current.paused()
             ? playerRef.current.play()
             : playerRef.current.pause();
         }
-        setTimeout(restorePlaybackSpeed, 100);  // ✅ Restore speed after gesture
+        setTimeout(restorePlaybackSpeed, 100);
       }
     });
 
