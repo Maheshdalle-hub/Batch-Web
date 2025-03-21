@@ -53,11 +53,11 @@ const VideoPlayer = () => {
         playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
       }
 
-      // ✅ Add Speed Button inside Player (Fixed)
+      // ✅ Add Speed Button Properly Inside Player
       const controlBar = playerRef.current.controlBar;
 
-      if (controlBar && !controlBar.getChild("SpeedButton")) {
-        const speedButton = controlBar.addChild("button", {}, 8);
+      if (!controlBar.getChild("SpeedButton")) {
+        const speedButton = controlBar.addChild("button", {}, 10);
         speedButton.addClass("vjs-speed-button");
         speedButton.controlText(`${playbackSpeed}x`);
 
@@ -69,19 +69,20 @@ const VideoPlayer = () => {
         });
 
         // ✅ Styling the button properly
-        speedButton.el().style.padding = "8px";
-        speedButton.el().style.backgroundColor = "#007bff";
-        speedButton.el().style.color = "#fff";
-        speedButton.el().style.borderRadius = "4px";
-        speedButton.el().style.cursor = "pointer";
-        speedButton.el().style.margin = "0 10px";
+        const buttonElement = speedButton.el();
+        buttonElement.style.padding = "8px";
+        buttonElement.style.backgroundColor = "#007bff";
+        buttonElement.style.color = "#fff";
+        buttonElement.style.borderRadius = "4px";
+        buttonElement.style.cursor = "pointer";
+        buttonElement.style.margin = "0 10px";
+        buttonElement.innerText = `${playbackSpeed}x`; // Display current speed
       }
 
-      // ✅ Apply saved playback speed
       playerRef.current.playbackRate(playbackSpeed);
     });
 
-    // ✅ Gesture controls
+    // ✅ Gesture Controls
     const videoContainer = videoRef.current.parentElement;
 
     videoContainer.addEventListener("touchstart", (event) => {
