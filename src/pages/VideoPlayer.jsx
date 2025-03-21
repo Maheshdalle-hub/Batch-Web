@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
+import "videojs-contrib-quality-levels";
 import "videojs-hls-quality-selector";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -32,6 +33,12 @@ const VideoPlayer = () => {
       autoplay: false,
       fluid: true,
       playbackRates: [0.5, 1, 1.5, 2, 2.5, 3],
+      html5: {
+        vhs: {
+          overrideNative: true, // ✅ Enable custom HLS handling
+          enableLowInitialPlaylist: true, // ✅ Faster quality switching
+        }
+      },
       controlBar: {
         children: [
           "playToggle",             // ✅ Play/Pause  
@@ -51,15 +58,10 @@ const VideoPlayer = () => {
       type: "application/x-mpegURL",
     });
 
-    // ✅ Force timestamp rendering using Video.js tech layer
+    // ✅ Force timestamp rendering with event listeners
     playerRef.current.ready(() => {
-      if (playerRef.current.hlsQualitySelector) {
-        playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
-      }
-
       const controlBar = playerRef.current.controlBar;
 
-      // ✅ Ensure timestamp & duration components are rendered
       if (!controlBar.getChild("currentTimeDisplay")) {
         controlBar.addChild("currentTimeDisplay", {}, 1);
       }
@@ -70,13 +72,25 @@ const VideoPlayer = () => {
         controlBar.addChild("durationDisplay", {}, 3);
       }
 
-      // ✅ Force refresh to guarantee visibility
       playerRef.current.tech_.on("loadedmetadata", () => {
         playerRef.current.controlBar.show();
         playerRef.current.controlBar.currentTimeDisplay.show();
         playerRef.current.controlBar.timeDivider.show();
         playerRef.current.controlBar.durationDisplay.show();
       });
+
+      // ✅ Fast quality switching
+      const qualityLevels = playerRef.current.qualityLevels();
+      qualityLevels.on("change", () => {
+        const currentLevel = qualityLevels[qualityLevels.selectedIndex];
+        console.log(`Switched to quality: ${currentLevel.height}p`);
+      });
+
+      if (playerRef.current.hlsQualitySelector) {
+        playerRef.current.hlsQualitySelector({
+          displayCurrentQuality: true,
+        });
+      }
     });
 
     // ✅ Double Tap Gesture Controls
