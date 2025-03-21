@@ -144,7 +144,7 @@ const VideoPlayer = () => {
             value={playbackRate}
             onChange={(e) => setPlaybackRate(parseFloat(e.target.value))}
           >
-            {[0.5, 1, 1.5, 2, 2.5, 3].map((rate) => (
+            {[0.5, 1, 1.25, 1.5, 2, 2.5].map((rate) => (
               <option key={rate} value={rate}>
                 {rate}x
               </option>
