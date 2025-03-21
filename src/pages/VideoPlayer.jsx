@@ -14,7 +14,7 @@ const VideoPlayer = () => {
   const holdTimer = useRef(null);
 
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
-  const [volume, setVolume] = useState(0.5); // Default volume
+  const [volume, setVolume] = useState(0.5); 
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [qualityLevels, setQualityLevels] = useState([]);
   const [selectedQuality, setSelectedQuality] = useState("auto");
@@ -35,7 +35,6 @@ const VideoPlayer = () => {
 
     const videoElement = videoRef.current;
 
-    // ✅ Initialize HLS.js for M3U8 support
     if (Hls.isSupported()) {
       const hls = new Hls();
       hls.loadSource(m3u8Url || defaultLiveUrl);
@@ -56,9 +55,8 @@ const VideoPlayer = () => {
       videoElement.src = m3u8Url || defaultLiveUrl;
     }
 
-    // ✅ Initialize Video.js
     playerRef.current = videojs(videoElement, {
-      controls: true,
+      controls: false,   // 🔥 No HTML5 buttons
       autoplay: false,
       fluid: true,
       playbackRates: [0.5, 1, 1.25, 1.5, 2, 2.5],
@@ -67,25 +65,20 @@ const VideoPlayer = () => {
     const player = playerRef.current;
 
     player.ready(() => {
-      // ✅ Quality selector
       if (player.hlsQualitySelector) {
         player.hlsQualitySelector({ displayCurrentQuality: true });
       }
 
-      // ✅ Apply playback speed
       player.playbackRate(playbackSpeed);
 
-      // ✅ Gesture controls
       const videoContainer = videoElement.parentElement;
 
-      // ✅ Handle gestures
       videoContainer.addEventListener("touchstart", (event) => {
         const touch = event.touches[0];
         const rect = videoContainer.getBoundingClientRect();
         const tapX = touch.clientX - rect.left;
         const videoWidth = rect.width;
 
-        // ✅ Swipe gestures for volume control
         if (tapX > videoWidth * 0.75) {
           player.volume(Math.min(1, player.volume() + 0.1));
           setVolume(player.volume());
@@ -95,7 +88,7 @@ const VideoPlayer = () => {
         }
 
         holdTimer.current = setTimeout(() => {
-          player.playbackRate(2);  // ✅ 2x speed boost
+          player.playbackRate(2);
         }, 600);
 
         const currentTime = Date.now();
@@ -103,9 +96,9 @@ const VideoPlayer = () => {
 
         if (tapGap < 300) {
           if (tapX < videoWidth / 3) {
-            player.currentTime(player.currentTime() - 10);  // ⏪ Skip back 10s
+            player.currentTime(player.currentTime() - 10);
           } else if (tapX > (2 * videoWidth) / 3) {
-            player.currentTime(player.currentTime() + 10);  // ⏩ Skip forward 10s
+            player.currentTime(player.currentTime() + 10);
           } else {
             player.paused() ? player.play() : player.pause();
           }
@@ -116,7 +109,7 @@ const VideoPlayer = () => {
 
       videoContainer.addEventListener("touchend", () => {
         clearTimeout(holdTimer.current);
-        player.playbackRate(playbackSpeed);  // ✅ Restore original speed
+        player.playbackRate(playbackSpeed);
       });
     });
 
@@ -127,7 +120,6 @@ const VideoPlayer = () => {
     };
   }, [m3u8Url, isLive, playbackSpeed]);
 
-  // ✅ Toggle Fullscreen
   const toggleFullscreen = () => {
     if (playerRef.current) {
       const player = playerRef.current;
@@ -142,7 +134,6 @@ const VideoPlayer = () => {
     }
   };
 
-  // ✅ Format time to hh:mm:ss
   const formatTime = (time) => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
@@ -158,39 +149,18 @@ const VideoPlayer = () => {
           : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
 
-      {/* ✅ Advanced Video.js Player */}
-      <div
-        style={{
-          position: "relative",
-          maxWidth: "100%",
-          background: "#000",
-          overflow: "hidden",
-          borderRadius: "8px",
-        }}
-      >
-        {/* ✅ Video */}
+      {/* ✅ Advanced Player */}
+      <div>
+        {/* ✅ Video element with no HTML5 controls */}
         <video
           ref={videoRef}
           className="video-js vjs-default-skin"
-          controls
           preload="auto"
           style={{ width: "100%", height: "100%" }}
         />
 
         {/* ✅ Custom Controls */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "10px",
-            left: "10px",
-            right: "10px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            zIndex: 10,
-            color: "#fff",
-          }}
-        >
+        <div>
           <div>
             <span>{formatTime(playerRef.current?.currentTime() || 0)} / </span>
             <span>{formatTime(playerRef.current?.duration() || 0)}</span>
@@ -199,7 +169,6 @@ const VideoPlayer = () => {
           <select
             value={playbackSpeed}
             onChange={(e) => setPlaybackSpeed(parseFloat(e.target.value))}
-            style={{ margin: "0 10px" }}
           >
             {[0.5, 1, 1.25, 1.5, 2, 2.5].map((speed) => (
               <option key={speed} value={speed}>
@@ -211,7 +180,6 @@ const VideoPlayer = () => {
           <select
             value={selectedQuality}
             onChange={(e) => setSelectedQuality(e.target.value)}
-            style={{ margin: "0 10px" }}
           >
             {qualityLevels.map((level, index) => (
               <option key={index} value={level.label}>
