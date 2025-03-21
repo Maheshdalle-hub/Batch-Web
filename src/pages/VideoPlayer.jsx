@@ -13,8 +13,6 @@ const VideoPlayer = () => {
   const holdTimer = useRef(null);
 
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
-  const [qualityLevels, setQualityLevels] = useState([]);
-  const [selectedQuality, setSelectedQuality] = useState("auto");
 
   const { chapterName, lectureName, m3u8Url } = location.state || {};
   const isLive = location.pathname.includes("/video/live");
@@ -35,7 +33,7 @@ const VideoPlayer = () => {
       controls: true,
       autoplay: false,
       fluid: true,
-      playbackRates: [0.5, 1, 1.5, 2, 2.5, 3],
+      playbackRates: [0.5, 1, 1.25, 1.5, 2, 2.5, 3],
     });
 
     const videoSource = isLive ? defaultLiveUrl : m3u8Url || defaultLiveUrl;
@@ -58,10 +56,18 @@ const VideoPlayer = () => {
       // ✅ Apply saved playback speed
       playerRef.current.playbackRate(playbackSpeed);
 
-      // ✅ Add Playback Speed Menu
+      // ✅ Add Speed Button inside Player
       const controlBar = playerRef.current.controlBar;
-      if (controlBar && !controlBar.getChild("PlaybackRateMenuButton")) {
-        controlBar.addChild("PlaybackRateMenuButton", {}, 8);
+      if (controlBar && !controlBar.getChild("SpeedButton")) {
+        const speedButton = controlBar.addChild("button", {}, 8);
+        speedButton.addClass("vjs-speed-button");
+        speedButton.controlText(`${playbackSpeed}x`);
+        speedButton.on("click", () => {
+          const newSpeed = getNextSpeed(playbackSpeed);
+          setPlaybackSpeed(newSpeed);
+          playerRef.current.playbackRate(newSpeed);
+          speedButton.controlText(`${newSpeed}x`);
+        });
       }
     });
 
@@ -109,13 +115,11 @@ const VideoPlayer = () => {
     };
   }, [m3u8Url, isLive, playbackSpeed]);
 
-  // ✅ Handle Speed Change
-  const handleSpeedChange = (event) => {
-    const newSpeed = parseFloat(event.target.value);
-    setPlaybackSpeed(newSpeed);
-    if (playerRef.current) {
-      playerRef.current.playbackRate(newSpeed);
-    }
+  // ✅ Get the next speed in the loop
+  const getNextSpeed = (currentSpeed) => {
+    const speeds = [0.5, 1, 1.25, 1.5, 2, 2.5, 3];
+    const currentIndex = speeds.indexOf(currentSpeed);
+    return speeds[(currentIndex + 1) % speeds.length];  // Loop through speeds
   };
 
   return (
@@ -125,22 +129,6 @@ const VideoPlayer = () => {
           ? "🔴 Live Class (nhi hua batch shuru)"
           : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
-
-      {/* ✅ Playback Speed Control */}
-      <div style={{ marginBottom: "15px" }}>
-        <label>Speed: </label>
-        <select
-          value={playbackSpeed}
-          onChange={handleSpeedChange}
-          style={{ padding: "5px", fontSize: "14px" }}
-        >
-          {[0.5, 1, 1.25, 1.5, 2, 2.5, 3].map((rate) => (
-            <option key={rate} value={rate}>
-              {rate}x
-            </option>
-          ))}
-        </select>
-      </div>
 
       <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
     </div>
