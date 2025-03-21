@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import Plyr from "plyr";  // ✅ Import Plyr
-import "plyr/dist/plyr.css";  // ✅ Import Plyr CSS
+import Plyr from "plyr";  
+import "plyr/dist/plyr.css";  
 import { useLocation, useNavigate } from "react-router-dom";
 
 const VideoPlayer = () => {
@@ -27,12 +27,12 @@ const VideoPlayer = () => {
 
     const player = new Plyr(videoRef.current, {
       controls: [
-        "play", "progress", "current-time", "duration", "mute", "volume", 
+        "play", "progress", "current-time", "duration", "mute", "volume",
         "captions", "settings", "fullscreen", "airplay"
       ],
       settings: ["speed", "quality", "loop"],
       speed: { selected: 1, options: [0.5, 1, 1.5, 2, 2.5] },
-      quality: { default: 240, options: [240, 360, 720, 1080] },
+      quality: { default: 1080, options: [240, 360, 720, 1080] },
     });
 
     player.source = {
@@ -46,7 +46,26 @@ const VideoPlayer = () => {
       ],
     };
 
-    // ✅ Gesture Controls (double tap and skip)
+    // ✅ Prevent black screen by reloading the source after skipping
+    const reloadVideo = () => {
+      const currentTime = player.currentTime;
+      const speed = player.speed;
+
+      player.source = {
+        type: "video",
+        title: lectureName || "Unknown Lecture",
+        sources: [{ src: videoSource, type: "application/x-mpegURL" }],
+      };
+
+      // Restore playback position and speed
+      player.once("ready", () => {
+        player.currentTime = currentTime;
+        player.speed = speed;
+        player.play();
+      });
+    };
+
+    // ✅ Gesture Controls (double tap with reload)
     const videoContainer = videoRef.current.parentElement;
 
     videoContainer.addEventListener("touchend", (event) => {
@@ -62,8 +81,10 @@ const VideoPlayer = () => {
       if (tapGap < 300) {
         if (tapX < videoWidth / 3) {
           player.rewind(10);
+          reloadVideo();  // ✅ Reload after backward skip
         } else if (tapX > (2 * videoWidth) / 3) {
           player.forward(10);
+          reloadVideo();  // ✅ Reload after forward skip
         } else {
           player.togglePlay();
         }
