@@ -53,22 +53,32 @@ const VideoPlayer = () => {
         playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
       }
 
-      // ✅ Apply saved playback speed
-      playerRef.current.playbackRate(playbackSpeed);
-
-      // ✅ Add Speed Button inside Player
+      // ✅ Add Speed Button inside Player (Fixed)
       const controlBar = playerRef.current.controlBar;
+
       if (controlBar && !controlBar.getChild("SpeedButton")) {
         const speedButton = controlBar.addChild("button", {}, 8);
         speedButton.addClass("vjs-speed-button");
         speedButton.controlText(`${playbackSpeed}x`);
+
         speedButton.on("click", () => {
           const newSpeed = getNextSpeed(playbackSpeed);
           setPlaybackSpeed(newSpeed);
           playerRef.current.playbackRate(newSpeed);
           speedButton.controlText(`${newSpeed}x`);
         });
+
+        // ✅ Styling the button properly
+        speedButton.el().style.padding = "8px";
+        speedButton.el().style.backgroundColor = "#007bff";
+        speedButton.el().style.color = "#fff";
+        speedButton.el().style.borderRadius = "4px";
+        speedButton.el().style.cursor = "pointer";
+        speedButton.el().style.margin = "0 10px";
       }
+
+      // ✅ Apply saved playback speed
+      playerRef.current.playbackRate(playbackSpeed);
     });
 
     // ✅ Gesture controls
@@ -82,9 +92,8 @@ const VideoPlayer = () => {
       const tapX = touch.clientX - rect.left;
       const videoWidth = rect.width;
 
-      // ✅ Hold to temporarily speed up
+      // ✅ Hold gesture for temporary speed boost
       holdTimer.current = setTimeout(() => {
-        setPlaybackSpeed(2);  // Temporary speed boost
         playerRef.current.playbackRate(2);
       }, 600);
 
