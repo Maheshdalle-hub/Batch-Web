@@ -10,7 +10,7 @@ const VideoPlayer = () => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const lastTap = useRef(0);
-  const holdTimer = useRef(null);
+
   const [playbackSpeed, setPlaybackSpeed] = useState(1);  // ✅ Persistent playback speed state
 
   const { chapterName, lectureName, m3u8Url } = location.state || {};
@@ -69,37 +69,11 @@ const VideoPlayer = () => {
       }
     };
 
-    // ✅ Restore the saved playback speed
-    const restorePlaybackSpeed = () => {
-      if (playerRef.current) {
-        playerRef.current.playbackRate(playbackSpeed);
-      }
-    };
-
     // ✅ Gesture controls
     const videoContainer = videoRef.current.parentElement;
 
-    videoContainer.addEventListener("touchstart", (event) => {
-      if (event.target.closest(".vjs-control-bar")) return;
-
-      const touch = event.touches[0];
-      const rect = videoContainer.getBoundingClientRect();
-      const tapY = touch.clientY - rect.top;
-      const videoHeight = rect.height;
-
-      if (tapY > videoHeight - 50) return;
-
-      holdTimer.current = setTimeout(() => {
-        setPlaybackSpeed(2);  // ✅ Temporarily speed up
-        playerRef.current.playbackRate(2);
-      }, 600);
-    });
-
     videoContainer.addEventListener("touchend", (event) => {
       if (event.target.closest(".vjs-control-bar")) return;
-
-      clearTimeout(holdTimer.current);
-      restorePlaybackSpeed();
 
       const currentTime = Date.now();
       const tapGap = currentTime - lastTap.current;
@@ -113,13 +87,12 @@ const VideoPlayer = () => {
       if (tapGap < 300) {
         savePlaybackSpeed();  // ✅ Save speed before gesture action
         if (tapX < videoWidth / 3) {
-          playerRef.current.currentTime(playerRef.current.currentTime() - 10);
+          playerRef.current.currentTime(playerRef.current.currentTime() - 10);  // ⏪ Skip back
         } else if (tapX > (2 * videoWidth) / 3) {
-          playerRef.current.currentTime(playerRef.current.currentTime() + 10);
+          playerRef.current.currentTime(playerRef.current.currentTime() + 10);  // ⏩ Skip forward
         } else {
           playerRef.current.paused() ? playerRef.current.play() : playerRef.current.pause();
         }
-        setTimeout(restorePlaybackSpeed, 100);  // ✅ Restore speed after gesture
       }
     });
 
@@ -135,7 +108,7 @@ const VideoPlayer = () => {
       <h2>
         {isLive ? "🔴 Live Class (nhi hua batch shuru)" : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
-      
+
       {/* ✅ Fullscreen toggle button */}
       <button
         onClick={() => {
