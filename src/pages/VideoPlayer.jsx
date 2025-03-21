@@ -11,7 +11,7 @@ const VideoPlayer = () => {
   const playerRef = useRef(null);
   const lastTap = useRef(0);
 
-  const [playbackSpeed, setPlaybackSpeed] = useState(1);  
+  const [currentTime, setCurrentTime] = useState("0:00");
 
   const { chapterName, lectureName, m3u8Url } = location.state || {};
   const isLive = location.pathname.includes("/video/live");
@@ -33,7 +33,7 @@ const VideoPlayer = () => {
       controls: true,
       autoplay: false,
       fluid: true,
-      playbackRates: [0.5, 1, 1.25, 1.5, 2,],
+      playbackRates: [0.5, 1, 1.25, 1.5, 2],
       controlBar: {
         children: [
           "playToggle", 
@@ -43,6 +43,7 @@ const VideoPlayer = () => {
           "durationDisplay", 
           "progressControl", 
           "fullscreenToggle",
+          "playbackRateMenuButton"  
         ],
       },
     });
@@ -57,7 +58,12 @@ const VideoPlayer = () => {
         playerRef.current.hlsQualitySelector({ displayCurrentQuality: true });
       }
 
-      playerRef.current.playbackRate(playbackSpeed);
+      playerRef.current.on("timeupdate", () => {
+        const time = playerRef.current.currentTime();
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        setCurrentTime(`${minutes}:${seconds < 10 ? "0" : ""}${seconds}`);
+      });
     });
 
     // ✅ Gesture Controls (Double Tap Skip)
@@ -89,13 +95,16 @@ const VideoPlayer = () => {
         playerRef.current.dispose();
       }
     };
-  }, [m3u8Url, isLive, playbackSpeed]);
+  }, [m3u8Url, isLive]);
 
   return (
     <div>
       <h2>
         {isLive ? "🔴 Live Class(nhi hua batch shuru)" : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
+
+      {/* ✅ Timestamp with only time */}
+      <p>{currentTime}</p>
 
       <video ref={videoRef} className="video-js vjs-default-skin custom-video-player" />
     </div>
