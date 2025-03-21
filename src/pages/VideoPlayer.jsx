@@ -45,8 +45,8 @@ const VideoPlayer = () => {
           "playToggle",
           "currentTimeDisplay",
           "timeDivider",
-          "durationDisplay",
-          "progressControl", // Add progressControl to ensure the timeline is visible
+          "durationDisplay", // Ensure this is included
+          "progressControl",
           "playbackRateMenuButton",
           "volumePanel",
           "qualitySelector",
@@ -69,16 +69,18 @@ const VideoPlayer = () => {
 
       const controlBar = playerRef.current.controlBar;
 
-      // ✅ Ensure the time displays are properly initialized
-      if (!controlBar.getChild("currentTimeDisplay")) {
-        controlBar.addChild("currentTimeDisplay", {}, 1);
-      }
-      if (!controlBar.getChild("timeDivider")) {
-        controlBar.addChild("timeDivider", {}, 2);
-      }
+      // ✅ Ensure the durationDisplay is properly initialized
       if (!controlBar.getChild("durationDisplay")) {
         controlBar.addChild("durationDisplay", {}, 3);
       }
+
+      // ✅ Listen for the "loadedmetadata" event to ensure duration is available
+      playerRef.current.on("loadedmetadata", () => {
+        const duration = playerRef.current.duration();
+        if (duration && !isNaN(duration)) {
+          controlBar.durationDisplay?.updateContent(duration); // Update duration display
+        }
+      });
 
       // ✅ Delay to ensure visibility
       setTimeout(() => {
