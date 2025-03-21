@@ -82,6 +82,14 @@ const VideoPlayer = () => {
         }
       });
 
+      // ✅ Listen for the "durationchange" event to handle dynamic duration updates
+      playerRef.current.on("durationchange", () => {
+        const duration = playerRef.current.duration();
+        if (duration && !isNaN(duration)) {
+          controlBar.durationDisplay?.updateContent(duration); // Update duration display
+        }
+      });
+
       // ✅ Delay to ensure visibility
       setTimeout(() => {
         controlBar.show();
