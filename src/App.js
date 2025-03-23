@@ -5,23 +5,28 @@ import Lectures from "./pages/Lectures";
 import VideoPlayer from "./pages/VideoPlayer";
 import ChapterLectures from "./pages/ChapterLectures";
 import Login from "./pages/Login";
-import Verify from "./pages/Verify"; // ✅ Keep this
+import Verify from "./pages/Verify"; 
 import ProtectedRoute from "./components/ProtectedRoute";
+import { Analytics } from "@vercel/analytics/react";  // ✅ Import Vercel Analytics
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Homepage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/verify/:token" element={<Verify />} />  {/* ✅ Corrected this route */}
+    <>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/verify/:token" element={<Verify />} />
 
-      {/* ✅ Protected Routes */}
-      <Route path="/subjects" element={<ProtectedRoute><Subjects /></ProtectedRoute>} />
-      <Route path="/lectures/:subject" element={<ProtectedRoute><Lectures /></ProtectedRoute>} />
-      <Route path="/chapter-lectures/:subject/:chapterIndex" element={<ProtectedRoute><ChapterLectures /></ProtectedRoute>} />
-      <Route path="/video/:subject/:chapterIndex" element={<ProtectedRoute><VideoPlayer /></ProtectedRoute>} />
-      <Route path="/video/live" element={<ProtectedRoute><VideoPlayer /></ProtectedRoute>} />  
-    </Routes>
+        {/* ✅ Protected Routes */}
+        <Route path="/subjects" element={<ProtectedRoute><Subjects /></ProtectedRoute>} />
+        <Route path="/lectures/:subject" element={<ProtectedRoute><Lectures /></ProtectedRoute>} />
+        <Route path="/chapter-lectures/:subject/:chapterIndex" element={<ProtectedRoute><ChapterLectures /></ProtectedRoute>} />
+        <Route path="/video/:subject/:chapterIndex" element={<ProtectedRoute><VideoPlayer /></ProtectedRoute>} />
+        <Route path="/video/live" element={<ProtectedRoute><VideoPlayer /></ProtectedRoute>} />  
+      </Routes>
+
+      <Analytics />  {/* ✅ Add Analytics here */}
+    </>
   );
 }
 
