@@ -10,28 +10,28 @@ const Login = () => {
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const isVerified = localStorage.getItem("isVerified") === "true";
     const expiresAt = localStorage.getItem("verificationExpires");
 
-    if (isLoggedIn && expiresAt && Date.now() < Number(expiresAt)) {
-      navigate("/subjects");  // ✅ If still valid, go to subjects directly
+    // ✅ Keep the user logged in if they are verified and not expired
+    if ((isLoggedIn && isVerified) && expiresAt && Date.now() < Number(expiresAt)) {
+      navigate("/subjects");  // ✅ Go directly to subjects
       return;
     }
 
-    // ✅ If expired or not verified, proceed with normal verification process
     const initializeLogin = async () => {
-      // ✅ Get existing link if available
       let storedLink = localStorage.getItem("shortenerLink");
       let userToken = localStorage.getItem("userToken");
 
       if (!storedLink || !userToken) {
-        // ✅ If no stored link or token, generate new one
+        // ✅ Generate new shortener link if not stored
         const newLink = await generateShortenedLink();
         if (newLink) {
           setShortenerLink(newLink);
           localStorage.setItem("shortenerLink", newLink);
         }
       } else {
-        // ✅ If stored link exists, reuse it
+        // ✅ Use existing shortener link
         setShortenerLink(storedLink);
       }
 
@@ -39,6 +39,7 @@ const Login = () => {
       const isCompleted = checkShortenerCompletion();
       if (isCompleted) {
         localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("isVerified", "true");  // ✅ Add verification flag
         localStorage.setItem("verificationExpires", Date.now() + 2 * 24 * 60 * 60 * 1000);
         navigate("/subjects");
       }
@@ -55,6 +56,7 @@ const Login = () => {
       const isCompleted = checkShortenerCompletion();
       if (isCompleted) {
         localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("isVerified", "true");  // ✅ Add verification flag
         localStorage.setItem("verificationExpires", Date.now() + 2 * 24 * 60 * 60 * 1000);
         clearInterval(interval);
         navigate("/subjects");
