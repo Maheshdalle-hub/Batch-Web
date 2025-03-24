@@ -6,9 +6,9 @@ import "./styles/global.css";
 import { Analytics } from "@vercel/analytics/react";  // ✅ Import Vercel Analytics
 
 ReactDOM.render(
-      <Analytics /> 
   <BrowserRouter>
     <App />
   </BrowserRouter>,
   document.getElementById("root")
-);
+)
+      <Analytics />  ;
