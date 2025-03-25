@@ -8,6 +8,19 @@ const Verify = () => {
   useEffect(() => {
     if (!token) return;
 
+    console.log("🔑 Token received:", token);
+
+    // ✅ Clear expired verification data
+    const expiresAt = localStorage.getItem("verificationExpires");
+
+    if (expiresAt && Date.now() > Number(expiresAt)) {
+      console.log("⚠️ Expired session. Clearing old data.");
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("isVerified");
+      localStorage.removeItem("verificationToken");
+      localStorage.removeItem("verificationExpires");
+    }
+
     // ✅ Retrieve the list of used tokens
     let usedTokens = JSON.parse(localStorage.getItem("usedTokens")) || [];
 
@@ -18,7 +31,7 @@ const Verify = () => {
       return;
     }
 
-    // ✅ Add the token to the used list
+    // ✅ Add the new token to the used list
     usedTokens.push(token);
     localStorage.setItem("usedTokens", JSON.stringify(usedTokens));
 
@@ -30,7 +43,12 @@ const Verify = () => {
     localStorage.setItem("verificationExpires", expirationTime);
 
     console.log("✅ Verification successful. Redirecting...");
-    navigate("/subjects");  // ✅ Redirect to content
+
+    // ✅ Add 1-second delay to prevent caching issues
+    setTimeout(() => {
+      navigate("/subjects");
+    }, 1000);  // ✅ Smooth navigation with delay
+
   }, [token, navigate]);
 
   return <p>✅ Verification successful! Redirecting...</p>;
