@@ -7,32 +7,37 @@ const Verify = () => {
 
   useEffect(() => {
     if (!token) {
+      console.log("❌ No token found. Redirecting to login...");
       navigate("/login");
       return;
     }
 
-    // ✅ Get the current token and expiration
     const storedToken = localStorage.getItem("verificationToken");
     const expiresAt = localStorage.getItem("verificationExpires");
 
-    // 🚫 Prevent reuse of old tokens
+    // ✅ Validate token and expiration
     if (!storedToken || token !== storedToken || Date.now() > Number(expiresAt)) {
-      console.log("❌ Invalid or expired token. Redirecting to login...");
+      console.log("❌ Invalid or expired token. Redirecting...");
+      
+      // ✅ Clear expired session
       localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("isVerified");
       localStorage.removeItem("verificationToken");
       localStorage.removeItem("verificationExpires");
+      localStorage.removeItem("shortenerLink");  // ✅ Clear old shortener link
+      
       navigate("/login");
       return;
     }
 
-    // ✅ Successful verification (first-time use)
+    // ✅ Successful verification
     console.log("✅ Verification successful!");
-    localStorage.setItem("isLoggedIn", "true");
-    
-    // ✅ Remove token after successful verification (one-time use)
-    localStorage.removeItem("verificationToken");
 
-    navigate("/subjects");  // ✅ Redirect after successful verification
+    // ✅ Mark user as logged in
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("isVerified", "true");
+
+    navigate("/subjects");  // ✅ Redirect to content
   }, [token, navigate]);
 
   return <p>✅ Verification successful! Redirecting...</p>;
