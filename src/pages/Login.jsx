@@ -19,29 +19,17 @@ const Login = () => {
       return;
     }
 
+    // ✅ Generate a new token for each verification
+    const newToken = Math.random().toString(36).substr(2, 9);
+    localStorage.setItem("verificationToken", newToken);  // ✅ Store new token
+    localStorage.setItem("verificationExpires", Date.now() + 2 * 24 * 60 * 60 * 1000);  // 2 days expiry
+
     const initializeLogin = async () => {
-      let storedLink = localStorage.getItem("shortenerLink");
-      let userToken = localStorage.getItem("userToken");
-
-      if (!storedLink || !userToken) {
-        // ✅ Generate new shortener link if not stored
-        const newLink = await generateShortenedLink();
-        if (newLink) {
-          setShortenerLink(newLink);
-          localStorage.setItem("shortenerLink", newLink);
-        }
-      } else {
-        // ✅ Use existing shortener link
-        setShortenerLink(storedLink);
-      }
-
-      // ✅ Check if shortener is already completed
-      const isCompleted = checkShortenerCompletion();
-      if (isCompleted) {
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("isVerified", "true");  // ✅ Add verification flag
-        localStorage.setItem("verificationExpires", Date.now() + 2 * 24 * 60 * 60 * 1000);
-        navigate("/subjects");
+      // ✅ Generate a new shortened link with the token
+      const newLink = await generateShortenedLink(`/verify/${newToken}`);
+      if (newLink) {
+        setShortenerLink(newLink);
+        localStorage.setItem("shortenerLink", newLink);
       }
 
       setLoading(false);
@@ -56,8 +44,7 @@ const Login = () => {
       const isCompleted = checkShortenerCompletion();
       if (isCompleted) {
         localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("isVerified", "true");  // ✅ Add verification flag
-        localStorage.setItem("verificationExpires", Date.now() + 2 * 24 * 60 * 60 * 1000);
+        localStorage.setItem("isVerified", "true");
         clearInterval(interval);
         navigate("/subjects");
       }
