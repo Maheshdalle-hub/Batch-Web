@@ -25,19 +25,22 @@ const Verify = () => {
       localStorage.removeItem("verificationToken");
       localStorage.removeItem("verificationExpires");
       localStorage.removeItem("shortenerLink");  // ✅ Clear old shortener link
-      
+
       navigate("/login");
       return;
     }
 
-    // ✅ Successful verification
-    console.log("✅ Verification successful!");
-
-    // ✅ Mark user as logged in
+    // ✅ Store verification status and session time
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("isVerified", "true");
 
-    navigate("/subjects");  // ✅ Redirect to content
+    console.log("✅ Verification successful!");
+
+    // ✅ Redirect with a delay to ensure `localStorage` is properly saved
+    setTimeout(() => {
+      navigate("/subjects");
+    }, 100);  // ✅ Short delay to ensure localStorage is saved properly
+
   }, [token, navigate]);
 
   return <p>✅ Verification successful! Redirecting...</p>;
