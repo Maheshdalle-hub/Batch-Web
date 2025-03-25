@@ -19,19 +19,17 @@ const Login = () => {
       return;
     }
 
-    // ✅ Generate a new token for each verification
+    // ✅ Generate a new token for each verification attempt
     const newToken = Math.random().toString(36).substr(2, 9);
     localStorage.setItem("verificationToken", newToken);  // ✅ Store new token
     localStorage.setItem("verificationExpires", Date.now() + 2 * 24 * 60 * 60 * 1000);  // 2 days expiry
 
     const initializeLogin = async () => {
-      // ✅ Generate a new shortened link with the token
       const newLink = await generateShortenedLink(`/verify/${newToken}`);
       if (newLink) {
         setShortenerLink(newLink);
         localStorage.setItem("shortenerLink", newLink);
       }
-
       setLoading(false);
     };
 
