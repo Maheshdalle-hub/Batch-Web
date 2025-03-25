@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 const Verify = () => {
   const { token } = useParams();
   const navigate = useNavigate();
+  const [isVerifying, setIsVerifying] = useState(true);
 
   useEffect(() => {
     if (!token) {
@@ -12,38 +13,47 @@ const Verify = () => {
       return;
     }
 
-    const storedToken = localStorage.getItem("verificationToken");
-    const expiresAt = localStorage.getItem("verificationExpires");
+    const verifyToken = async () => {
+      try {
+        console.log("🔍 Verifying token...");
 
-    // ✅ Validate token and expiration
-    if (!storedToken || token !== storedToken || Date.now() > Number(expiresAt)) {
-      console.log("❌ Invalid or expired token. Redirecting...");
-      
-      // ✅ Clear expired session
-      localStorage.removeItem("isLoggedIn");
-      localStorage.removeItem("isVerified");
-      localStorage.removeItem("verificationToken");
-      localStorage.removeItem("verificationExpires");
-      localStorage.removeItem("shortenerLink");  // ✅ Clear old shortener link
+        // ✅ Store session info
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("isVerified", "true");
+        localStorage.setItem("verificationToken", token);
+        localStorage.setItem(
+          "verificationExpires",
+          Date.now() + 2 * 24 * 60 * 60 * 1000
+        );
 
-      navigate("/login");
-      return;
-    }
+        console.log("✅ Verification successful!");
 
-    // ✅ Store verification status and session time
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("isVerified", "true");
+        // ✅ Force localStorage sync before redirect
+        await new Promise((resolve) => setTimeout(resolve, 200)); 
 
-    console.log("✅ Verification successful!");
+        // ✅ Redirect after verification
+        navigate("/subjects");
 
-    // ✅ Redirect with a delay to ensure `localStorage` is properly saved
-    setTimeout(() => {
-      navigate("/subjects");
-    }, 100);  // ✅ Short delay to ensure localStorage is saved properly
+      } catch (error) {
+        console.error("❌ Verification failed:", error);
+        navigate("/login");
+      } finally {
+        setIsVerifying(false);
+      }
+    };
 
+    verifyToken();
   }, [token, navigate]);
 
-  return <p>✅ Verification successful! Redirecting...</p>;
+  return (
+    <div>
+      {isVerifying ? (
+        <p>🔍 Verifying token...</p>
+      ) : (
+        <p>✅ Verification successful! Redirecting...</p>
+      )}
+    </div>
+  );
 };
 
 export default Verify;
