@@ -6,38 +6,33 @@ const Verify = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) return;
+    if (!token) {
+      navigate("/login");
+      return;
+    }
 
-    const verifyToken = () => {
-      // ✅ Use sessionStorage instead of localStorage
-      let usedTokens = JSON.parse(sessionStorage.getItem("usedTokens")) || [];
+    // ✅ Get the current token and expiration
+    const storedToken = localStorage.getItem("verificationToken");
+    const expiresAt = localStorage.getItem("verificationExpires");
 
-      if (usedTokens.includes(token)) {
-        console.log("❌ Token already used! Redirecting to login...");
-        navigate("/login");
-        return;
-      }
+    // 🚫 Prevent reuse of old tokens
+    if (!storedToken || token !== storedToken || Date.now() > Number(expiresAt)) {
+      console.log("❌ Invalid or expired token. Redirecting to login...");
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("verificationToken");
+      localStorage.removeItem("verificationExpires");
+      navigate("/login");
+      return;
+    }
 
-      // ✅ Add the token to usedTokens
-      usedTokens.push(token);
-      sessionStorage.setItem("usedTokens", JSON.stringify(usedTokens));
+    // ✅ Successful verification (first-time use)
+    console.log("✅ Verification successful!");
+    localStorage.setItem("isLoggedIn", "true");
+    
+    // ✅ Remove token after successful verification (one-time use)
+    localStorage.removeItem("verificationToken");
 
-      // ✅ Store session values
-      const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000;  // 2 days expiry
-      sessionStorage.setItem("isLoggedIn", "true");
-      sessionStorage.setItem("isVerified", "true");
-      sessionStorage.setItem("verificationToken", token);
-      sessionStorage.setItem("verificationExpires", expirationTime.toString());
-
-      console.log("✅ Verification successful. Redirecting...");
-
-      // ✅ Slight delay to ensure proper storage
-      setTimeout(() => {
-        navigate("/subjects");
-      }, 100);
-    };
-
-    verifyToken();
+    navigate("/subjects");  // ✅ Redirect after successful verification
   }, [token, navigate]);
 
   return <p>✅ Verification successful! Redirecting...</p>;
