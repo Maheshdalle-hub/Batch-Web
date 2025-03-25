@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
-import { generateShortenedLink, checkShortenerCompletion } from "../utils/shortener"; 
+import { generateShortenedLink, checkShortenerCompletion } from "../utils/shortener";
 
 const Login = () => {
   const [shortenerLink, setShortenerLink] = useState("");
@@ -13,23 +13,30 @@ const Login = () => {
     const isVerified = localStorage.getItem("isVerified") === "true";
     const expiresAt = localStorage.getItem("verificationExpires");
 
+    console.log("🔍 Checking session...");
+
     // ✅ Keep the user logged in if they are verified and not expired
     if ((isLoggedIn && isVerified) && expiresAt && Date.now() < Number(expiresAt)) {
+      console.log("✅ User already verified. Redirecting to subjects...");
       navigate("/subjects");  // ✅ Go directly to subjects
       return;
     }
 
-    // ✅ Generate a new token for each verification attempt
-    const newToken = Math.random().toString(36).substr(2, 9);
-    localStorage.setItem("verificationToken", newToken);  // ✅ Store new token
-    localStorage.setItem("verificationExpires", Date.now() + 2 * 24 * 60 * 60 * 1000);  // 2 days expiry
-
     const initializeLogin = async () => {
-      const newLink = await generateShortenedLink(`/verify/${newToken}`);
-      if (newLink) {
-        setShortenerLink(newLink);
-        localStorage.setItem("shortenerLink", newLink);
+      let storedLink = localStorage.getItem("shortenerLink");
+      
+      if (!storedLink) {
+        // ✅ Generate new shortener link if not stored
+        const newLink = await generateShortenedLink();
+        if (newLink) {
+          setShortenerLink(newLink);
+          localStorage.setItem("shortenerLink", newLink);
+        }
+      } else {
+        // ✅ Use existing shortener link
+        setShortenerLink(storedLink);
       }
+
       setLoading(false);
     };
 
@@ -40,13 +47,23 @@ const Login = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       const isCompleted = checkShortenerCompletion();
+
       if (isCompleted) {
+        console.log("✅ Shortener completed. Redirecting...");
+
+        // ✅ Store session info
         localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("isVerified", "true");
+        localStorage.setItem("isVerified", "true");  
+        localStorage.setItem("verificationExpires", Date.now() + 2 * 24 * 60 * 60 * 1000);
+
         clearInterval(interval);
-        navigate("/subjects");
+
+        // ✅ Force localStorage sync before redirect
+        setTimeout(() => {
+          navigate("/subjects");
+        }, 200); 
       }
-    }, 5000);
+    }, 5000);  // Check every 5 seconds
 
     return () => clearInterval(interval);
   }, [navigate]);
@@ -60,7 +77,7 @@ const Login = () => {
         <p>Generating your link...</p>
       ) : (
         shortenerLink && (
-          <a href={shortenerLink} className="shortener-button">
+          <a href={shortenerLink} className="shortener-button" target="_blank" rel="noopener noreferrer">
             Click Here ✅
           </a>
         )
