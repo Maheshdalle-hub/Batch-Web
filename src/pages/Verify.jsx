@@ -8,8 +8,9 @@ const Verify = () => {
   useEffect(() => {
     if (!token) return;
 
-    const verifyToken = async () => {
-      let usedTokens = JSON.parse(localStorage.getItem("usedTokens")) || [];
+    const verifyToken = () => {
+      // ✅ Use sessionStorage instead of localStorage
+      let usedTokens = JSON.parse(sessionStorage.getItem("usedTokens")) || [];
 
       if (usedTokens.includes(token)) {
         console.log("❌ Token already used! Redirecting to login...");
@@ -17,26 +18,23 @@ const Verify = () => {
         return;
       }
 
-      // ✅ Store token and verification flag properly
+      // ✅ Add the token to usedTokens
       usedTokens.push(token);
-      localStorage.setItem("usedTokens", JSON.stringify(usedTokens));
+      sessionStorage.setItem("usedTokens", JSON.stringify(usedTokens));
 
+      // ✅ Store session values
       const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000;  // 2 days expiry
-
-      // ✅ Use `await` to ensure localStorage writes are completed
-      await Promise.resolve().then(() => {
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("isVerified", "true");
-        localStorage.setItem("verificationToken", token);
-        localStorage.setItem("verificationExpires", expirationTime);
-      });
+      sessionStorage.setItem("isLoggedIn", "true");
+      sessionStorage.setItem("isVerified", "true");
+      sessionStorage.setItem("verificationToken", token);
+      sessionStorage.setItem("verificationExpires", expirationTime.toString());
 
       console.log("✅ Verification successful. Redirecting...");
-      
-      // ✅ Delay redirection slightly to ensure data is saved
+
+      // ✅ Slight delay to ensure proper storage
       setTimeout(() => {
         navigate("/subjects");
-      }, 100);  // Small delay to ensure localStorage is written
+      }, 100);
     };
 
     verifyToken();
