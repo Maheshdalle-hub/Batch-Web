@@ -1,42 +1,54 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 
 const Verify = () => {
+  const { token } = useParams();  // ✅ Get the token from the URL
   const navigate = useNavigate();
-  const [status, setStatus] = useState("loading");  // "loading", "success", "error"
+  const location = useLocation();
+  
+  const [verified, setVerified] = useState(false);
+  const [invalidToken, setInvalidToken] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // ✅ Get the current full URL (including path)
-    const currentUrl = window.location.href;
     const storedUrl = sessionStorage.getItem("currentVerificationUrl");
 
+    // ✅ Get the full current URL being accessed
+    const currentUrl = `${window.location.origin}${location.pathname}`;
+
     if (!storedUrl || currentUrl !== storedUrl) {
-      console.log("❌ Token not verified! URLs don't match.");
-      setStatus("error");
+      console.log("❌ Token not verified!");
+      setInvalidToken(true);
+      setLoading(false);
       return;
     }
 
-    // ✅ URLs match → Verify the user
+    // ✅ Token is valid → Verify the user
     const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000;  // 2 days expiry
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("isVerified", "true");
     localStorage.setItem("verificationExpires", expirationTime);
 
-    // ✅ Clear stored verification URL after successful login
+    // ✅ Remove the used verification URL
     sessionStorage.removeItem("currentVerificationUrl");
 
+    setVerified(true);
+    setLoading(false);
     console.log("✅ Verification successful. Redirecting...");
-    setStatus("success");
-
-    // ✅ Redirect after 2 seconds
-    setTimeout(() => navigate("/subjects"), 2000);
-  }, [navigate]);
+    setTimeout(() => navigate("/subjects"), 2000);  // Redirect after 2 seconds
+  }, [navigate, location]);
 
   return (
-    <div style={{ textAlign: "center", padding: "50px", fontSize: "18px" }}>
-      {status === "loading" && <p>🔄 Verifying... Please wait...</p>}
-      {status === "success" && <p>✅ Verification successful! Redirecting...</p>}
-      {status === "error" && <p>❌ Token not verified! Please complete the shortener again.</p>}
+    <div>
+      {loading ? (
+        <p>🔄 Verifying...</p>
+      ) : verified ? (
+        <p>✅ Verification successful! Redirecting...</p>
+      ) : invalidToken ? (
+        <p>❌ Token not verified! Please complete the shortener again.</p>
+      ) : (
+        <p>🔄 Verifying...</p>
+      )}
     </div>
   );
 };
