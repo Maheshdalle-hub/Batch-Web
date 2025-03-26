@@ -7,7 +7,6 @@ import ChapterLectures from "./pages/ChapterLectures";
 import Login from "./pages/Login";
 import Verify from "./pages/Verify"; 
 import ProtectedRoute from "./components/ProtectedRoute";
-import { Analytics } from "@vercel/analytics/react";  // ✅ Import Vercel Analytics
 
 function App() {
   return (
@@ -24,8 +23,6 @@ function App() {
         <Route path="/video/:subject/:chapterIndex" element={<ProtectedRoute><VideoPlayer /></ProtectedRoute>} />
         <Route path="/video/live" element={<ProtectedRoute><VideoPlayer /></ProtectedRoute>} />  
       </Routes>
-
-      <Analytics />  {/* ✅ Add Analytics here */}
     </>
   );
 }
