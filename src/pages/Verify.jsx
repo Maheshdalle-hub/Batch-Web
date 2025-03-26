@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Verify = () => {
-  const { token } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [verified, setVerified] = useState(false);
   const [invalidToken, setInvalidToken] = useState(false);
+
+  // ✅ Extract token from query parameter
+  const token = new URLSearchParams(location.search).get("token");
 
   useEffect(() => {
     const storedToken = sessionStorage.getItem("currentToken");
