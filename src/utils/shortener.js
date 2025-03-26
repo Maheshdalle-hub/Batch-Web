@@ -15,7 +15,7 @@ export const generateShortenedLink = async () => {
     localStorage.setItem("userToken", userToken);
   }
 
-  const callbackUrl = `${CALLBACK_BASE_URL}/token=${userToken}`;
+  const callbackUrl = `${CALLBACK_BASE_URL}?token=${userToken}`;
 
   try {
     const response = await fetch(`https://vipurl.in/api?api=${API_KEY}&url=${callbackUrl}`);
