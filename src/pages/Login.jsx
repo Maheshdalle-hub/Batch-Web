@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
-import { generateShortenedLink, checkShortenerCompletion } from "../utils/shortener"; 
+import { generateShortenedLink } from "../utils/shortener"; 
 
 const Login = () => {
   const [shortenerLink, setShortenerLink] = useState("");
