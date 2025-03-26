@@ -4,53 +4,41 @@ import { useParams, useNavigate } from "react-router-dom";
 const Verify = () => {
   const { token } = useParams();
   const navigate = useNavigate();
-  const [isVerifying, setIsVerifying] = useState(true);
+  const [verified, setVerified] = useState(false);
+  const [invalidToken, setInvalidToken] = useState(false);
 
   useEffect(() => {
-    if (!token) {
-      console.log("❌ No token found. Redirecting to login...");
-      navigate("/login");
+    const storedToken = sessionStorage.getItem("currentToken");
+
+    if (!token || token !== storedToken) {
+      console.log("❌ Token not verified!");
+      setInvalidToken(true);
       return;
     }
 
-    const verifyToken = async () => {
-      try {
-        console.log("🔍 Verifying token...");
+    // ✅ Token is valid → Verify user
+    const expirationTime = Date.now() + 2 * 24 * 60 * 60 * 1000;  // 2 days expiry
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("isVerified", "true");
+    localStorage.setItem("verificationExpires", expirationTime);
 
-        // ✅ Store session info
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("isVerified", "true");
-        localStorage.setItem("verificationToken", token);
-        localStorage.setItem(
-          "verificationExpires",
-          Date.now() + 2 * 24 * 60 * 60 * 1000
-        );
+    // ✅ Remove the used token from both storages
+    localStorage.removeItem("verificationToken");
+    sessionStorage.removeItem("currentToken");
 
-        console.log("✅ Verification successful!");
-
-        // ✅ Force localStorage sync before redirect
-        await new Promise((resolve) => setTimeout(resolve, 200)); 
-
-        // ✅ Redirect after verification
-        navigate("/subjects");
-
-      } catch (error) {
-        console.error("❌ Verification failed:", error);
-        navigate("/login");
-      } finally {
-        setIsVerifying(false);
-      }
-    };
-
-    verifyToken();
+    setVerified(true);
+    console.log("✅ Verification successful. Redirecting...");
+    setTimeout(() => navigate("/subjects"), 2000);  // Redirect after 2 seconds
   }, [token, navigate]);
 
   return (
     <div>
-      {isVerifying ? (
-        <p>🔍 Verifying token...</p>
-      ) : (
+      {verified ? (
         <p>✅ Verification successful! Redirecting...</p>
+      ) : invalidToken ? (
+        <p>❌ Token not verified! Please complete the shortener again.</p>
+      ) : (
+        <p>🔄 Verifying...</p>
       )}
     </div>
   );
