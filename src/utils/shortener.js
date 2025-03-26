@@ -1,5 +1,5 @@
 const API_KEY = "0a0c7508fe669b4259d5f70d55dfdc467ea177bc";
-const CALLBACK_BASE_URL = "https://nt-batch-web.vercel.app/verify"; // Replace with your actual site URL
+const CALLBACK_BASE_URL = "https://nt-batch-web.vercel.app/verify"; // Your base site URL
 
 // ✅ Generate a secure token
 const generateSecureToken = () => {
@@ -8,21 +8,23 @@ const generateSecureToken = () => {
 
 // ✅ Generate or Retrieve a shortened link
 export const generateShortenedLink = async () => {
-  let userToken = localStorage.getItem("userToken");
+  let verificationUrl = sessionStorage.getItem("currentVerificationUrl");
 
-  if (!userToken) {
-    userToken = generateSecureToken();
-    localStorage.setItem("userToken", userToken);
+  if (!verificationUrl) {
+    // ✅ Generate a new token and create the full verification URL with path
+    const token = generateSecureToken();
+    verificationUrl = `${CALLBACK_BASE_URL}/${token}`;  // Path-based URL format
+
+    // ✅ Store the full verification URL
+    sessionStorage.setItem("currentVerificationUrl", verificationUrl);
   }
 
-  const callbackUrl = `${CALLBACK_BASE_URL}?token=${userToken}`;
-
   try {
-    const response = await fetch(`https://vipurl.in/api?api=${API_KEY}&url=${callbackUrl}`);
+    const response = await fetch(`https://vipurl.in/api?api=${API_KEY}&url=${verificationUrl}`);
     const data = await response.json();
 
     if (data.status === "success") {
-      return data.shortenedUrl; 
+      return data.shortenedUrl; // ✅ Return the shortened link
     } else {
       console.error("❌ Error generating short link:", data.message);
       return null;
@@ -31,18 +33,4 @@ export const generateShortenedLink = async () => {
     console.error("❌ Error connecting to shortener API:", error);
     return null;
   }
-};
-
-// ✅ Check if the shortener was completed
-export const checkShortenerCompletion = () => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  const isVerified = localStorage.getItem("isVerified") === "true";
-
-  return isLoggedIn && isVerified;
-};
-
-// ✅ Mark shortener as completed
-export const markShortenerAsCompleted = () => {
-  localStorage.setItem("isLoggedIn", "true");
-  localStorage.setItem("isVerified", "true");
 };
