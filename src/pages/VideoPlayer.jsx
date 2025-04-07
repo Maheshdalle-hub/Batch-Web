@@ -63,43 +63,43 @@ const VideoPlayer = () => {
       });
 
       const controlBar = playerRef.current.controlBar;
-      const playToggle = controlBar.getChild("playToggle");
 
-      if (playToggle) {
-        const playEl = playToggle.el();
+      // Timestamp styling
+      const timeDisplay = document.createElement("div");
+      timeDisplay.className = "vjs-custom-time-display";
+      timeDisplay.style.position = "absolute";
+      timeDisplay.style.bottom = "50px"; // Just above play/pause
+      timeDisplay.style.left = "calc(50% - 30px)";
+      timeDisplay.style.background = "rgba(0, 0, 0, 0.7)";
+      timeDisplay.style.color = "#fff";
+      timeDisplay.style.fontSize = "13px";
+      timeDisplay.style.padding = "4px 8px";
+      timeDisplay.style.borderRadius = "4px";
+      timeDisplay.style.whiteSpace = "nowrap";
+      timeDisplay.style.pointerEvents = "none";
+      timeDisplay.style.zIndex = "999";
+      timeDisplay.textContent = "00:00 / 00:00";
 
-        const timeDisplay = document.createElement("div");
-        timeDisplay.className = "vjs-custom-time-display";
-        timeDisplay.style.position = "absolute";
-        timeDisplay.style.bottom = "60px"; // slightly above the play button
-        timeDisplay.style.left = "50%";
-        timeDisplay.style.transform = "translateX(-50%)";
-        timeDisplay.style.background = "rgba(0, 0, 0, 0.7)";
-        timeDisplay.style.color = "#fff";
-        timeDisplay.style.fontSize = "12px";
-        timeDisplay.style.padding = "4px 10px";
-        timeDisplay.style.borderRadius = "5px";
-        timeDisplay.style.pointerEvents = "none";
-        timeDisplay.style.zIndex = "999";
-        timeDisplay.textContent = "00:00 / 00:00";
-
-        playEl.appendChild(timeDisplay);
-
-        playerRef.current.on("loadedmetadata", () => {
-          const duration = formatTime(playerRef.current.duration());
-          timeDisplay.textContent = `00:00 / ${duration}`;
-        });
-
-        playerRef.current.on("timeupdate", () => {
-          const currentTime = formatTime(playerRef.current.currentTime());
-          const duration = formatTime(playerRef.current.duration());
-          timeDisplay.textContent = `${currentTime} / ${duration}`;
-        });
+      const progressControl = controlBar.getChild("progressControl")?.el();
+      if (progressControl) {
+        progressControl.appendChild(timeDisplay);
       }
+
+      playerRef.current.on("loadedmetadata", () => {
+        const duration = formatTime(playerRef.current.duration());
+        timeDisplay.textContent = `00:00 / ${duration}`;
+      });
+
+      playerRef.current.on("timeupdate", () => {
+        const currentTime = formatTime(playerRef.current.currentTime());
+        const duration = formatTime(playerRef.current.duration());
+        timeDisplay.textContent = `${currentTime} / ${duration}`;
+      });
     });
 
-    // Gesture handling
+    // Double Tap Gesture
     const videoContainer = videoRef.current.parentElement;
+
     videoContainer.addEventListener("touchend", (event) => {
       const currentTime = Date.now();
       const tapGap = currentTime - lastTap.current;
@@ -140,44 +140,37 @@ const VideoPlayer = () => {
   };
 
   return (
-    <div style={{ textAlign: "center", padding: "10px" }}>
+    <div>
       <h2>
         {isLive
           ? "🔴 Live Class"
           : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
 
-      <div style={{ maxWidth: "1000px", margin: "auto" }}>
-        <video
-          ref={videoRef}
-          className="video-js vjs-default-skin"
-        />
+      <div style={{ position: "relative" }}>
+        <video ref={videoRef} className="video-js vjs-default-skin" />
       </div>
 
       {notesUrl && (
-        <a
-          href={notesUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "inline-block",
-            marginTop: "20px",
-            padding: "12px 24px",
-            backgroundColor: "#007bff",
-            color: "#fff",
-            borderRadius: "8px",
-            border: "none",
-            fontSize: "16px",
-            fontWeight: "bold",
-            textDecoration: "none",
-            boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-            transition: "all 0.3s",
-          }}
-          onMouseOver={(e) => (e.target.style.backgroundColor = "#0056b3")}
-          onMouseOut={(e) => (e.target.style.backgroundColor = "#007bff")}
-        >
-          View Notes
-        </a>
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <a
+            href={notesUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              padding: "12px 24px",
+              backgroundColor: "#007bff",
+              color: "#fff",
+              textDecoration: "none",
+              borderRadius: "8px",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+              fontSize: "16px",
+              fontWeight: "bold",
+            }}
+          >
+            Download Notes
+          </a>
+        </div>
       )}
     </div>
   );
