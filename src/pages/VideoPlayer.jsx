@@ -62,40 +62,43 @@ const VideoPlayer = () => {
         displayCurrentQuality: true,
       });
 
-      // Create and style the custom time display
-      const timeDisplay = document.createElement("div");
-      timeDisplay.className = "vjs-custom-time-display";
-      timeDisplay.style.position = "absolute";
-      timeDisplay.style.bottom = "70px"; // just above play/pause
-      timeDisplay.style.left = "60px";   // aligned with playToggle (approx)
-      timeDisplay.style.background = "rgba(0, 0, 0, 0.6)";
-      timeDisplay.style.color = "#fff";
-      timeDisplay.style.fontSize = "12px";
-      timeDisplay.style.padding = "4px 8px";
-      timeDisplay.style.borderRadius = "4px";
-      timeDisplay.style.zIndex = "10";
-      timeDisplay.textContent = "00:00 / 00:00";
-
       const controlBar = playerRef.current.controlBar;
-      const playToggle = controlBar.getChild("playToggle")?.el();
-      if (playToggle && playToggle.parentNode) {
-        playToggle.parentNode.insertBefore(timeDisplay, playToggle);
+      const playToggle = controlBar.getChild("playToggle");
+
+      if (playToggle) {
+        const playEl = playToggle.el();
+
+        const timeDisplay = document.createElement("div");
+        timeDisplay.className = "vjs-custom-time-display";
+        timeDisplay.style.position = "absolute";
+        timeDisplay.style.bottom = "60px"; // slightly above the play button
+        timeDisplay.style.left = "50%";
+        timeDisplay.style.transform = "translateX(-50%)";
+        timeDisplay.style.background = "rgba(0, 0, 0, 0.7)";
+        timeDisplay.style.color = "#fff";
+        timeDisplay.style.fontSize = "12px";
+        timeDisplay.style.padding = "4px 10px";
+        timeDisplay.style.borderRadius = "5px";
+        timeDisplay.style.pointerEvents = "none";
+        timeDisplay.style.zIndex = "999";
+        timeDisplay.textContent = "00:00 / 00:00";
+
+        playEl.appendChild(timeDisplay);
+
+        playerRef.current.on("loadedmetadata", () => {
+          const duration = formatTime(playerRef.current.duration());
+          timeDisplay.textContent = `00:00 / ${duration}`;
+        });
+
+        playerRef.current.on("timeupdate", () => {
+          const currentTime = formatTime(playerRef.current.currentTime());
+          const duration = formatTime(playerRef.current.duration());
+          timeDisplay.textContent = `${currentTime} / ${duration}`;
+        });
       }
-
-      // Sync current/duration times
-      playerRef.current.on("loadedmetadata", () => {
-        const duration = formatTime(playerRef.current.duration());
-        timeDisplay.textContent = `00:00 / ${duration}`;
-      });
-
-      playerRef.current.on("timeupdate", () => {
-        const currentTime = formatTime(playerRef.current.currentTime());
-        const duration = formatTime(playerRef.current.duration());
-        timeDisplay.textContent = `${currentTime} / ${duration}`;
-      });
     });
 
-    // Gesture Handling
+    // Gesture handling
     const videoContainer = videoRef.current.parentElement;
     videoContainer.addEventListener("touchend", (event) => {
       const currentTime = Date.now();
