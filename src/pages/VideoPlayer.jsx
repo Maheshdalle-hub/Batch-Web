@@ -62,12 +62,12 @@ const VideoPlayer = () => {
         displayCurrentQuality: true,
       });
 
+      // Create and style the custom time display
       const timeDisplay = document.createElement("div");
       timeDisplay.className = "vjs-custom-time-display";
       timeDisplay.style.position = "absolute";
-      timeDisplay.style.bottom = "50px";
-      timeDisplay.style.left = "50%";
-      timeDisplay.style.transform = "translateX(-50%)";
+      timeDisplay.style.bottom = "70px"; // just above play/pause
+      timeDisplay.style.left = "60px";   // aligned with playToggle (approx)
       timeDisplay.style.background = "rgba(0, 0, 0, 0.6)";
       timeDisplay.style.color = "#fff";
       timeDisplay.style.fontSize = "12px";
@@ -78,10 +78,11 @@ const VideoPlayer = () => {
 
       const controlBar = playerRef.current.controlBar;
       const playToggle = controlBar.getChild("playToggle")?.el();
-      if (playToggle) {
+      if (playToggle && playToggle.parentNode) {
         playToggle.parentNode.insertBefore(timeDisplay, playToggle);
       }
 
+      // Sync current/duration times
       playerRef.current.on("loadedmetadata", () => {
         const duration = formatTime(playerRef.current.duration());
         timeDisplay.textContent = `00:00 / ${duration}`;
@@ -94,8 +95,8 @@ const VideoPlayer = () => {
       });
     });
 
+    // Gesture Handling
     const videoContainer = videoRef.current.parentElement;
-
     videoContainer.addEventListener("touchend", (event) => {
       const currentTime = Date.now();
       const tapGap = currentTime - lastTap.current;
