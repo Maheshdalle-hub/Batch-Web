@@ -26,7 +26,7 @@ const Subjects = () => {
   return (
     <div className="subjects-container">
       {/* ✅ Display Logo */}
-      <img src="https://dxixtlyravvxx.cloudfront.net/540/admin_v1/sample/57643650_Aarambh%2010th%20Timetable.png"    alt="Logo" className="big-logo" />
+      <img src="https://dxixtlyravvxx.cloudfront.net/540/admin_v1/sample/57643650_Aarambh%2010th%20Timetable.png"    alt="Logo" className="tt" />
       
       <h2>Select Subject</h2>
 
