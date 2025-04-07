@@ -21,6 +21,7 @@ const Subjects = () => {
     { name: "English", path: "/lectures/English" },
     { name: "Hindi", path: "/lectures/Hindi" },
     { name: "IT", path: "/lectures/IT" },
+    { name: "Sanskrit", path: "/lectures/Sanskrit" },
   ];
 
   return (
