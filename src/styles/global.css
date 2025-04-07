@@ -104,10 +104,9 @@ body {
 
   /* ✅ Big Logo Styling */
   .big-logo {
-    width: 250px;
-    max-width: 80%;
+    width: 100%;
+    height: auto;
     display: block;
-    margin: 20px auto;
-    border-radius: 10px;
+  
   }
     }
