@@ -12,7 +12,7 @@ const VideoPlayer = () => {
   const playerRef = useRef(null);
   const lastTap = useRef(0);
 
-  const { chapterName, lectureName, m3u8Url } = location.state || {};
+  const { chapterName, lectureName, m3u8Url, notesUrl } = location.state || {};
   const isLive = location.pathname.includes("/video/live");
   const defaultLiveUrl = "m3u8_link_here";
 
@@ -28,7 +28,6 @@ const VideoPlayer = () => {
 
     const videoSource = isLive ? defaultLiveUrl : m3u8Url || defaultLiveUrl;
 
-    // ✅ Initialize the Video.js player
     playerRef.current = videojs(videoRef.current, {
       controls: true,
       autoplay: false,
@@ -57,7 +56,6 @@ const VideoPlayer = () => {
       type: "application/x-mpegURL",
     });
 
-    // ✅ Ensure Quality Levels and Selector
     playerRef.current.ready(() => {
       playerRef.current.qualityLevels();
       playerRef.current.hlsQualitySelector({
@@ -66,13 +64,12 @@ const VideoPlayer = () => {
 
       const controlBar = playerRef.current.controlBar;
 
-      // ✅ Add custom current time and duration display
       const timeDisplay = document.createElement("div");
       timeDisplay.className = "vjs-custom-time-display";
       timeDisplay.style.position = "absolute";
       timeDisplay.style.bottom = "5px";
       timeDisplay.style.left = "10px";
-      timeDisplay.style.background = "rgba(0, 0, 0, 0.6)";  // Semi-transparent background
+      timeDisplay.style.background = "rgba(0, 0, 0, 0.6)";
       timeDisplay.style.color = "#fff";
       timeDisplay.style.fontSize = "12px";
       timeDisplay.style.padding = "4px 8px";
@@ -80,13 +77,11 @@ const VideoPlayer = () => {
       timeDisplay.style.zIndex = "10";
       timeDisplay.textContent = "00:00 / 00:00";
 
-      // Append the time display near the progress bar
       const progressControl = controlBar.getChild("progressControl")?.el();
       if (progressControl) {
         progressControl.appendChild(timeDisplay);
       }
 
-      // ✅ Listen for metadata and time updates
       playerRef.current.on("loadedmetadata", () => {
         const duration = formatTime(playerRef.current.duration());
         timeDisplay.textContent = `00:00 / ${duration}`;
@@ -99,7 +94,6 @@ const VideoPlayer = () => {
       });
     });
 
-    // ✅ Double Tap Gesture Controls
     const videoContainer = videoRef.current.parentElement;
 
     videoContainer.addEventListener("touchend", (event) => {
@@ -130,7 +124,6 @@ const VideoPlayer = () => {
     };
   }, [m3u8Url, isLive]);
 
-  // ✅ Time formatting function
   const formatTime = (timeInSeconds) => {
     if (isNaN(timeInSeconds) || timeInSeconds < 0) return "00:00";
     const minutes = Math.floor(timeInSeconds / 60);
@@ -143,6 +136,23 @@ const VideoPlayer = () => {
       <h2>
         {isLive ? "🔴 Live Class" : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
+
+      {!isLive && notesUrl && notesUrl.trim() !== "" && (
+        <button
+          style={{
+            marginBottom: "12px",
+            padding: "10px 18px",
+            backgroundColor: "#007bff",
+            color: "#fff",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+          onClick={() => window.open(notesUrl, "_blank")}
+        >
+          View Notes
+        </button>
+      )}
 
       <video ref={videoRef} className="video-js vjs-default-skin" />
     </div>
