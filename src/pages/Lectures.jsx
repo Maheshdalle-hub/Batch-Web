@@ -41,6 +41,9 @@ const Lectures = () => {
     Hindi: [
       { name: "Chapter 1", index: 0 },
     ],
+    Sanskrit: [
+      { name: "Chapter 1", index: 0 },
+    ],
   };
 
   return (
