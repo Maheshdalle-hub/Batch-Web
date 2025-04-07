@@ -37,7 +37,7 @@ const VideoPlayer = () => {
         vhs: {
           overrideNative: true,
           enableLowInitialPlaylist: true,
-        }
+        },
       },
       controlBar: {
         children: [
@@ -46,7 +46,7 @@ const VideoPlayer = () => {
           "volumePanel",
           "playbackRateMenuButton",
           "qualitySelector",
-          "fullscreenToggle"
+          "fullscreenToggle",
         ],
       },
     });
@@ -132,29 +132,50 @@ const VideoPlayer = () => {
   };
 
   return (
-    <div>
-      <h2>
+    <div style={{ textAlign: "center", padding: "10px" }}>
+      <h2 style={{ marginBottom: "15px" }}>
         {isLive ? "🔴 Live Class" : `Now Playing: ${chapterName} - ${lectureName || "Unknown Lecture"}`}
       </h2>
+
+      <video
+        ref={videoRef}
+        className="video-js vjs-default-skin"
+        style={{
+          width: "100%",
+          maxWidth: "800px",
+          margin: "0 auto",
+          borderRadius: "10px",
+          overflow: "hidden",
+        }}
+      />
 
       {!isLive && notesUrl && notesUrl.trim() !== "" && (
         <button
           style={{
-            marginBottom: "12px",
-            padding: "10px 18px",
-            backgroundColor: "#007bff",
+            marginTop: "20px",
+            padding: "12px 24px",
+            background: "linear-gradient(135deg, #4facfe, #00f2fe)",
             color: "#fff",
+            fontSize: "16px",
             border: "none",
-            borderRadius: "5px",
+            borderRadius: "8px",
+            boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
             cursor: "pointer",
+            transition: "transform 0.2s ease, box-shadow 0.2s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = "scale(1.03)";
+            e.target.style.boxShadow = "0 6px 20px rgba(0, 0, 0, 0.3)";
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = "scale(1)";
+            e.target.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.2)";
           }}
           onClick={() => window.open(notesUrl, "_blank")}
         >
           View Notes
         </button>
       )}
-
-      <video ref={videoRef} className="video-js vjs-default-skin" />
     </div>
   );
 };
