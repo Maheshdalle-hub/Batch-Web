@@ -64,37 +64,38 @@ const VideoPlayer = () => {
 
       const controlBar = playerRef.current.controlBar;
 
-      // Timestamp styling
-      const timeDisplay = document.createElement("div");
-      timeDisplay.className = "vjs-custom-time-display";
-      timeDisplay.style.position = "absolute";
-      timeDisplay.style.bottom = "50px"; // Just above play/pause
-      timeDisplay.style.left = "calc(50% - 30px)";
-      timeDisplay.style.background = "rgba(0, 0, 0, 0.7)";
-      timeDisplay.style.color = "#fff";
-      timeDisplay.style.fontSize = "13px";
-      timeDisplay.style.padding = "4px 8px";
-      timeDisplay.style.borderRadius = "4px";
-      timeDisplay.style.whiteSpace = "nowrap";
-      timeDisplay.style.pointerEvents = "none";
-      timeDisplay.style.zIndex = "999";
-      timeDisplay.textContent = "00:00 / 00:00";
+      // Get playToggle element to position timestamp above it
+      const playToggleEl = controlBar.getChild("playToggle")?.el();
+      if (playToggleEl) {
+        const timeDisplay = document.createElement("div");
+        timeDisplay.className = "vjs-custom-time-display";
+        timeDisplay.style.position = "absolute";
+        timeDisplay.style.bottom = "50px";
+        timeDisplay.style.left = "0";
+        timeDisplay.style.background = "rgba(0, 0, 0, 0.7)";
+        timeDisplay.style.color = "#fff";
+        timeDisplay.style.fontSize = "13px";
+        timeDisplay.style.padding = "4px 8px";
+        timeDisplay.style.borderRadius = "4px";
+        timeDisplay.style.whiteSpace = "nowrap";
+        timeDisplay.style.pointerEvents = "none";
+        timeDisplay.style.zIndex = "999";
+        timeDisplay.textContent = "00:00 / 00:00";
 
-      const progressControl = controlBar.getChild("progressControl")?.el();
-      if (progressControl) {
-        progressControl.appendChild(timeDisplay);
+        playToggleEl.style.position = "relative";
+        playToggleEl.appendChild(timeDisplay);
+
+        playerRef.current.on("loadedmetadata", () => {
+          const duration = formatTime(playerRef.current.duration());
+          timeDisplay.textContent = `00:00 / ${duration}`;
+        });
+
+        playerRef.current.on("timeupdate", () => {
+          const currentTime = formatTime(playerRef.current.currentTime());
+          const duration = formatTime(playerRef.current.duration());
+          timeDisplay.textContent = `${currentTime} / ${duration}`;
+        });
       }
-
-      playerRef.current.on("loadedmetadata", () => {
-        const duration = formatTime(playerRef.current.duration());
-        timeDisplay.textContent = `00:00 / ${duration}`;
-      });
-
-      playerRef.current.on("timeupdate", () => {
-        const currentTime = formatTime(playerRef.current.currentTime());
-        const duration = formatTime(playerRef.current.duration());
-        timeDisplay.textContent = `${currentTime} / ${duration}`;
-      });
     });
 
     // Double Tap Gesture
