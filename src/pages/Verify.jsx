@@ -41,7 +41,7 @@ const Verify = () => {
       {verified ? (
         <p>✅ Verification successful! Redirecting...</p>
       ) : invalidToken ? (
-        <p>❌ Token not verified! Please complete the shortener again.</p>
+        <p>❌ Tumhe sahi se karna nahi aa rha. Website ka data clear karo chrome pe jaake, and then chrome pe meri website ko kholna. jab tum click here dabaona tab meri website chrome pe open Hui honi chahiye. </p>
       ) : (
         <p>🔄 Verifying...</p>
       )}
