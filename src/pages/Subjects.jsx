@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/global.css"; 
+import tt from "../assets/tt.png";
 
 const Subjects = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Subjects = () => {
   return (
     <div className="subjects-container">
       {/* ✅ Display Logo */}
-      <img src="https://dxixtlyravvxx.cloudfront.net/540/admin_v1/sample/57643650_Aarambh%2010th%20Timetable.png"    alt="Logo" className="tt" />
+      <img src={tt}  alt="Logo" className="tt" />
       
       <h2>Select Subject</h2>
 
