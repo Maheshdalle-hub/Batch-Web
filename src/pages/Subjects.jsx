@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/global.css"; 
+import mlogo from "../assets/ntmlogo.jpg";
 
 const Subjects = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Subjects = () => {
   return (
     <div className="subjects-container">
       {/* ✅ Display Logo */}
-      <img src=""  alt="Logo" className="tt" />
+      <img src={mlogo}  alt="Logo" className="big-logo" />
       
       <h2>Select Subject</h2>
 
