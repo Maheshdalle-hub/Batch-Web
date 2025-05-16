@@ -49,7 +49,7 @@ const ChapterLectures = () => {
       0:
 
 [
-  { name: "Real Numbers | Lecture 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17127637923662649384/17127637923662649384_649384.m3u8" },
+  { name: "Real Numbers | Lecture 1", youtubeUrl: "https://www.youtube.com/watch?v=6yYg64NzEK4" },
   { name: "Real Numbers | Lecture 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17129371342512649384/17129371342512649384_649384.m3u8" },
   { name: "Real Numbers | Lecture 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17132822008732649384/17132822008732649384_649384.m3u8" },
   { name: "DPP Solving and Doubt Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17133693708701649384/17133693708701649384_649384.m3u8" },
@@ -142,26 +142,63 @@ const ChapterLectures = () => {
     },
   };
 
+  const handleLectureClick = (lecture) => {
+    if (lecture.youtubeUrl) {
+      window.location.href = lecture.youtubeUrl;
+    }
+  };
+
   return (
     <div className="chapter-lectures-container">
       <img src={mlogo} alt="Logo" className="big-logo" />
-
       <h2>{subject} - Chapter {parseInt(chapterIndex) + 1}</h2>
       <div className="lecture-boxes">
-        {chapterLectures[subject]?.[chapterIndex]?.map((lecture, index) => (
-          <Link
-            key={index}
-            to={`/video/${subject}/${chapterIndex}`}
-            state={{
-              chapterName: lecture.name,
-              m3u8Url: lecture.m3u8Url,
-              notesUrl: lecture.notesUrl,
+        {chapterLectures[subject]?.[chapterIndex]?.map((lecture, index) => {
+          if (lecture.redirect) {
+            return (
+              <div
+                key={index}
+                onClick={() => window.location.href = lecture.redirect}
+                className="lecture-box"
+                style={{ cursor: "pointer" }}
+              >
+                {lecture.name} (PDF)
+              </div>
+            );
+          } else if (lecture.youtubeUrl) {
+            return (
+              <div
+                key={index}
+                onClick={() => handleLectureClick(lecture)}
+                className="lecture-box"
+                style={{ cursor: "pointer" }}
+              >
+                {lecture.name} (YouTube)
+              </div>
+            );
+          } else if (lecture.m3u8Url) {
+            return (
+              <Link
+                key={index}
+                to={`/video/${subject}/${chapterIndex}`}
+                state={{
+                  chapterName: lecture.name,
+                  m3u8Url: lecture.m3u8Url,
+                  notesUrl: lecture.notesUrl,
+                }}
+                className="lecture-box"
+                onClick={() => {
+              // Store chapter name and index in localStorage for later use
+              localStorage.setItem("lectureName", lecture.name);  // Store chapter name
             }}
-            className="lecture-box"
-          >
-            {lecture.name}
-          </Link>
-        ))}
+              >
+                {lecture.name}
+              </Link>
+            );
+          } else {
+            return null;
+          }
+        })}
       </div>
     </div>
   );
