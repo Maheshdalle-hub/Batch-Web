@@ -1,6 +1,6 @@
 export const generateShortenedLink = async () => {
-  const API_KEY = "0a0c7508fe669b4259d5f70d55dfdc467ea177bc";
-  const CALLBACK_BASE_URL = "https://nt-batch-web.vercel.app/verify"; 
+  const API_KEY = "223ed4c64f0a265df4c96a4328a2a7edc6640a80";
+  const CALLBACK_BASE_URL = "https://old-batch.vercel.app/verify"; 
 
   // ✅ Retrieve or generate token
   let userToken = localStorage.getItem("currentToken");
@@ -12,7 +12,7 @@ export const generateShortenedLink = async () => {
   const callbackUrl = `${CALLBACK_BASE_URL}/${userToken}`;
 
   try {
-    const response = await fetch(`https://vipurl.in/api?api=${API_KEY}&url=${callbackUrl}`);
+    const response = await fetch(`https://shortxlinks.com/api?api=${API_KEY}&url=${callbackUrl}`);
     const data = await response.json();
 
     if (data.status === "success") {
