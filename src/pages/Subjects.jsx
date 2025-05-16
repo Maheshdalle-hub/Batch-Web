@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/global.css"; 
-import tt from "../assets/tt.png";
 
 const Subjects = () => {
   const navigate = useNavigate();
@@ -15,33 +14,17 @@ const Subjects = () => {
   }, [navigate]);
 
   const subjects = [
-    { name: "Notice", path: "/lectures/Notice" },
     { name: "Science", path: "/lectures/Science" },
     { name: "Maths", path: "/lectures/Maths" },
     { name: "SST", path: "/lectures/SST" },
-    { name: "English", path: "/lectures/English" },
-    { name: "Hindi", path: "/lectures/Hindi" },
-    { name: "IT", path: "/lectures/IT" },
-    { name: "Sanskrit", path: "/lectures/Sanskrit" },
   ];
 
   return (
     <div className="subjects-container">
       {/* ✅ Display Logo */}
-      <img src={tt}  alt="Logo" className="tt" />
+      <img src=""  alt="Logo" className="tt" />
       
       <h2>Select Subject</h2>
-
-      {/* ✅ Live Class */}
-      <div className="live-class-container">
-        <Link
-          to={`/video/live`}
-          state={{ chapterName: "Live Class", m3u8Url: "m3u8_link_here" }}
-          className="subject-box live-class-section"
-        >
-          🔴 Live Class (Click to Join)
-        </Link>
-      </div>
 
       {/* ✅ Subjects */}
       <div className="subject-boxes">
