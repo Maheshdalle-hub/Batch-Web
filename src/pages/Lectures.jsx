@@ -17,18 +17,21 @@ const Lectures = () => {
   const lectures = {
     Science: [
       { name: "Science Lectures", index: 0 },
+      { name: "Science PDF", index: 1},
     ],
     Maths: [
       { name: "Maths Lectures", index: 0 },
+      { name: "Maths PDF", index: 1},
     ],
     SST: [
       { name: "SST Lectures", index: 0 },
+      { name: "SST PDF", index: 1},
     ],
   };
 
   return (
     <div className="lectures-container">
-      <img src="https://dxixtlyravvxx.cloudfront.net/540/admin_v1/sample/35218290_Aarambh%2010th%20Weekly%20Planner.png" alt="Weekly Planner" className="tt" />
+      <img src="" alt="Logo" className="tt" />
       <h2>{subject} Lectures</h2>
       <div className="lecture-boxes">
         {lectures[subject]?.map((lecture, index) => (
