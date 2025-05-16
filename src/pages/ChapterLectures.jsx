@@ -426,7 +426,7 @@ const ChapterLectures = () => {
     SST: {
       0:
 [
-  { name: "AARAMBH BATCH Social Science - 1st Class FREE | Power Sharing- Lecture 1 | Class 10th", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17129837278112649384/17129837278112649384_649384.m3u8" },
+  { name: "AARAMBH BATCH Social Science - 1st Class FREE | Power Sharing- Lecture 1 | Class 10th", youtubeUrl: "https://www.youtube.com/watch?v=YyLWS_yIoms" },
   { name: "Power Sharing - Lecture 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17130287982364649384/17130287982364649384_649384.m3u8" },
   { name: "Power Sharing Lecture - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17131111451407649384/17131111451407649384_649384.m3u8" },
   { name: "Power Sharing Lecture - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17131869363705649384/17131869363705649384_649384.m3u8" },
@@ -531,7 +531,17 @@ const ChapterLectures = () => {
   { name: "Manufacturing Industries - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172951462132511815381/172951462132511815381_815381.m3u8" },
   { name: "Manufacturing Industries - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172952541058421815381/172952541058421815381_815381.m3u8" },
   { name: "Manufacturing Industries - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172960263482521815381/172960263482521815381_815381.m3u8" },
-  { name: "Manufacturing Industries - 4", m3u8Url: "" },
+  { name: "Manufacturing Industries 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172968874616261815381/172968874616261815381_815381.m3u8" },
+{ name: "Manufacturing Industries Solving Class 5 & doubt solving", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172977455641771815381/1 72977455641771815381_815381.m3u8" },
+{ name: "Print Culture and The Modern World 1",m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172986146924881815381/172986146924881815381_815381.m3u8"},
+{ name: "Print Culture and The Modern World 2",m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172994254576221815381/194254576221815381_815381.m3u8"},
+{ name: "Print Culture and The Modern World - 3", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173012053720581815381/173012053720581815381_815381.m3u8" },
+{ name: "Print Culture and The Modern World - 4", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173020705778561815381/173020705778561815381_815381.m3u8"},
+{ name: "Print Culture and The Modern World - 5", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173030322681651815381/173030322681651815381_815381.m3u8" },
+{ name: "Print Culture and The Modern World 6", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173072459434381815381/173072459434381815381_815381.m3u8"},
+{ name: "Print Culture and The Modern World - 7", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173082175059551815381/173082175059551815381_815381.m3u8"},
+{ name: "Print Culture and The Modern World 8", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173089759353101815381/173089759353101815381_815381.m3u8"},
+{ name: "Print Culture and The Modern World - 9 & Doubt Solving Class", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173107155697101815381/173107155697101815381_815381.m3u8" }
      ],
     },
   };
