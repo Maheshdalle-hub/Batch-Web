@@ -424,8 +424,7 @@ const ChapterLectures = () => {
 ],
     },
     SST: {
-      0:Copy this array:
-
+      0:
 [
   { name: "AARAMBH BATCH Social Science - 1st Class FREE | Power Sharing- Lecture 1 | Class 10th", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17129837278112649384/17129837278112649384_649384.m3u8" },
   { name: "Power Sharing - Lecture 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17130287982364649384/17130287982364649384_649384.m3u8" },
