@@ -15,33 +15,14 @@ const Lectures = () => {
   }, [navigate]);
 
   const lectures = {
-    Notice: [
-      { name: "Introduction", index:0},
-],
     Science: [
-      { name: "Chapter 1", index: 0 },
-      { name: "Chapter 2", index: 1 },
+      { name: "Science Lectures", index: 0 },
     ],
     Maths: [
-      { name: "Chapter 1", index: 0 },
-      { name: "Chapter 2", index: 1 },
+      { name: "Maths Lectures", index: 0 },
     ],
     SST: [
-      { name: "Chapter 1", index: 0 },
-      { name: "Chapter 2", index: 1 },
-    ],
-    IT: [
-      { name: "Chapter 1", index: 0 },
-      { name: "Chapter 2", index: 1 },
-    ],
-    English: [
-      { name: "Chapter 1", index: 0 },
-    ],
-    Hindi: [
-      { name: "Chapter 1", index: 0 },
-    ],
-    Sanskrit: [
-      { name: "Chapter 1", index: 0 },
+      { name: "SST Lectures", index: 0 },
     ],
   };
 
