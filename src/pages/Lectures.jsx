@@ -32,7 +32,7 @@ const Lectures = () => {
 
   return (
     <div className="lectures-container">
-      <img src={mlogo} alt="Logo" className="tt" />
+      <img src={mlogo} alt="Logo" className="big-logo" />
       <h2>{subject} Lectures</h2>
       <div className="lecture-boxes">
         {lectures[subject]?.map((lecture, index) => (
