@@ -15,114 +15,376 @@ const ChapterLectures = () => {
   }, [navigate]);
 
   const chapterLectures = {
-    Notice: {
-      0: [
-        {
-          name: "Introduction Video",
-          m3u8Url: "https://d3cx6qbbd4cbso.cloudfront.net/file_library/videos/vod_non_drm_ios/4312904/1740491033_1089325762901906/sunny/1740490966781_94603654451027820_video_VOD.m3u8",
-          notesUrl: ""
-        },
-      ],
-    },
     Science: {
-      0:
-[
-  { name: "Introduction Videos", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17127637923662649384/17127637923662649384_649384.m3u8" },
-  { name: "AARAMBH BATCH Science - 1st Class FREE | Basics of Chemistry | Class 10th", youtubeUrl: "https://www.youtube.com/watch?v=NUF159lXOBw" },
-  { name: "Basics of physics Class 10th", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17127537215601649384/17127537215601649384_649384.m3u8" },
-  { name: "Basics of Biology", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17131970117723649384/17131970117723649384_649384.m3u8" },
-  { name: "Chemical reactions and equations Lecture - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17133600563599649384/17133600563599649384_649384.m3u8" },
-  { name: "Chemical Reactions and Equations Lec-2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17134452954759649384/17134452954759649384_649384.m3u8" },
-  { name: "Chemical Reactions and Equations Lec - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17138010498958649384/17138010498958649384_649384.m3u8" },
-  { name: "ACP solve + Lecture 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17138774499408649384/17138774499408649384_649384.m3u8" },
-  { name: "Chemical reactions and equations L5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17139644014533649384/17139644014533649384_649384.m3u8" },
-  { name: "Chemical reactions and equations L6", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17140502365511649384/17140502365511649384_649384.m3u8" },
-  { name: "Chemical reactions and equations L7", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17143961581787649384/17143961581787649384_649384.m3u8" },
-  { name: "ACP solve + complete Reaction revision", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17144825599737649384/17144825599737649384_649384.m3u8" },
-  { name: "Life Processes Lecture 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17145694219206649384/17145694219206649384_649384.m3u8" },
-  { name: "Life process LEC -2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17146550858275649384/17146550858275649384_649384.m3u8" },
-  { name: "Life process LEC -3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17150105266682649384/17150105266682649384_649384.m3u8" },
-  { name: "Doubt Sessions + Lecture 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/1715083200/1715083200_083200.m3u8" },
-  { name: "Life Processes LEC-5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/1715088600/1715088600_088600.m3u8" },
-  { name: "Life Processes lecture 6", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17151735781192649384/17151735781192649384_649384.m3u8" },
-  { name: "Life Processes lecture 7", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17152599573616649384/17152599573616649384_649384.m3u8" },
-  { name: "Complete NCERT Activity ( Life Processes)", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17156925525362649384/17156925525362649384_649384.m3u8" },
-  { name: "Light Lecture 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17157794545257649384/17157794545257649384_649384.m3u8" },
-  { name: "Science doubt class (Extra class )", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17161235046344649384/17161235046344649384_649384.m3u8" },
-  { name: "Light Lecture 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17162191913272649384/17162191913272649384_649384.m3u8" },
-  { name: "Light lecture 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17162977591186649384/17162977591186649384_649384.m3u8" },
-  { name: "Light lecture 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17163837245952649384/17163837245952649384_649384.m3u8" },
-  { name: "Light Lec-5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17164706945137649384/17164706945137649384_649384.m3u8" },
-  { name: "ACP Solve + Light Lec-6", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17168252698711649384/17168252698711649384_649384.m3u8" },
-  { name: "Light Lecture 7", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17169021711956649384/17169021711956649384_649384.m3u8" },
-  { name: "Light Lec- 8", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/770667220256039400/770667220256039400_039400.m3u8" },
-  { name: "Acid , Base and Salts lecture 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17178522829284649384/17178522829284649384_649384.m3u8" },
-  { name: "Acid , Base and Salts lecture 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17179391311935649384/17179391311935649384_649384.m3u8" },
-  { name: "Acid , Base and Salts lecture 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17180249667889649384/17180249667889649384_649384.m3u8" },
-  { name: "Acid , Base and Salts lecture 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17181114422642649384/17181114422642649384_649384.m3u8" },
-  { name: "Acid , Base and Salts lecture 5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17181979211747649384/17181979211747649384_649384.m3u8" },
-  { name: "Acid, Base and Salts Lecture 6", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17182839586994649384/17182839586994649384_649384.m3u8" },
-  { name: "Doubt solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17186403267539649384/17186403267539649384_649384.m3u8" },
-  { name: "Doubt solving class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17187167781412649384/17187167781412649384_649384.m3u8" },
-  { name: "Human eye Lecture 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17188028707546649384/17188028707546649384_649384.m3u8" },
-  { name: "Human eye lecture 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17188895186220649384/17188895186220649384_649384.m3u8" },
-  { name: "Human Eye|Lecture 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17200122798421649384/17200122798421649384_649384.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17200976893750649384/17200976893750649384_649384.m3u8" },
-  { name: "Human Eye|Lecture 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17201849262443649384/17201849262443649384_649384.m3u8" },
-  { name: "Control and coordination lecture 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17204531151224649384/17204531151224649384_649384.m3u8" },
-  { name: "L2 - Control and coordination", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17205310642213649384/17205310642213649384_649384.m3u8" },
-  { name: "L3- Control and coordination", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17206170098769649384/17206170098769649384_649384.m3u8" },
-  { name: "L4 - control and coordination", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17207044432043649384/17207044432043649384_649384.m3u8" },
-  { name: "Control and coordination L5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17210484872245649384/17210484872245649384_649384.m3u8" },
-  { name: "Control and coordination NCERT Activity", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17211352602062649384/17211352602062649384_649384.m3u8" },
-  { name: "Electricity lecture 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17212216083244649384/17212216083244649384_649384.m3u8" },
-  { name: "Electricity lecture 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17213086397666649384/17213086397666649384_649384.m3u8" },
-  { name: "Electricity Lec-3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17217404976141649384/17217404976141649384_649384.m3u8" },
-  { name: "Electricity Lecture 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17218269228750649384/17218269228750649384_649384.m3u8" },
-  { name: "Electricity Lecture 5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17219124552590649384/17219124552590649384_649384.m3u8" },
-  { name: "Electricity Lecture 6", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17222678298178649384/17222678298178649384_649384.m3u8" },
-  { name: "Electricity question practice ( NCERT +PYQ)", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17224301148373649384/17224301148373649384_649384.m3u8" },
-  { name: "Doubt solving class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17225181899237649384/17225181899237649384_649384.m3u8" },
-  { name: "Metals and Non Metals-1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17226040918045649384/17226040918045649384_649384.m3u8" },
-  { name: "Metals and Non Metals-2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17228627007280649384/17228627007280649384_649384.m3u8" },
-  { name: "Metals and Non Metals - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17231392922958649384/17231392922958649384_649384.m3u8" },
-  { name: "Metals and Non metals-4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17234776689711649384/17234776689711649384_649384.m3u8" },
-  { name: "Late night talk with Prashant Sir", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17235542773827649384/17235542773827649384_649384.m3u8" },
-  { name: "Metals and Non Metals-5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17236415539041649384/17236415539041649384_649384.m3u8" },
-  { name: "Metals and Non Metals-6", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17237266268094649384/17237266268094649384_649384.m3u8" },
-  { name: "Metals and Non Metals-7", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17241603136531649384/17241603136531649384_649384.m3u8" },
-  { name: "Doubt Solving class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17242455128205649384/17242455128205649384_649384.m3u8" },
-  { name: "How do Organisms Reproduce -1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17243328766892649384/17243328766892649384_649384.m3u8" },
-  { name: "How do Organisms Reproduce-2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17248508008072649384/17248508008072649384_649384.m3u8" },
-  { name: "How do organisms Reproduce-3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17248664426002649384/17248664426002649384_649384.m3u8" },
-  { name: "How do organism Reproduce -4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17249464951828649384/17249464951828649384_649384.m3u8" },
-  { name: "Late night talk with Prashant Sir", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17251967381268649384/17251967381268649384_649384.m3u8" },
-  { name: "How do organism Reproduce -5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17252909095353649384/17252909095353649384_649384.m3u8" },
-  { name: "How Do Organisms Reproduce - 6", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17253698807925649384/17253698807925649384_649384.m3u8" },
-  { name: "How do organisms Reproduce-7", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17254553128450649384/17254553128450649384_649384.m3u8" },
-  { name: "Magnetic effects of current -1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17258968201772649384/17258968201772649384_649384.m3u8" },
-  { name: "Magnetic effects of current -2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17259738208696649384/17259738208696649384_649384.m3u8" },
-  { name: "Magnetic effect of current-3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17260593215441649384/17260593215441649384_649384.m3u8" },
-  { name: "Magnetic effect of current-4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17265010976091649384/17265010976091649384_649384.m3u8" },
-  { name: "NCERT Magnetic effects of current", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17267580928151649384/17267580928151649384_649384.m3u8" },
-  { name: "Doubt class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17271073583747649384/17271073583747649384_649384.m3u8" },
-  { name: "Electricity Revision", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17271832944057649384/17271832944057649384_649384.m3u8" },
-  { name: "Carbon and its compounds lecture 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172727142951271815381/172727142951271815381_1815381.m3u8" },
-  { name: "Carbon and its compounds lecture 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/830771775218119200/830771775218119200_119200.m3u8" },
-  { name: "Carbon and its compounds lecture 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172778815681591815381/172778815681591815381_1815381.m3u8" },
-  { name: "Carbon and its compounds L4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172787465637211815381/172787465637211815381_1815381.m3u8" },
-  { name: "Carbon and its compounds L5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172831638273281815381/172831638273281815381_1815381.m3u8" },
-  { name: "Carbon and its compounds L6", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172839396627861815381/172839396627861815381_1815381.m3u8" },
-  { name: "Carbon and its compound 7", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172848000547861815381/172848000547861815381_1815381.m3u8" },
-  { name: "Carbon and its compound 8", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172856740057771815381/172856740057771815381_1815381.m3u8" },
-  { name: "Carbon and its compound 9", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172882423816101815381/172882423816101815381_1815381.m3u8" },
-  { name: "Carbon and its compound 10", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172899870876231815381/172899870876231815381_1815381.m3u8" },
-  { name: "Doubt class + Revision", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172908500992531815381/172908500992531815381_1815381.m3u8" },
-  { name: "Our Environment Lecture 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173013084075151815381/173013084075151815381_1815381.m3u8" },
-  { name: "Our Environment Lecture 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173021778223461815381/173021778223461815381_1815381.m3u8" },
-  { name: "Heredity and Evolution Lecture No 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173029357025641815381/173029357025641815381_1815381.m3u8" },
-  { name: "Heredity and Evolution Lecture No 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173073473665341815381/173073473665341815381_1815381.m3u8" },
-  { name: "Heredity and Evolution Lecture No 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173081238721711815381/173081238721711815381_1815381.m3u8" }
+      0:[
+  {
+    "name": "Introduction Videos",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17127637923662649384/17127637923662649384_649384.m3u8"
+  },
+  {
+    "name": "Basics of physics Class 10th",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/1712667138565534134/1712667138565534134_534134.m3u8"
+  },
+  {
+    "name": "Basics of Biology",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17127537215601649384/17127537215601649384_649384.m3u8"
+  },
+  {
+    "name": "Chemical reactions and equations Lecture - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17131970117723649384/17131970117723649384_649384.m3u8"
+  },
+  {
+    "name": "Chemical Reactions and Equations Lec-2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17133600563599649384/17133600563599649384_649384.m3u8"
+  },
+  {
+    "name": "Chemical Reactions and Equations Lec - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17134452954759649384/17134452954759649384_649384.m3u8"
+  },
+  {
+    "name": "ACP solve + Lecture 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17138010498958649384/17138010498958649384_649384.m3u8"
+  },
+  {
+    "name": "Chemical reactions and equations L5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17138774499408649384/17138774499408649384_649384.m3u8"
+  },
+  {
+    "name": "Chemical reactions and equations L6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17139644014533649384/17139644014533649384_649384.m3u8"
+  },
+  {
+    "name": "Chemical reactions and equations L7",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17140502365511649384/17140502365511649384_649384.m3u8"
+  },
+  {
+    "name": "ACP solve + complete Reaction revision",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17143961581787649384/17143961581787649384_649384.m3u8"
+  },
+  {
+    "name": "Life Processes Lecture 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17144825599737649384/17144825599737649384_649384.m3u8"
+  },
+  {
+    "name": "Life process LEC -2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17145694219206649384/17145694219206649384_649384.m3u8"
+  },
+  {
+    "name": "Life process LEC -3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17146550858275649384/17146550858275649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Sessions + Lecture 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17150105266682649384/17150105266682649384_649384.m3u8"
+  },
+  {
+    "name": "Life Processes lecture 6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17151735781192649384/17151735781192649384_649384.m3u8"
+  },
+  {
+    "name": "Life Processes lecture 7",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17152599573616649384/17152599573616649384_649384.m3u8"
+  },
+  {
+    "name": "Complete NCERT Activity ( Life Processes)",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17156925525362649384/17156925525362649384_649384.m3u8"
+  },
+  {
+    "name": "Light Lecture 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17157794545257649384/17157794545257649384_649384.m3u8"
+  },
+  {
+    "name": "Science doubt class (Extra class )",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17161235046344649384/17161235046344649384_649384.m3u8"
+  },
+  {
+    "name": "Light Lecture 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17162191913272649384/17162191913272649384_649384.m3u8"
+  },
+  {
+    "name": "Light lecture 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17162977591186649384/17162977591186649384_649384.m3u8"
+  },
+  {
+    "name": "Light lecture 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17163837245952649384/17163837245952649384_649384.m3u8"
+  },
+  {
+    "name": "Light Lec-5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17164706945137649384/17164706945137649384_649384.m3u8"
+  },
+  {
+    "name": "ACP Solve +Light Lec-6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17168252698711649384/17168252698711649384_649384.m3u8"
+  },
+  {
+    "name": "Light Lecture 7",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17169021711956649384/17169021711956649384_649384.m3u8"
+  },
+  {
+    "name": "Acid , Base and Salts lecture 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17178522829284649384/17178522829284649384_649384.m3u8"
+  },
+  {
+    "name": "Acid , Base and Salts lecture 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17179391311935649384/17179391311935649384_649384.m3u8"
+  },
+  {
+    "name": "Acid , Base and Salts lecture 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17180249667889649384/17180249667889649384_649384.m3u8"
+  },
+  {
+    "name": "Acid , Base and Salts lecture 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17181114422642649384/17181114422642649384_649384.m3u8"
+  },
+  {
+    "name": "Acid , Base and Salts lecture 5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17181979211747649384/17181979211747649384_649384.m3u8"
+  },
+  {
+    "name": "Acid, Base and Salts Lecture 6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17182839586994649384/17182839586994649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt solving class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17186403267539649384/17186403267539649384_649384.m3u8"
+  },
+  {
+    "name": "Human eye Lecture 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17187167781412649384/17187167781412649384_649384.m3u8"
+  },
+  {
+    "name": "Human eye lecture 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17188028707546649384/17188028707546649384_649384.m3u8"
+  },
+  {
+    "name": "Human Eye|Lecture 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17188895186220649384/17188895186220649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17200122798421649384/17200122798421649384_649384.m3u8"
+  },
+  {
+    "name": "Human Eye|Lecture 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17200976893750649384/17200976893750649384_649384.m3u8"
+  },
+  {
+    "name": "Control and coordination lecture 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17201849262443649384/17201849262443649384_649384.m3u8"
+  },
+  {
+    "name": "L2 - Control and coordination",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17204531151224649384/17204531151224649384_649384.m3u8"
+  },
+  {
+    "name": "L3- Control and coordination",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17205310642213649384/17205310642213649384_649384.m3u8"
+  },
+  {
+    "name": "L4 - control and coordination",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17206170098769649384/17206170098769649384_649384.m3u8"
+  },
+  {
+    "name": "Control and coordination L5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17207044432043649384/17207044432043649384_649384.m3u8"
+  },
+  {
+    "name": "Control and coordination NCERT Activity",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17210484872245649384/17210484872245649384_649384.m3u8"
+  },
+  {
+    "name": "Electricity lecture 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17211352602062649384/17211352602062649384_649384.m3u8"
+  },
+  {
+    "name": "Electricity lecture 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17212216083244649384/17212216083244649384_649384.m3u8"
+  },
+  {
+    "name": "Electricity Lec-3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17213086397666649384/17213086397666649384_649384.m3u8"
+  },
+  {
+    "name": "Electricity Lecture 5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17217404976141649384/17217404976141649384_649384.m3u8"
+  },
+  {
+    "name": "Electricity Lecture 6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17218269228750649384/17218269228750649384_649384.m3u8"
+  },
+  {
+    "name": "Electricity question practice ( NCERT +PYQ)",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17219124552590649384/17219124552590649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt solving class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17222678298178649384/17222678298178649384_649384.m3u8"
+  },
+  {
+    "name": "Metals and Non Metals-1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17224301148373649384/17224301148373649384_649384.m3u8"
+  },
+  {
+    "name": "Metals and Non Metals-2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17225181899237649384/17225181899237649384_649384.m3u8"
+  },
+  {
+    "name": "Metals and Non Metals - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17226040918045649384/17226040918045649384_649384.m3u8"
+  },
+  {
+    "name": "Metals and Non metals-4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17228627007280649384/17228627007280649384_649384.m3u8"
+  },
+  {
+    "name": "Late night talk with Prashant Sir",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17231392922958649384/17231392922958649384_649384.m3u8"
+  },
+  {
+    "name": "Metals and Non Metals-5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17234776689711649384/17234776689711649384_649384.m3u8"
+  },
+  {
+    "name": "Metals and Non Metals-6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17235542773827649384/17235542773827649384_649384.m3u8"
+  },
+  {
+    "name": "Metals and Non Metals-7",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17236415539041649384/17236415539041649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17237266268094649384/17237266268094649384_649384.m3u8"
+  },
+  {
+    "name": "How do Organisms Reproduce -1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17241603136531649384/17241603136531649384_649384.m3u8"
+  },
+  {
+    "name": "How do Organisms Reproduce-2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17242455128205649384/17242455128205649384_649384.m3u8"
+  },
+  {
+    "name": "How do organisms Reproduce-3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17243328766892649384/17243328766892649384_649384.m3u8"
+  },
+  {
+    "name": "How do organism Reproduce -4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17248508008072649384/17248508008072649384_649384.m3u8"
+  },
+  {
+    "name": "Late night talk with Prashant Sir",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17248664426002649384/17248664426002649384_649384.m3u8"
+  },
+  {
+    "name": "How do organism Reproduce -5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17249464951828649384/17249464951828649384_649384.m3u8"
+  },
+  {
+    "name": "How Do Organisms Reproduce - 6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17251967381268649384/17251967381268649384_649384.m3u8"
+  },
+  {
+    "name": "How do organisms Reproduce-7",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17252909095353649384/17252909095353649384_649384.m3u8"
+  },
+  {
+    "name": "Magnetic effects of current -1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17253698807925649384/17253698807925649384_649384.m3u8"
+  },
+  {
+    "name": "Magnetic effects of current -2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17254553128450649384/17254553128450649384_649384.m3u8"
+  },
+  {
+    "name": "Magnetic effect of current-3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17258968201772649384/17258968201772649384_649384.m3u8"
+  },
+  {
+    "name": "Magnetic effect of current-4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17259738208696649384/17259738208696649384_649384.m3u8"
+  },
+  {
+    "name": "NCERT Magnetic effects of current",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17260593215441649384/17260593215441649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17265010976091649384/17265010976091649384_649384.m3u8"
+  },
+  {
+    "name": "Electricity Revision",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17267580928151649384/17267580928151649384_649384.m3u8"
+  },
+  {
+    "name": "Carbon and its compounds lecture 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17271073583747649384/17271073583747649384_649384.m3u8"
+  },
+  {
+    "name": "Carbon and its compounds lecture 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17271832944057649384/17271832944057649384_649384.m3u8"
+  },
+  {
+    "name": "Carbon and its compounds lecture 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172727142951271815381/172727142951271815381_1815381.m3u8"
+  },
+  {
+    "name": "Carbon and its compounds L5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172778815681591815381/172778815681591815381_1815381.m3u8"
+  },
+  {
+    "name": "Carbon and its compounds L6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172787465637211815381/172787465637211815381_1815381.m3u8"
+  },
+  {
+    "name": "Carbon and its compound 7",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172831638273281815381/172831638273281815381_1815381.m3u8"
+  },
+  {
+    "name": "Carbon and its compound 8",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172839396627861815381/172839396627861815381_1815381.m3u8"
+  },
+  {
+    "name": "Carbon and its compound 9",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172848000547861815381/172848000547861815381_1815381.m3u8"
+  },
+  {
+    "name": "Carbon and its compound 10",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172856740057771815381/172856740057771815381_1815381.m3u8"
+  },
+  {
+    "name": "Doubt class + Revision",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172882423816101815381/172882423816101815381_1815381.m3u8"
+  },
+  {
+    "name": "Our Environment Lecture 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172899870876231815381/172899870876231815381_1815381.m3u8"
+  },
+  {
+    "name": "Our Environment Lecture 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172908500992531815381/172908500992531815381_1815381.m3u8"
+  },
+  {
+    "name": "Heredity and Evolution Lecture No 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173013084075151815381/173013084075151815381_1815381.m3u8"
+  },
+  {
+    "name": "Heredity and Evolution Lecture No 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173021778223461815381/173021778223461815381_1815381.m3u8"
+  },
+  {
+    "name": "Heredity and Evolution Lecture No 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173029357025641815381/173029357025641815381_1815381.m3u8"
+  },
+  {
+    "name": "Complete Evolution",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173073473665341815381/173073473665341815381_1815381.m3u8"
+  },
+  {
+    "name": "Heredity and Evolution - 4 Final Lecture",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173081238721711815381/173081238721711815381_1815381.m3u8"
+  }
 ],
       1:
 [
