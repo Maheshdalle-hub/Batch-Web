@@ -21,6 +21,10 @@ const ChapterLectures = () => {
     "name": "Introduction Videos",
     "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17127637923662649384/17127637923662649384_649384.m3u8"
   },
+        {
+          name: "Basics Of Chemistry",
+          youtubeUrl: "https://www.youtube.com/watch?v=NUF159lXOBw"
+        },
   {
     "name": "Basics of physics Class 10th",
     "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/1712667138565534134/1712667138565534134_534134.m3u8"
@@ -494,7 +498,7 @@ const ChapterLectures = () => {
       0:[
   {
     "name": "Real Numbers | Lecture 1",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17127637923662649384/17127637923662649384_649384.m3u8"
+    youtubeUrl: "https://www.youtube.com/watch?v=6yYg64NzEK4"
   },
   {
     "name": "Real Numbers | Lecture 2",
@@ -950,7 +954,7 @@ const ChapterLectures = () => {
       0:[
   {
     "name": "AARAMBH BATCH Social Science - 1st Class FREE | Power Sharing- Lecture 1 | Class 10th",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17129837278112649384/17129837278112649384_649384.m3u8"
+    "youtubeUrl": "https://www.youtube.com/watch?v=YyLWS_yIoms"
   },
   {
     "name": "Power Sharing - Lecture 2",
