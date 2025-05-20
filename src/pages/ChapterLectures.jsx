@@ -947,125 +947,476 @@ const ChapterLectures = () => {
 ],
     },
     SST: {
-      0:
-[
-  { name: "AARAMBH BATCH Social Science - 1st Class FREE | Power Sharing- Lecture 1 | Class 10th", youtubeUrl: "https://www.youtube.com/watch?v=YyLWS_yIoms" },
-  { name: "Power Sharing - Lecture 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17130287982364649384/17130287982364649384_649384.m3u8" },
-  { name: "Power Sharing Lecture - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17131111451407649384/17131111451407649384_649384.m3u8" },
-  { name: "Power Sharing Lecture - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17131869363705649384/17131869363705649384_649384.m3u8" },
-  { name: "Doubt Solving Session", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17135881738965649384/17135881738965649384_649384.m3u8" },
-  { name: "Resources and Development - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17136288349335649384/17136288349335649384_649384.m3u8" },
-  { name: "Resources and Development - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17137141925506649384/17137141925506649384_649384.m3u8" },
-  { name: "Resources and Development - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17137919172655649384/17137919172655649384_649384.m3u8" },
-  { name: "Resources and Development - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17141369546279649384/17141369546279649384_649384.m3u8" },
-  { name: "Doubt Solving Session", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17142336228201649384/17142336228201649384_649384.m3u8" },
-  { name: "Resources and Development - 5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17143186281180649384/17143186281180649384_649384.m3u8" },
-  { name: "Resources and Development - 6", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17144056412321649384/17144056412321649384_649384.m3u8" },
-  { name: "The Rise Of Nationalism In Europe - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17147425907230649384/17147425907230649384_649384.m3u8" },
-  { name: "The Rise Of Nationalism In Europe - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17148369667130649384/17148369667130649384_649384.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17149241369250649384/17149241369250649384_649384.m3u8" },
-  { name: "The Rise Of Nationalism In Europe - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17150011565016649384/17150011565016649384_649384.m3u8" },
-  { name: "The Rise Of Nationalism In Europe - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17153595915108649384/17153595915108649384_649384.m3u8" },
-  { name: "The Rise of Nationalism in Europe - 5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17154424674251649384/17154424674251649384_649384.m3u8" },
-  { name: "The Rise of Nationalism in Europe - 6", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17155275125960649384/17155275125960649384_649384.m3u8" },
-  { name: "The Rise of Nationalism in Europe - 7", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17156056224746649384/17156056224746649384_649384.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17160380281113649384/17160380281113649384_649384.m3u8" },
-  { name: "The Nationalism in Europe - 8", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17161334644454649384/17161334644454649384_649384.m3u8" },
-  { name: "The Rise of Nationalism In Europe - 9", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17162108314730649384/17162108314730649384_649384.m3u8" },
-  { name: "The Rise of Nationalism In Europe - 10", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17165565215854649384/17165565215854649384_649384.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17166516995920649384/17166516995920649384_649384.m3u8" },
-  { name: "Development - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17167382266300649384/17167382266300649384_649384.m3u8" },
-  { name: "Development - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17168153633966649384/17168153633966649384_649384.m3u8" },
-  { name: "Development - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17180340074292649384/17180340074292649384_649384.m3u8" },
-  { name: "Development - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17181211522469649384/17181211522469649384_649384.m3u8" },
-  { name: "Federalism - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17182064999480649384/17182064999480649384_649384.m3u8" },
-  { name: "Federalism - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17182936795463649384/17182936795463649384_649384.m3u8" },
-  { name: "Federalism - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17186293167106649384/17186293167106649384_649384.m3u8" },
-  { name: "Federalism - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17189759349261649384/17189759349261649384_649384.m3u8" },
-  { name: "SST doubt solving class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17191570875588649384/17191570875588649384_649384.m3u8" },
-  { name: "Federalism - 5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17192342518384649384/17192342518384649384_649384.m3u8" },
-  { name: "Forest and Wildlife Resources - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17192436195662649384/17192436195662649384_649384.m3u8" },
-  { name: "Forest and Wildlife Resources - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17195890452952649384/17195890452952649384_649384.m3u8" },
-  { name: "Forest and Wildlife Resources - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17196665905631649384/17196665905631649384_649384.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17199257035351649384/17199257035351649384_649384.m3u8" },
-  { name: "Nationalism in India - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17200219498358649384/17200219498358649384_649384.m3u8" },
-  { name: "Nationalism in India - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17203670994343649384/17203670994343649384_649384.m3u8" },
-  { name: "Nationalism in India - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17204439365397649384/17204439365397649384_649384.m3u8" },
-  { name: "Nationalism in India - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17207896504953649384/17207896504953649384_649384.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17208759348052649384/17208759348052649384_649384.m3u8" },
-  { name: "Nationalism in India - 5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17209632394366649384/17209632394366649384_649384.m3u8" },
-  { name: "Nationalism in India - 6", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17210578113221649384/17210578113221649384_649384.m3u8" },
-  { name: "Nationalism in India - 7", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17213945669794649384/17213945669794649384_649384.m3u8" },
-  { name: "Nationalism in India - 8", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17214899422201649384/17214899422201649384_649384.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17215762347214649384/17215762347214649384_649384.m3u8" },
-  { name: "Nationalism in India - 9", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17216543628282649384/17216543628282649384_649384.m3u8" },
-  { name: "Nationalism in India -10", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17219994483478649384/17219994483478649384_649384.m3u8" },
-  { name: "Nationalism in India -11", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17220857602615649384/17220857602615649384_649384.m3u8" },
-  { name: "Sectors of Indian Economy -1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17221721799585649384/17221721799585649384_649384.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17222586425782649384/17222586425782649384_649384.m3u8" },
-  { name: "Sectors of Indian Economy - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17223553931198649384/17223553931198649384_649384.m3u8" },
-  { name: "Sectors of Indian Economy - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17225270037284649384/17225270037284649384_649384.m3u8" },
-  { name: "Sectors of Indian Economy - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17226126118710649384/17226126118710649384_649384.m3u8" },
-  { name: "Sectors of Indian Economy - 5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17226911011907649384/17226911011907649384_649384.m3u8" },
-  { name: "Sectors of Indian Economy - 6", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17227849033391649384/17227849033391649384_649384.m3u8" },
-  { name: "Sectors of Indian Economy - 7", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17232087402271649384/17232087402271649384_649384.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17232957999372649384/17232957999372649384_649384.m3u8" },
-  { name: "Gender Religion and Caste - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17233823175257649384/17233823175257649384_649384.m3u8" },
-  { name: "Gender Religion and Caste - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17234683236558649384/17234683236558649384_649384.m3u8" },
-  { name: "Gender Religion and Caste - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17238139292270649384/17238139292270649384_649384.m3u8" },
-  { name: "Gender Religion and Caste - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17239107041300649384/17239107041300649384_649384.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17239971515225649384/17239971515225649384_649384.m3u8" },
-  { name: "Gender Religion and Caste - 5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17244183951783649384/17244183951783649384_649384.m3u8" },
-  { name: "Gender Religion and Caste - 6", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17245140267892649384/17245140267892649384_649384.m3u8" },
-  { name: "Water Resources - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17246012877694649384/17246012877694649384_649384.m3u8" },
-  { name: "Water Resources - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17246770419493649384/17246770419493649384_649384.m3u8" },
-  { name: "Water Resources - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17250230287618649384/17250230287618649384_649384.m3u8" },
-  { name: "Water Resources - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17251204702229649384/17251204702229649384_649384.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17252065848999649384/17252065848999649384_649384.m3u8" },
-  { name: "The Making of Global World - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17252822286960649384/17252822286960649384_649384.m3u8" },
-  { name: "Money and Credit - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17256277955602649384/17256277955602649384_649384.m3u8" },
-  { name: "Money and Credit - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17257250229492649384/17257250229492649384_649384.m3u8" },
-  { name: "Money and Credit - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17258111905537649384/17258111905537649384_649384.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17258871495429649384/17258871495429649384_649384.m3u8" },
-  { name: "Money and Credit - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17262317223529649384/17262317223529649384_649384.m3u8" },
-  { name: "Money and Credit L - 5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17263190565284649384/17263190565284649384_649384.m3u8" },
-  { name: "Agriculture - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17264049976491649384/17264049976491649384_649384.m3u8" },
-  { name: "Agriculture - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17264905481856649384/17264905481856649384_649384.m3u8" },
-  { name: "Agriculture - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17268391297807649384/17268391297807649384_649384.m3u8" },
-  { name: "Agriculture - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17269348145919649384/17269348145919649384_649384.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17270199593509649384/17270199593509649384_649384.m3u8" },
-  { name: "Political Parties - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17270965213441649384/17270965213441649384_649384.m3u8" },
-  { name: "Political Parties - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17271929548836649384/17271929548836649384_649384.m3u8" },
-  { name: "Political Parties - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172727990433611815381/172727990433611815381_1815381.m3u8" },
-  { name: "Political Parties - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172788457975011815381/172788457975011815381_1815381.m3u8" },
-  { name: "Political Parties - 5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172796094871731815381/172796094871731815381_1815381.m3u8" },
-  { name: "Political Parties - 6 & Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172804666393971815381/172804666393971815381_1815381.m3u8" },
-  { name: "Globalization And The Indian Economy -1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172805664351241815381/172805664351241815381_1815381.m3u8" },
-  { name: "Minerals and Energy Resources - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172804666393971815381/172804666393971815381_1815381.m3u8" },
-  { name: "Minerals and Energy Resources - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172805664351241815381/172805664351241815381_1815381.m3u8" },
-  { name: "Minerals and Energy Resources - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172832045681981815381/172832045681981815381_1815381.m3u8" },
-  { name: "Minerals and Energy Resources - 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172865200380601815381/172865200380601815381_1815381.m3u8" },
-  { name: "Minerals and Energy Resources - 5", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172873373174521815381/172873373174521815381_1815381.m3u8" },
-  { name: "Doubt Solving Class", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172891054119991815381/172891054119991815381_1815381.m3u8" },
-  { name: "Outcomes of Democracy 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172909383696221815381/172909383696221815381_1815381.m3u8" },
-  { name: "Outcomes of Democracy 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172925641547591815381/172925641547591815381_1815381.m3u8" },
-  { name: "Outcomes of Democracy 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172934281316761815381/172934281316761815381_1815381.m3u8" },
-  { name: "Outcomes of Democracy 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172935274991431815381/172935274991431815381_1815381.m3u8" },
-  { name: "Manufacturing Industries - 1", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172951462132511815381/172951462132511815381_1815381.m3u8" },
-  { name: "Manufacturing Industries - 2", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172952541058421815381/172952541058421815381_1815381.m3u8" },
-  { name: "Manufacturing Industries - 3", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172832094678541815381/172832094678541815381_1815381.m3u8" },
-  { name: "Manufacturing Industries 4", m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172968874616261815381/172968874616261815381_1815381.m3u8" },
-{ name: "Manufacturing Industries Solving Class 5 & doubt solving", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172977455641771815381/1 72977455641771815381_1815381.m3u8" },
-{ name: "Print Culture and The Modern World 1",m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172986146924881815381/172986146924881815381_1815381.m3u8"},
-{ name: "Print Culture and The Modern World 2",m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172994254576221815381/194254576221815381_1815381.m3u8"},
-{ name: "Print Culture and The Modern World - 3", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173012053720581815381/173012053720581815381_1815381.m3u8" },
-{ name: "Print Culture and The Modern World - 4", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173020705778561815381/173020705778561815381_1815381.m3u8"},
-{ name: "Print Culture and The Modern World - 5", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173030322681651815381/173030322681651815381_1815381.m3u8" },
-{ name: "Print Culture and The Modern World 6", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173072459434381815381/173072459434381815381_1815381.m3u8"},
-{ name: "Print Culture and The Modern World - 7", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173082175059551815381/173082175059551815381_1815381.m3u8"},
-{ name: "Print Culture and The Modern World 8", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173089759353101815381/173089759353101815381_1815381.m3u8"},
-{ name: "Print Culture and The Modern World - 9 & Doubt Solving Class", m3u8Url:"https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173107155697101815381/173107155697101815381_1815381.m3u8" }
-     ],
+      0:[
+  {
+    "name": "AARAMBH BATCH Social Science - 1st Class FREE | Power Sharing- Lecture 1 | Class 10th",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17129837278112649384/17129837278112649384_649384.m3u8"
+  },
+  {
+    "name": "Power Sharing - Lecture 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17129837278112649384/17129837278112649384_649384.m3u8"
+  },
+  {
+    "name": "Power Sharing Lecture - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17130287982364649384/17130287982364649384_649384.m3u8"
+  },
+  {
+    "name": "Power Sharing Lecture - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17131111451407649384/17131111451407649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Session",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17131869363705649384/17131869363705649384_649384.m3u8"
+  },
+  {
+    "name": "Resources and Development - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17135881738965649384/17135881738965649384_649384.m3u8"
+  },
+  {
+    "name": "Resources and Development - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17136288349335649384/17136288349335649384_649384.m3u8"
+  },
+  {
+    "name": "Resources and Development - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17137141925506649384/17137141925506649384_649384.m3u8"
+  },
+  {
+    "name": "Resources and Development - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17137919172655649384/17137919172655649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Session",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17141369546279649384/17141369546279649384_649384.m3u8"
+  },
+  {
+    "name": "Resources and Development - 5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17142336228201649384/17142336228201649384_649384.m3u8"
+  },
+  {
+    "name": "Resources and Development - 6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17143186281180649384/17143186281180649384_649384.m3u8"
+  },
+  {
+    "name": "The Rise Of Nationalism In Europe - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17144056412321649384/17144056412321649384_649384.m3u8"
+  },
+  {
+    "name": "The Rise Of Nationalism In Europe - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17147425907230649384/17147425907230649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17148369667130649384/17148369667130649384_649384.m3u8"
+  },
+  {
+    "name": "The Rise Of Nationalism In Europe - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17150011565016649384/17150011565016649384_649384.m3u8"
+  },
+  {
+    "name": "The Rise of Nationalism in Europe - 5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17153595915108649384/17153595915108649384_649384.m3u8"
+  },
+  {
+    "name": "The Rise of Nationalism in Europe - 6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17154424674251649384/17154424674251649384_649384.m3u8"
+  },
+  {
+    "name": "The Rise of Nationalism in Europe - 7",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17155275125960649384/17155275125960649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17156056224746649384/17156056224746649384_649384.m3u8"
+  },
+  {
+    "name": "The Nationalism in Europe - 8",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17160380281113649384/17160380281113649384_649384.m3u8"
+  },
+  {
+    "name": "The Rise of Nationalism In Europe - 9",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17161334644454649384/17161334644454649384_649384.m3u8"
+  },
+  {
+    "name": "The Rise of Nationalism In Europe - 10",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17162108314730649384/17162108314730649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17165565215854649384/17165565215854649384_649384.m3u8"
+  },
+  {
+    "name": "Development - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17166516995920649384/17166516995920649384_649384.m3u8"
+  },
+  {
+    "name": "Development - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17167382266300649384/17167382266300649384_649384.m3u8"
+  },
+  {
+    "name": "Development - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17168153633966649384/17168153633966649384_649384.m3u8"
+  },
+  {
+    "name": "Development - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17180340074292649384/17180340074292649384_649384.m3u8"
+  },
+  {
+    "name": "Federalism - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17180340074292649384/17180340074292649384_649384.m3u8"
+  },
+  {
+    "name": "Federalism - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17181211522469649384/17181211522469649384_649384.m3u8"
+  },
+  {
+    "name": "Federalism - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17182064999480649384/17182064999480649384_649384.m3u8"
+  },
+  {
+    "name": "Federalism - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17182936795463649384/17182936795463649384_649384.m3u8"
+  },
+  {
+    "name": "SST doubt solving class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17186293167106649384/17186293167106649384_649384.m3u8"
+  },
+  {
+    "name": "Federalism - 5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17189759349261649384/17189759349261649384_649384.m3u8"
+  },
+  {
+    "name": "Forest and Wildlife Resources - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17191570875588649384/17191570875588649384_649384.m3u8"
+  },
+  {
+    "name": "Forest and Wildlife Resources - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17192342518384649384/17192342518384649384_649384.m3u8"
+  },
+  {
+    "name": "Forest and Wildlife Resources - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17192436195662649384/17192436195662649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17195890452952649384/17195890452952649384_649384.m3u8"
+  },
+  {
+    "name": "Nationalism in India - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17196665905631649384/17196665905631649384_649384.m3u8"
+  },
+  {
+    "name": "Nationalism in India - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17199257035351649384/17199257035351649384_649384.m3u8"
+  },
+  {
+    "name": "Nationalism in India - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17200219498358649384/17200219498358649384_649384.m3u8"
+  },
+  {
+    "name": "Nationalism in India - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17203670994343649384/17203670994343649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17204439365397649384/17204439365397649384_649384.m3u8"
+  },
+  {
+    "name": "Nationalism in India - 5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17207896504953649384/17207896504953649384_649384.m3u8"
+  },
+  {
+    "name": "Nationalism in India - 6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17208759348052649384/17208759348052649384_649384.m3u8"
+  },
+  {
+    "name": "Nationalism in India - 7",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17209632394366649384/17209632394366649384_649384.m3u8"
+  },
+  {
+    "name": "Nationalism in India - 8",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17210578113221649384/17210578113221649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17213945669794649384/17213945669794649384_649384.m3u8"
+  },
+  {
+    "name": "Nationalism in India - 9",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17214899422201649384/17214899422201649384_649384.m3u8"
+  },
+  {
+    "name": "Nationalism in India -10",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17215762347214649384/17215762347214649384_649384.m3u8"
+  },
+  {
+    "name": "Nationalism in India -11",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17216543628282649384/17216543628282649384_649384.m3u8"
+  },
+  {
+    "name": "Sectors of Indian Economy -1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17219994483478649384/17219994483478649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17220857602615649384/17220857602615649384_649384.m3u8"
+  },
+  {
+    "name": "Sectors of Indian Economy - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17221721799585649384/17221721799585649384_649384.m3u8"
+  },
+  {
+    "name": "Sectors of Indian Economy - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17222586425782649384/17222586425782649384_649384.m3u8"
+  },
+  {
+    "name": "Sectors of Indian Economy - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17223553931198649384/17223553931198649384_649384.m3u8"
+  },
+  {
+    "name": "Sectors of Indian Economy - 5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17225270037284649384/17225270037284649384_649384.m3u8"
+  },
+  {
+    "name": "Sectors of Indian Economy - 6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17226126118710649384/17226126118710649384_649384.m3u8"
+  },
+  {
+    "name": "Sectors of Indian Economy - 7",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17226911011907649384/17226911011907649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17227849033391649384/17227849033391649384_649384.m3u8"
+  },
+  {
+    "name": "Gender Religion and Caste - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17232087402271649384/17232087402271649384_649384.m3u8"
+  },
+  {
+    "name": "Gender Religion and Caste - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17232957999372649384/17232957999372649384_649384.m3u8"
+  },
+  {
+    "name": "Gender Religion and Caste - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17233823175257649384/17233823175257649384_649384.m3u8"
+  },
+  {
+    "name": "Gender Religion and Caste - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17234683236558649384/17234683236558649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17238139292270649384/17238139292270649384_649384.m3u8"
+  },
+  {
+    "name": "Gender Religion and Caste - 5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17239107041300649384/17239107041300649384_649384.m3u8"
+  },
+  {
+    "name": "Gender Religion and Caste - 6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17239971515225649384/17239971515225649384_649384.m3u8"
+  },
+  {
+    "name": "Water Resources - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17244183951783649384/17244183951783649384_649384.m3u8"
+  },
+  {
+    "name": "Water Resources - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17245140267892649384/17245140267892649384_649384.m3u8"
+  },
+  {
+    "name": "Water Resources - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17246012877694649384/17246012877694649384_649384.m3u8"
+  },
+  {
+    "name": "Water Resources - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17246770419493649384/17246770419493649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17250230287618649384/17250230287618649384_649384.m3u8"
+  },
+  {
+    "name": "The Making of Global World - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17251204702229649384/17251204702229649384_649384.m3u8"
+  },
+  {
+    "name": "Money and Credit - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17252065848999649384/17252065848999649384_649384.m3u8"
+  },
+  {
+    "name": "Money and Credit - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17252822286960649384/17252822286960649384_649384.m3u8"
+  },
+  {
+    "name": "Money and Credit - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17256277955602649384/17256277955602649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17257250229492649384/17257250229492649384_649384.m3u8"
+  },
+  {
+    "name": "Money and Credit - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17258111905537649384/17258111905537649384_649384.m3u8"
+  },
+  {
+    "name": "Money and Credit L - 5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17258871495429649384/17258871495429649384_649384.m3u8"
+  },
+  {
+    "name": "Agriculture - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17262317223529649384/17262317223529649384_649384.m3u8"
+  },
+  {
+    "name": "Agriculture - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17263190565284649384/17263190565284649384_649384.m3u8"
+  },
+  {
+    "name": "Agriculture - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17264049976491649384/17264049976491649384_649384.m3u8"
+  },
+  {
+    "name": "Agriculture - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17264905481856649384/17264905481856649384_649384.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17268391297807649384/17268391297807649384_649384.m3u8"
+  },
+  {
+    "name": "Political Parties - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17269348145919649384/17269348145919649384_649384.m3u8"
+  },
+  {
+    "name": "Political Parties - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17270199593509649384/17270199593509649384_649384.m3u8"
+  },
+  {
+    "name": "Political Parties - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17270965213441649384/17270965213441649384_649384.m3u8"
+  },
+  {
+    "name": "Political Parties - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/17271929548836649384/17271929548836649384_649384.m3u8"
+  },
+  {
+    "name": "Political Parties - 5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172727990433611815381/172727990433611815381_1815381.m3u8"
+  },
+  {
+    "name": "Political Parties - 6 & Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172788457975011815381/172788457975011815381_1815381.m3u8"
+  },
+  {
+    "name": "Globalization And The Indian Economy -1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172796094871731815381/172796094871731815381_1815381.m3u8"
+  },
+  {
+    "name": "Minerals and Energy Resources - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172804666393971815381/172804666393971815381_1815381.m3u8"
+  },
+  {
+    "name": "Minerals and Energy Resources - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172805664351241815381/172805664351241815381_1815381.m3u8"
+  },
+  {
+    "name": "Minerals and Energy Resources - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172832094678541815381/172832094678541815381_1815381.m3u8"
+  },
+  {
+    "name": "Minerals and Energy Resources - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172821876985661815381/172821876985661815381_1815381.m3u8"
+  },
+  {
+    "name": "Minerals and Energy Resources - 5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172832045681981815381/172832045681981815381_1815381.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172865200380601815381/172865200380601815381_1815381.m3u8"
+  },
+  {
+    "name": "Outcomes of Democracy 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172873373174521815381/172873373174521815381_1815381.m3u8"
+  },
+  {
+    "name": "Outcomes of Democracy 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172891054119991815381/172891054119991815381_1815381.m3u8"
+  },
+  {
+    "name": "Outcomes of Democracy 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172909383696221815381/172909383696221815381_1815381.m3u8"
+  },
+  {
+    "name": "Outcomes of Democracy 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172925641547591815381/172925641547591815381_1815381.m3u8"
+  },
+  {
+    "name": "Manufacturing Industries - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172934281316761815381/172934281316761815381_1815381.m3u8"
+  },
+  {
+    "name": "Manufacturing Industries - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172935274991431815381/172935274991431815381_1815381.m3u8"
+  },
+  {
+    "name": "Manufacturing Industries - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172951462132511815381/172951462132511815381_1815381.m3u8"
+  },
+  {
+    "name": "Manufacturing Industries - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172952541058421815381/172952541058421815381_1815381.m3u8"
+  },
+  {
+    "name": "Manufacturing Industries - 5 & Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172960263482521815381/172960263482521815381_1815381.m3u8"
+  },
+  {
+    "name": "Print Culture and The Modern World - 1",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172968874616261815381/172968874616261815381_1815381.m3u8"
+  },
+  {
+    "name": "Print Culture and The Modern World - 2",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172977455641771815381/172977455641771815381_1815381.m3u8"
+  },
+  {
+    "name": "Print Culture and The Modern World - 3",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172986146924881815381/172986146924881815381_1815381.m3u8"
+  },
+  {
+    "name": "Print Culture and The Modern World - 4",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172994254576221815381/172994254576221815381_1815381.m3u8"
+  },
+  {
+    "name": "Print Culture and The Modern World - 5",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173012053720581815381/173012053720581815381_1815381.m3u8"
+  },
+  {
+    "name": "Print Culture and The Modern World - 6",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173020705778561815381/173020705778561815381_1815381.m3u8"
+  },
+  {
+    "name": "Print Culture and The Modern World - 7",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173030322681651815381/173030322681651815381_1815381.m3u8"
+  },
+  {
+    "name": "Print Culture and The Modern World - 8",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173072459434381815381/173072459434381815381_1815381.m3u8"
+  },
+  {
+    "name": "Print Culture and The Modern World - 9 & Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173082175059551815381/173082175059551815381_1815381.m3u8"
+  },
+  {
+    "name": "Map Work",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173089759353101815381/173089759353101815381_1815381.m3u8"
+  },
+  {
+    "name": "Doubt Solving Class",
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/173107155697101815381/173107155697101815381_1815381.m3u8"
+  }
+],
       1:
 [
   { name: "Outcomes of Democrecy", redirect: "https://d3cx6qbbd4cbso.cloudfront.net/540admin_v1/file_manager/pdf/263005453973522140.pdf" },
