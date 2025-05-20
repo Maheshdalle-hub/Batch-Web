@@ -532,55 +532,55 @@ const ChapterLectures = () => {
   },
   {
     "name": "Area Related to Circles | Lecture 1",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172736464482251815381/172736464482251815381_815381.m3u8"
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172736464482251815381/172736464482251815381_1815381.m3u8"
   },
   {
     "name": "Area Related to Circles | Lecture 2",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172745146062961815381/172745146062961815381_815381.m3u8"
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172745146062961815381/172745146062961815381_1815381.m3u8"
   },
   {
     "name": "Area Related to Circles | Lecture 3",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172770146155001815381/172770146155001815381_815381.m3u8"
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172770146155001815381/172770146155001815381_1815381.m3u8"
   },
   {
     "name": "NCERT and DPPs discussion |Surface Area and Volume | Lecture 1",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172840157790441815381/172840157790441815381_815381.m3u8"
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172840157790441815381/172840157790441815381_1815381.m3u8"
   },
   {
     "name": "Surface Area and Volume | Lecture 2",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172857459049321815381/172857459049321815381_815381.m3u8"
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172857459049321815381/172857459049321815381_1815381.m3u8"
   },
   {
     "name": "Surface Area and Volume | Lecture 3",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172866101963571815381/172866101963571815381_815381.m3u8"
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172866101963571815381/172866101963571815381_1815381.m3u8"
   },
   {
     "name": "Surface Area and Volume | Lecture 4",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172900628539191815381/172900628539191815381_815381.m3u8"
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172900628539191815381/172900628539191815381_1815381.m3u8"
   },
   {
     "name": "Statistics | Lecture 1",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172918054741191815381/172918054741191815381_815381.m3u8"
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172918054741191815381/172918054741191815381_1815381.m3u8"
   },
   {
     "name": "Statistics | Lecture 2",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172926652637711815381/172926652637711815381_815381.m3u8"
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172926652637711815381/172926652637711815381_1815381.m3u8"
   },
   {
     "name": "Statistics | Lecture 3",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172961122145341815381/172961122145341815381_815381.m3u8"
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172961122145341815381/172961122145341815381_1815381.m3u8"
   },
   {
     "name": "Doubt Solving Class",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172969790150071815381/172969790150071815381_815381.m3u8"
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172969790150071815381/172969790150071815381_1815381.m3u8"
   },
   {
     "name": "Probability | Lecture 1",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172978423973451815381/172978423973451815381_815381.m3u8"
+    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172978423973451815381/172978423973451815381_1815381.m3u8"
   },
   {
     "name": "Probability | Lecture 2 ~ Official Last Class",
-    "m3u8Url": "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172987115832861815381/172987115832861815381_815381.m3u8"
+      m3u8Url: "https://d1qcficr3lu37x.cloudfront.net/file_library/videos/channel_vod_non_drm_hls/172987115832861815381/172987115832861815381_1815381.m3u8"
   }
 ],
       1: [
