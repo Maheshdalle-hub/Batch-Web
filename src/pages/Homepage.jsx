@@ -18,7 +18,7 @@ const Homepage = () => {
 
       <div className="click-box" onClick={handleClick}>
         <img src={imageUrl} alt="Aarambh Batch 2025-26" className="homepage-image" />
-        <h1>Aarambh Batch 2025-26</h1>
+        <h1>Aarambh Batch 2024-25 (old)</h1>
       </div>
     </div>
   );
