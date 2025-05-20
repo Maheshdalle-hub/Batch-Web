@@ -1,6 +1,6 @@
 export const generateShortenedLink = async () => {
   const API_KEY = "223ed4c64f0a265df4c96a4328a2a7edc6640a80";
-  const CALLBACK_BASE_URL = "https://old-batch.vercel.app/verify"; 
+  const CALLBACK_BASE_URL = "https://batch-web.vercel.app/verify"; 
 
   // ✅ Retrieve or generate token
   let userToken = localStorage.getItem("currentToken");
