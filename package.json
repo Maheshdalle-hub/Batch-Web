@@ -12,7 +12,7 @@
     "video.js": "^8.0.0",
     "videojs-hls-quality-selector": "^2.0.0",
     "yocto-queue": "^1.0.0",
-    "@vercel/analytics": "^1.5.0"
+    "videojs-hotkeys": "^0.2.30"
   },
   "scripts": {
     "start": "react-scripts start",
